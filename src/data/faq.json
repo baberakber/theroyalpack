@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "id": "faq-1",
+      "question": "What is your minimum order quantity?",
+      "answer": "Our minimum order quantity is 1,000 pieces for standard designs. For fully custom designs with special colors or finishes, the minimum is 5,000 pieces. We offer flexible ordering options to accommodate businesses of all sizes.",
+      "category": "ordering",
+      "order": 1,
+      "createdAt": "2024-01-10T10:00:00Z"
+    },
+    {
+      "id": "faq-2",
+      "question": "What cup sizes are available?",
+      "answer": "We offer a wide range of sizes including 4oz (espresso), 8oz (small), 12oz (medium), 16oz (large), and 20oz (extra-large). Custom sizes can be accommodated for orders above 10,000 pieces.",
+      "category": "products",
+      "order": 2,
+      "createdAt": "2024-01-10T10:30:00Z"
+    },
+    {
+      "id": "faq-3",
+      "question": "What printing options do you offer?",
+      "answer": "We offer full-color CMYK printing, spot colors (Pantone), metallic finishes, and embossing. Our high-quality printing ensures your brand looks stunning on every cup. We can print full wrap or partial designs.",
+      "category": "printing",
+      "order": 3,
+      "createdAt": "2024-01-10T11:00:00Z"
+    },
+    {
+      "id": "faq-4",
+      "question": "How long does delivery take?",
+      "answer": "Standard orders are delivered within 2-3 weeks after artwork approval. Rush orders can be accommodated within 7-10 business days for an additional fee. We ship across the UAE and GCC region.",
+      "category": "delivery",
+      "order": 4,
+      "createdAt": "2024-01-10T11:30:00Z"
+    },
+    {
+      "id": "faq-5",
+      "question": "Can you help with design?",
+      "answer": "Yes! Our in-house design team can create custom artwork based on your brand guidelines. We offer free design consultations and provide digital proofs before production. Simply send us your logo and brand assets to get started.",
+      "category": "design",
+      "order": 5,
+      "createdAt": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "faq-6",
+      "question": "Are your cups eco-friendly?",
+      "answer": "Yes, sustainability is core to our business. Our cups are made from responsibly sourced paper and feature water-based inks. We offer PLA-lined cups (plant-based lining) as an eco-friendly alternative to traditional PE lining.",
+      "category": "sustainability",
+      "order": 6,
+      "createdAt": "2024-01-10T12:30:00Z"
+    },
+    {
+      "id": "faq-7",
+      "question": "What payment methods do you accept?",
+      "answer": "We accept bank transfers, credit cards (Visa, Mastercard), and offer credit terms for established business accounts. A 50% deposit is required for new orders, with the balance due before shipping.",
+      "category": "ordering",
+      "order": 7,
+      "createdAt": "2024-01-10T13:00:00Z"
+    },
+    {
+      "id": "faq-8",
+      "question": "Do you offer samples?",
+      "answer": "Yes, we provide sample packs so you can evaluate our cup quality before placing a large order. Standard sample packs are complimentary; custom printed samples are available at a nominal fee that's credited toward your order.",
+      "category": "products",
+      "order": 8,
+      "createdAt": "2024-01-10T13:30:00Z"
+    }
+  ]
+}

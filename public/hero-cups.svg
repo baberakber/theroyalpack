@@ -1,0 +1,40 @@
+<svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="250" cy="250" r="200" fill="#E6F7F7" />
+
+  <!-- Large cup (center) -->
+  <g transform="translate(180, 100)">
+    <path d="M20 40h100l-10 180H30L20 40z" fill="#0D9488" />
+    <path d="M15 30h110v15H15V30z" fill="#0D9488" />
+    <ellipse cx="70" cy="40" rx="50" ry="8" fill="#0B7A70" />
+    <!-- Lid -->
+    <path d="M10 20h120v15H10V20z" fill="#4DC9C9" rx="4" />
+    <path d="M55 10h30v15H55V10z" fill="#26BDBD" rx="2" />
+    <!-- Brand stripe -->
+    <rect x="30" y="100" width="80" height="40" fill="#F59E0B" opacity="0.9" rx="2" />
+  </g>
+
+  <!-- Small cup (left) -->
+  <g transform="translate(60, 200)">
+    <path d="M15 30h70l-7 120H22L15 30z" fill="#0D9488" opacity="0.8" />
+    <path d="M10 22h80v12H10V22z" fill="#0D9488" opacity="0.8" />
+    <ellipse cx="50" cy="30" rx="35" ry="5" fill="#0B7A70" opacity="0.8" />
+    <!-- Brand stripe -->
+    <rect x="22" y="70" width="56" height="28" fill="#FBBF24" opacity="0.9" rx="2" />
+  </g>
+
+  <!-- Small cup (right) -->
+  <g transform="translate(320, 180)">
+    <path d="M15 30h70l-7 120H22L15 30z" fill="#0D9488" opacity="0.8" />
+    <path d="M10 22h80v12H10V22z" fill="#0D9488" opacity="0.8" />
+    <ellipse cx="50" cy="30" rx="35" ry="5" fill="#0B7A70" opacity="0.8" />
+    <!-- Sleeve -->
+    <rect x="18" y="60" width="64" height="45" fill="#10B981" opacity="0.9" rx="2" />
+  </g>
+
+  <!-- Decorative elements -->
+  <circle cx="120" cy="120" r="8" fill="#FBBF24" />
+  <circle cx="380" cy="140" r="6" fill="#10B981" />
+  <circle cx="100" cy="380" r="5" fill="#0D9488" />
+  <circle cx="400" cy="360" r="7" fill="#F59E0B" />
+</svg>

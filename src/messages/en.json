@@ -1,0 +1,810 @@
+{
+  "common": {
+    "siteName": "Xerostop Cups",
+    "siteDescription": "Premium custom branded paper cups for businesses",
+    "getQuote": "Get a Quote",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "readMore": "Read More",
+    "submit": "Submit",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "required": "Required",
+    "optional": "Optional",
+    "close": "Close",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "search": "Search",
+    "noResults": "No results found",
+    "tryAgain": "Try again",
+    "backToHome": "Back to Home",
+    "prev": "Previous",
+    "next": "Next",
+    "of": "of"
+  },
+  "nav": {
+    "products": {
+      "label": "Products",
+      "paperCups": "Paper Cups",
+      "paperCupsDesc": "Custom branded paper cups",
+      "cupSleeves": "Cup Sleeves",
+      "cupSleevesDesc": "Insulated cup sleeves",
+      "lids": "Lids",
+      "lidsDesc": "Compatible cup lids",
+      "accessories": "Accessories",
+      "accessoriesDesc": "Straws, stirrers & more"
+    },
+    "industries": {
+      "label": "Industries",
+      "cafes": "Cafes & Coffee Shops",
+      "restaurants": "Restaurants",
+      "hotels": "Hotels",
+      "events": "Events & Catering",
+      "corporate": "Corporate"
+    },
+    "gallery": "Gallery",
+    "about": "About",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "sustainability": "Sustainability",
+    "designSupport": "Design Support"
+  },
+  "footer": {
+    "description": "Premium custom branded paper cups for businesses. Eco-friendly solutions for cafes, restaurants, and events.",
+    "products": "Products",
+    "company": "Company",
+    "getStarted": "Get Started",
+    "aboutUs": "About Us",
+    "ourProcess": "Our Process",
+    "sustainability": "Sustainability",
+    "careers": "Careers",
+    "requestQuote": "Request a Quote",
+    "contactUs": "Contact Us",
+    "faq": "FAQ",
+    "gallery": "Gallery",
+    "copyright": "Xerostop Cups. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "twitter": "Twitter"
+    }
+  },
+  "language": {
+    "switchTo": "Switch to {language}",
+    "english": "English",
+    "arabic": "Arabic",
+    "en": "EN",
+    "ar": "AR"
+  },
+  "home": {
+    "hero": {
+      "title": "Premium Custom Branded Paper Cups",
+      "subtitle": "Elevate your brand with high-quality, eco-friendly paper cups designed for your business",
+      "cta": "Get a Quote",
+      "secondaryCta": "View Gallery"
+    },
+    "trustBar": {
+      "title": "Trusted By Leading Brands"
+    },
+    "whatWeDo": {
+      "title": "What We Do",
+      "subtitle": "Comprehensive solutions for your paper cup needs",
+      "paperCups": {
+        "title": "Paper Cups",
+        "description": "Custom designed paper cups in various sizes with your branding"
+      },
+      "cupPrinting": {
+        "title": "Cup Printing",
+        "description": "High-quality printing services for eye-catching designs"
+      },
+      "accessories": {
+        "title": "Accessories",
+        "description": "Complete your offering with lids, sleeves, and more"
+      }
+    },
+    "whyXerostop": {
+      "title": "Why Choose Xerostop?",
+      "subtitle": "Four pillars that set us apart",
+      "quality": {
+        "title": "Premium Quality",
+        "description": "Food-grade materials and rigorous quality control"
+      },
+      "customization": {
+        "title": "Full Customization",
+        "description": "Your design, your brand, your way"
+      },
+      "sustainability": {
+        "title": "Eco-Friendly",
+        "description": "Sustainable materials and responsible manufacturing"
+      },
+      "service": {
+        "title": "Expert Service",
+        "description": "Dedicated support from design to delivery"
+      }
+    },
+    "miniGallery": {
+      "title": "Our Work",
+      "subtitle": "See our designs in action",
+      "viewGallery": "View Full Gallery"
+    },
+    "industries": {
+      "title": "Industries We Serve",
+      "subtitle": "Custom solutions for every sector",
+      "viewAll": "View All Industries"
+    },
+    "cta": {
+      "title": "Ready to Elevate Your Brand?",
+      "subtitle": "Get a custom quote for your paper cup needs",
+      "button": "Request a Quote"
+    }
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "Premium paper cup solutions for every need",
+    "categories": {
+      "all": "All Products",
+      "cups": "Paper Cups",
+      "printing": "Cup Printing",
+      "accessories": "Accessories"
+    },
+    "paperCups": {
+      "title": "Paper Cups",
+      "subtitle": "Custom branded paper cups in all sizes",
+      "description": "High-quality paper cups designed for hot and cold beverages. Available in multiple sizes with full customization options.",
+      "sizes": {
+        "title": "Available Sizes",
+        "small": "Small (4oz - 8oz)",
+        "medium": "Medium (10oz - 12oz)",
+        "large": "Large (14oz - 16oz)",
+        "extraLarge": "Extra Large (18oz - 24oz)"
+      },
+      "features": {
+        "title": "Features",
+        "singleWall": "Single Wall",
+        "doubleWall": "Double Wall",
+        "rippleWall": "Ripple Wall",
+        "customPrinting": "Custom Printing"
+      },
+      "specs": {
+        "title": "Specifications",
+        "material": "Material",
+        "capacity": "Capacity",
+        "diameter": "Diameter",
+        "height": "Height",
+        "weight": "Weight"
+      }
+    },
+    "cupPrinting": {
+      "title": "Cup Printing",
+      "subtitle": "Bring your brand to life",
+      "description": "Professional printing services to make your cups stand out. From simple logos to full-wrap designs.",
+      "process": {
+        "title": "Our Process",
+        "step1": {
+          "title": "Design Consultation",
+          "description": "Work with our team to create the perfect design"
+        },
+        "step2": {
+          "title": "Proof & Approval",
+          "description": "Review and approve your custom design"
+        },
+        "step3": {
+          "title": "Production",
+          "description": "High-quality printing with attention to detail"
+        },
+        "step4": {
+          "title": "Delivery",
+          "description": "Fast and reliable shipping to your location"
+        }
+      },
+      "options": {
+        "title": "Printing Options",
+        "fullColor": "Full Color Printing",
+        "spot": "Spot Color Printing",
+        "wrap": "Full Wrap Design",
+        "logo": "Logo Placement"
+      }
+    },
+    "cupSleeves": {
+      "title": "Cup Sleeves",
+      "subtitle": "Insulating sleeves to protect hands from hot beverages. Available in kraft, white, or custom printed with your branding.",
+      "cta": {
+        "heading": "Need custom sleeves?",
+        "description": "Get a quote for kraft, white, or custom-printed cup sleeves. Low minimums and fast turnaround.",
+        "button": "Get a Quote"
+      },
+      "crossSell": {
+        "heading": "Bundle with Lids & More",
+        "text": "Order sleeves together with lids, carriers, and stirrers for a complete solution.",
+        "cta": "View All Accessories"
+      }
+    },
+    "lids": {
+      "title": "Cup Lids",
+      "subtitle": "Flat, dome, sip, and paper lids to match your branded cups in every size.",
+      "cta": {
+        "heading": "Need compatible lids?",
+        "description": "Get a quote for lids that fit your current or new cup lineup.",
+        "button": "Get a Quote"
+      },
+      "crossSell": {
+        "heading": "Bundle with Cups & Sleeves",
+        "text": "Order lids together with cups and sleeves for a complete solution.",
+        "cta": "View Accessories"
+      }
+    },
+    "accessories": {
+      "title": "Accessories",
+      "subtitle": "Complete your cup offering",
+      "description": "Everything you need to complement your paper cups. Quality accessories for a complete beverage solution.",
+      "items": {
+        "lids": {
+          "title": "Lids",
+          "description": "Secure, leak-proof lids in various styles"
+        },
+        "sleeves": {
+          "title": "Cup Sleeves",
+          "description": "Insulated sleeves for hot beverages"
+        },
+        "straws": {
+          "title": "Straws",
+          "description": "Eco-friendly paper and biodegradable straws"
+        },
+        "stirrers": {
+          "title": "Stirrers",
+          "description": "Wooden and paper stirrers"
+        },
+        "carriers": {
+          "title": "Cup Carriers",
+          "description": "Convenient carriers for multiple cups"
+        }
+      },
+      "compatibility": {
+        "title": "Compatibility Chart",
+        "description": "Find the right accessories for your cups"
+      }
+    },
+    "cta": {
+      "title": "Need Help Choosing?",
+      "description": "Our team is here to help you find the perfect solution",
+      "button": "Contact Us"
+    }
+  },
+  "industries": {
+    "title": "Industries We Serve",
+    "subtitle": "Custom paper cup solutions for every business",
+    "description": "From cozy cafes to large-scale events, we provide tailored solutions that meet your specific needs.",
+    "cafes": {
+      "title": "Cafes & Coffee Shops",
+      "description": "Stand out in a competitive market with branded cups that customers love to share",
+      "details": {
+        "heading": "Perfect for Cafes & Coffee Shops",
+        "description": "From espresso shots to large takeaway coffees, we provide cup sizes and lid options tailored to your menu and service style.",
+        "item1": "Branded cups in multiple sizes",
+        "item2": "Insulated options (double-wall / ripple-wall)",
+        "item3": "Matching lids, sleeves, stirrers and carriers",
+        "item4": "Flexible MOQs for small shops and large chains"
+      },
+      "cta": {
+        "button": "Get a Quote for Your Cafe"
+      }
+    },
+    "restaurants": {
+      "title": "Restaurants",
+      "description": "Enhance your takeaway and dine-in experience with quality branded cups",
+      "details": {
+        "heading": "Cups for Restaurants & QSR",
+        "description": "High-volume, cost-effective cups for dine-in, takeaway, and delivery with consistent quality across locations.",
+        "item1": "Bulk-friendly pricing",
+        "item2": "Multiple sizes for combo meals and drinks",
+        "item3": "Heat-resistant options for hot beverages",
+        "item4": "Custom printing for promotions and campaigns"
+      },
+      "cta": {
+        "button": "Get a Quote for Your Restaurant"
+      }
+    },
+    "hotels": {
+      "title": "Hotels",
+      "description": "Elevate guest experience with premium branded cups throughout your property",
+      "details": {
+        "heading": "Premium Cups for Hotels & Hospitality",
+        "description": "From in-room coffee stations to conference catering, our cups reinforce your hotel brand at every touchpoint.",
+        "item1": "Ripple-wall cups for a premium in-hand feel",
+        "item2": "Smaller sizes for in-room amenities",
+        "item3": "Coordinated lids and trays for conferences",
+        "item4": "Designs tailored to your brand standards"
+      },
+      "cta": {
+        "button": "Get a Quote for Your Hotel"
+      }
+    },
+    "events": {
+      "title": "Events & Catering",
+      "description": "Make your events memorable with custom designed cups",
+      "details": {
+        "heading": "Cups for Events & Catering",
+        "description": "Create a consistent, on-brand experience across festivals, conferences, and private events with custom printed cups.",
+        "item1": "Short-run options for one-off events",
+        "item2": "Multiple sizes for coffee, soft drinks, and cocktails",
+        "item3": "Eco-friendly materials to meet sustainability goals",
+        "item4": "Fast turnaround for time-sensitive activations"
+      },
+      "cta": {
+        "button": "Get a Quote for Your Event"
+      }
+    },
+    "corporate": {
+      "title": "Corporate",
+      "description": "Strengthen your brand identity in office settings and corporate events",
+      "details": {
+        "heading": "Cups for Offices & Corporate Events",
+        "description": "Reinforce your brand in meeting rooms, pantries, and corporate events with consistent, high-quality cups.",
+        "item1": "Branded cups for office coffee points",
+        "item2": "Special runs for conferences and launches",
+        "item3": "Sizes suited to water coolers and hot drinks",
+        "item4": "Designs aligned with your brand guidelines"
+      },
+      "cta": {
+        "button": "Get a Quote for Corporate Use"
+      }
+    },
+    "healthcare": {
+      "title": "Healthcare",
+      "description": "Hygienic, disposable cup solutions for medical facilities"
+    },
+    "education": {
+      "title": "Education",
+      "description": "Affordable quality cups for schools and universities"
+    },
+    "cta": {
+      "title": "Find Your Industry Solution",
+      "description": "We work with businesses of all types. Tell us what you need and we'll create a solution.",
+      "button": "Get Started"
+    },
+    "mainPage": {
+      "cafes": {
+        "title": "Cafes & Coffee Shops",
+        "description": "Your cup is an extension of your brand. Custom-printed cups create a memorable takeaway experience that keeps customers coming back.",
+        "keyNeeds": {
+          "item1": "Branded cups",
+          "item2": "Insulated options",
+          "item3": "Lids",
+          "item4": "Sleeves"
+        },
+        "ctaText": "Get a Quote for Your Cafe"
+      },
+      "restaurants": {
+        "title": "Restaurants & Fast Food",
+        "description": "High-volume, cost-effective cups for dine-in and delivery. Quick reorder and consistent quality.",
+        "keyNeeds": {
+          "item1": "Bulk orders",
+          "item2": "Fast turnaround",
+          "item3": "Various sizes"
+        },
+        "ctaText": "Get a Quote for Your Restaurant"
+      },
+      "foodTrucks": {
+        "title": "Food Trucks & Street Food",
+        "description": "Stand out at events and markets with eye-catching branded cups. Durable and portable.",
+        "keyNeeds": {
+          "item1": "Durable",
+          "item2": "Insulated",
+          "item3": "Bold printing",
+          "item4": "Carriers"
+        },
+        "ctaText": "Get a Quote for Your Food Truck"
+      },
+      "hotels": {
+        "title": "Hotels & Hospitality",
+        "description": "Elevate in-room service and conference catering with premium-feel branded cups.",
+        "keyNeeds": {
+          "item1": "Premium cups (ripple-wall)",
+          "item2": "Elegant design",
+          "item3": "Small sizes"
+        },
+        "ctaText": "Get a Quote for Your Hotel"
+      },
+      "airlines": {
+        "title": "Airlines & Travel",
+        "description": "Lightweight cups meeting aviation safety standards. Custom branding for in-flight service.",
+        "keyNeeds": {
+          "item1": "Lightweight",
+          "item2": "Specific sizes",
+          "item3": "Branded lids"
+        },
+        "ctaText": "Get a Quote for Your Airline"
+      },
+      "hospitals": {
+        "title": "Hospitals & Healthcare",
+        "description": "Hygienic, food-safe cups for patient service, cafeterias, and waiting areas.",
+        "keyNeeds": {
+          "item1": "Food-safe certified",
+          "item2": "Plain/simple",
+          "item3": "Bulk pricing"
+        },
+        "ctaText": "Get a Quote for Healthcare"
+      },
+      "corporate": {
+        "title": "Corporate & Events",
+        "description": "Custom cups for offices, conferences, and promotional events. Make every meeting on-brand.",
+        "keyNeeds": {
+          "item1": "Low MOQ for events",
+          "item2": "Corporate branding",
+          "item3": "Quick turnaround"
+        },
+        "ctaText": "Get a Quote for Your Event"
+      }
+    }
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "See our work in action",
+    "heading": "Our Work",
+    "description": "See what we have created for businesses like yours. Every cup tells a brand story.",
+    "filters": {
+      "all": "All",
+      "cafes": "Cafes",
+      "restaurants": "Restaurants",
+      "hotels": "Hotels",
+      "corporate": "Corporate",
+      "events": "Events",
+      "seasonal": "Seasonal",
+      "retail": "Retail",
+      "clear": "Clear"
+    },
+    "loadMore": "Load More",
+    "noItems": "No items found",
+    "lightbox": {
+      "close": "Close",
+      "prev": "Previous image",
+      "next": "Next image"
+    },
+    "cta": {
+      "title": "Like What You See?",
+      "description": "Let us create something just as stunning for your brand.",
+      "quote": "Get a Quote",
+      "sample": "Request Free Sample"
+    }
+  },
+  "about": {
+    "title": "About Xerostop Cups",
+    "subtitle": "Your trusted partner in custom paper cups",
+    "story": {
+      "title": "Our Story",
+      "content": "Founded with a passion for quality and sustainability, Xerostop Cups has grown to become a leading provider of custom branded paper cups in the region."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "content": "To provide businesses with premium quality, eco-friendly paper cup solutions that enhance their brand while minimizing environmental impact."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "content": "To be the most trusted and innovative paper cup manufacturer, leading the industry in sustainability and customer satisfaction."
+    },
+    "values": {
+      "title": "Our Values",
+      "quality": "Quality First",
+      "innovation": "Innovation",
+      "sustainability": "Sustainability",
+      "customer": "Customer Focus"
+    },
+    "stats": {
+      "cups": "Cups Produced",
+      "clients": "Happy Clients",
+      "years": "Years Experience",
+      "countries": "Countries Served"
+    },
+    "team": {
+      "title": "Our Team",
+      "subtitle": "Meet the people behind Xerostop Cups"
+    },
+    "cta": {
+      "title": "Partner With Us",
+      "button": "Get in Touch"
+    }
+  },
+  "sustainability": {
+    "title": "Sustainability",
+    "subtitle": "Our commitment to the environment",
+    "hero": {
+      "title": "Eco-Friendly Solutions",
+      "description": "We're committed to reducing environmental impact through sustainable practices and materials"
+    },
+    "initiatives": {
+      "title": "Our Initiatives",
+      "recycled": {
+        "title": "Recycled Materials",
+        "description": "Using recycled paper in our manufacturing process"
+      },
+      "biodegradable": {
+        "title": "Biodegradable Options",
+        "description": "Cups that break down naturally in the environment"
+      },
+      "carbon": {
+        "title": "Carbon Neutral",
+        "description": "Working towards carbon neutral operations"
+      },
+      "waste": {
+        "title": "Zero Waste",
+        "description": "Minimizing waste in our production process"
+      }
+    },
+    "timeline": {
+      "title": "Sustainability Roadmap",
+      "subtitle": "Our journey towards a greener future"
+    },
+    "certifications": {
+      "title": "Certifications",
+      "description": "Recognized for our commitment to sustainability"
+    },
+    "cta": {
+      "title": "Join Our Green Initiative",
+      "description": "Choose sustainable paper cups for your business",
+      "button": "Learn More"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to common questions",
+    "search": {
+      "placeholder": "Search questions...",
+      "noResults": "No questions found matching your search"
+    },
+    "categories": {
+      "all": "All Questions",
+      "ordering": "Ordering",
+      "products": "Products",
+      "printing": "Printing",
+      "shipping": "Shipping",
+      "pricing": "Pricing"
+    },
+    "contact": {
+      "title": "Still have questions?",
+      "description": "Our team is here to help",
+      "button": "Contact Us",
+      "whatsapp": "WhatsApp Us"
+    },
+    "resources": {
+      "title": "Popular Resources",
+      "paperCups": "Paper Cups",
+      "paperCupsDesc": "View our cup range",
+      "printing": "Printing Options",
+      "printingDesc": "Learn about printing",
+      "templates": "Design Templates",
+      "templatesDesc": "Download free templates",
+      "quote": "Get a Quote",
+      "quoteDesc": "Request pricing"
+    }
+  },
+  "designSupport": {
+    "title": "Design Support",
+    "subtitle": "We help bring your vision to life",
+    "services": {
+      "title": "Our Services",
+      "consultation": {
+        "title": "Design Consultation",
+        "description": "Free consultation to discuss your design needs"
+      },
+      "templates": {
+        "title": "Templates",
+        "description": "Download our design templates to get started"
+      },
+      "assistance": {
+        "title": "Design Assistance",
+        "description": "Our team can help create or refine your design"
+      }
+    },
+    "templates": {
+      "title": "Download Templates",
+      "description": "Get started with our ready-to-use design templates",
+      "download": "Download",
+      "formats": "Available in AI, PSD, PDF formats"
+    },
+    "guidelines": {
+      "title": "Design Guidelines",
+      "bleed": "Bleed Area",
+      "safeZone": "Safe Zone",
+      "resolution": "Resolution: 300 DPI minimum",
+      "colorMode": "Color Mode: CMYK"
+    },
+    "cta": {
+      "title": "Need Help With Your Design?",
+      "button": "Contact Our Team"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with our team",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "company": "Company Name",
+      "subject": "Subject",
+      "message": "Your Message",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully! We'll get back to you soon.",
+      "error": "Failed to send message. Please try again."
+    },
+    "info": {
+      "title": "Contact Information",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Business Hours",
+      "hoursValue": "Sunday - Thursday: 9AM - 6PM"
+    },
+    "map": {
+      "title": "Find Us"
+    }
+  },
+  "quote": {
+    "title": "Get a Quote",
+    "subtitle": "Tell us about your project",
+    "steps": {
+      "product": "Product Selection",
+      "quantity": "Quantity & Size",
+      "design": "Design Details",
+      "contact": "Contact Info",
+      "review": "Review & Submit"
+    },
+    "form": {
+      "productType": "Product Type",
+      "cupSize": "Cup Size",
+      "quantity": "Quantity",
+      "wallType": "Wall Type",
+      "hasDesign": "Do you have a design?",
+      "designFile": "Upload Design",
+      "designNotes": "Design Notes",
+      "name": "Your Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "company": "Company Name",
+      "timeline": "Desired Timeline",
+      "additionalNotes": "Additional Notes",
+      "submit": "Submit Quote Request",
+      "submitting": "Submitting...",
+      "success": "Quote request submitted! We'll contact you within 24 hours.",
+      "error": "Failed to submit. Please try again."
+    },
+    "options": {
+      "yes": "Yes",
+      "no": "No",
+      "singleWall": "Single Wall",
+      "doubleWall": "Double Wall",
+      "rippleWall": "Ripple Wall",
+      "urgent": "Urgent (1-2 weeks)",
+      "standard": "Standard (2-4 weeks)",
+      "flexible": "Flexible"
+    }
+  },
+  "sample": {
+    "title": "Request a Sample",
+    "subtitle": "See and feel our quality firsthand",
+    "description": "We'll send you sample cups so you can experience the quality before ordering.",
+    "form": {
+      "name": "Your Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "company": "Company Name",
+      "address": "Shipping Address",
+      "city": "City",
+      "country": "Country",
+      "sampleTypes": "Sample Types",
+      "notes": "Additional Notes",
+      "submit": "Request Sample",
+      "submitting": "Submitting...",
+      "success": "Sample request submitted! We'll ship your samples soon.",
+      "error": "Failed to submit. Please try again."
+    },
+    "types": {
+      "singleWall": "Single Wall Cup",
+      "doubleWall": "Double Wall Cup",
+      "rippleWall": "Ripple Wall Cup",
+      "coldCup": "Cold Cup"
+    }
+  },
+  "whatsapp": {
+    "ariaLabel": "Chat on WhatsApp",
+    "tooltip": "Chat with us"
+  },
+  "skipLink": {
+    "skipToContent": "Skip to main content"
+  },
+  "breadcrumb": {
+    "home": "Home"
+  },
+  "errors": {
+    "404": {
+      "title": "Page Not Found",
+      "description": "The page you're looking for doesn't exist or has been moved.",
+      "button": "Go Home"
+    },
+    "500": {
+      "title": "Server Error",
+      "description": "Something went wrong on our end. Please try again later.",
+      "button": "Try Again"
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "phone": "Please enter a valid phone number",
+    "minLength": "Must be at least {min} characters",
+    "maxLength": "Must be no more than {max} characters",
+    "fileSize": "File size must be less than {size}MB",
+    "fileType": "File type not supported"
+  },
+  "metadata": {
+    "home": {
+      "title": "Xerostop Cups | Premium Custom Branded Paper Cups",
+      "description": "High-quality custom branded paper cups for businesses. Eco-friendly, customizable designs for cafes, restaurants, and corporate events."
+    },
+    "products": {
+      "title": "Products | Xerostop Cups",
+      "description": "Explore our range of premium paper cups, printing services, and accessories."
+    },
+    "paperCups": {
+      "title": "Paper Cups | Xerostop Cups",
+      "description": "Custom branded paper cups in all sizes. Single wall, double wall, and ripple wall options available."
+    },
+    "cupPrinting": {
+      "title": "Cup Printing Services | Xerostop Cups",
+      "description": "Professional cup printing services. Full color, spot color, and custom designs."
+    },
+    "cupSleeves": {
+      "title": "Cup Sleeves | Xerostop Cups",
+      "description": "Insulated cup sleeves. Kraft, white, or custom printed to protect hands and promote your brand."
+    },
+    "lids": {
+      "title": "Cup Lids | Xerostop Cups",
+      "description": "Flat, dome, sip, and paper lids compatible with your custom cups."
+    },
+    "accessories": {
+      "title": "Cup Accessories | Xerostop Cups",
+      "description": "Lids, sleeves, straws, and more to complete your cup offering."
+    },
+    "industries": {
+      "title": "Industries We Serve | Xerostop Cups",
+      "description": "Custom paper cup solutions for cafes, restaurants, hotels, events, and more."
+    },
+    "gallery": {
+      "title": "Gallery | Xerostop Cups",
+      "description": "Browse our collection of custom designed paper cups."
+    },
+    "about": {
+      "title": "About Us | Xerostop Cups",
+      "description": "Learn about Xerostop Cups, our mission, and commitment to quality."
+    },
+    "sustainability": {
+      "title": "Sustainability | Xerostop Cups",
+      "description": "Our commitment to eco-friendly practices and sustainable paper cups."
+    },
+    "faq": {
+      "title": "FAQ | Xerostop Cups",
+      "description": "Find answers to frequently asked questions about our products and services."
+    },
+    "designSupport": {
+      "title": "Design Support | Xerostop Cups",
+      "description": "Get help with your cup design. Templates, guidelines, and expert assistance."
+    },
+    "contact": {
+      "title": "Contact Us | Xerostop Cups",
+      "description": "Get in touch with our team for inquiries and support."
+    },
+    "quote": {
+      "title": "Get a Quote | Xerostop Cups",
+      "description": "Request a custom quote for your paper cup needs."
+    },
+    "sample": {
+      "title": "Request a Sample | Xerostop Cups",
+      "description": "Request free samples to experience our quality firsthand."
+    }
+  }
+}

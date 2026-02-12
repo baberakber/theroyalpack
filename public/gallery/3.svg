@@ -1,0 +1,6 @@
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="400" fill="#FFFBEB" />
+  <circle cx="200" cy="200" r="120" fill="#F59E0B" />
+  <rect x="140" y="160" width="120" height="80" fill="white" rx="4" />
+  <text x="200" y="210" font-family="sans-serif" font-size="14" fill="#1F2937" text-anchor="middle">Branded</text>
+</svg>

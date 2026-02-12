@@ -1,0 +1,10 @@
+export { HeroSection } from './HeroSection';
+export { TrustBar } from './TrustBar';
+export { ServiceCard } from './ServiceCard';
+export { WhatWeDoSection } from './WhatWeDoSection';
+export { PillarItem } from './PillarItem';
+export { WhyXerostopSection } from './WhyXerostopSection';
+export { MiniGallery } from './MiniGallery';
+export { IndustryCard } from './IndustryCard';
+export { IndustriesPreview } from './IndustriesPreview';
+export { CtaBanner } from './CtaBanner';

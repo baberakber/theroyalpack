@@ -1,0 +1,1 @@
+export { IndustryDetailCard } from './IndustryDetailCard';
