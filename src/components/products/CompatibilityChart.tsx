@@ -16,6 +16,9 @@ interface CompatibilityRow {
   carrier4: boolean;
 }
 
+type AccessoryKey = keyof Omit<CompatibilityRow, 'cupSize'>;
+type CompatibilityColumn = { key: AccessoryKey; label: string };
+
 const compatibilityDataEn: CompatibilityRow[] = [
   {
     cupSize: '2.5oz',
@@ -147,7 +150,7 @@ export function CompatibilityChart() {
       { ...compatibilityDataEn[7], cupSize: '18-22 أونصة' },
     ]
     : compatibilityDataEn);
-  const columns = isRTL
+  const columns: CompatibilityColumn[] = isRTL
     ? [
       { key: 'flatLid', label: 'غطاء مسطح' },
       { key: 'domeLid', label: 'غطاء قُبّبي' },
@@ -165,7 +168,7 @@ export function CompatibilityChart() {
       { key: 'sleeve', label: 'Sleeve' },
       { key: 'carrier2', label: '2-Cup Carrier' },
       { key: 'carrier4', label: '4-Cup Carrier' },
-    ] as { key: 'flatLid' | 'domeLid' | 'sipLid' | 'paperLid' | 'sleeve' | 'carrier2' | 'carrier4'; label: string }[];
+    ];
 
   return (
     <section ref={ref} className="py-16 bg-white">
