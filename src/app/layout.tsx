@@ -20,8 +20,9 @@ const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://xerostopcups.com';
 
 export const metadata: Metadata = {
-  title: 'Royal Pack | Premium Custom Branded Paper Cups',
-  description: 'High-quality custom branded paper cups for businesses.',
+  title: 'Royal Pack | Custom Printed Packaging That Promotes Your Brand',
+  description:
+    'Paper cups, juice cups, ice-cream cups, burger boxes, complete food packaging and more—professionally printed packaging designed to make your brand stand out.',
   metadataBase: new URL(siteUrl),
   icons: {
     icon: '/favicon.ico',

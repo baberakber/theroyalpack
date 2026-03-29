@@ -6,7 +6,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
 const titles: Record<string, string> = {
-  'home': 'Premium Custom Branded Paper Cups',
+  'home': 'Custom Printed Packaging That Promotes Your Brand',
   'products': 'Products - Paper Cups, Printing & Accessories',
   'paper-cups': 'Paper Cups - Single, Double & Ripple Wall',
   'cup-printing': 'Custom Cup Printing - Offset & Flexo',
@@ -33,7 +33,7 @@ export async function GET(
 ) {
   const { slug } = await params;
   const key = slug.replace(/\.(jpg|jpeg|png|webp)$/i, '');
-  const title = titles[key] || 'Royal Pack | Premium Custom Branded Paper Cups';
+  const title = titles[key] || 'Royal Pack | Custom Printed Packaging That Promotes Your Brand';
 
   return new ImageResponse(
     (

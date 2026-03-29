@@ -14,12 +14,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://xerostopcups.com';
   return {
-    title: metadata.title || 'Royal Pack | Premium Custom Branded Paper Cups',
-    description: metadata.description || 'High-quality custom branded paper cups for businesses.',
+    title: metadata.title || 'Royal Pack | Custom Printed Packaging That Promotes Your Brand',
+    description:
+      metadata.description ||
+      'Paper cups, juice cups, ice-cream cups, burger boxes, complete food packaging and more—professionally printed packaging designed to make your brand stand out.',
     keywords: ['paper cups', 'custom cups', 'branded cups', 'eco-friendly cups', 'disposable cups'],
     openGraph: {
-      title: metadata.title || 'Royal Pack | Premium Custom Branded Paper Cups',
-      description: metadata.description || 'High-quality custom branded paper cups for businesses.',
+      title: metadata.title || 'Royal Pack | Custom Printed Packaging That Promotes Your Brand',
+      description:
+        metadata.description ||
+        'Paper cups, juice cups, ice-cream cups, burger boxes, complete food packaging and more—professionally printed packaging designed to make your brand stand out.',
       type: 'website',
       locale: locale === 'ar' ? 'ar_SA' : 'en_US',
       siteName: locale === 'ar' ? 'رويال باك' : 'Royal Pack',
@@ -27,8 +31,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     twitter: {
       card: 'summary_large_image',
-      title: metadata.title || 'Royal Pack | Premium Custom Branded Paper Cups',
-      description: metadata.description || 'High-quality custom branded paper cups for businesses.',
+      title: metadata.title || 'Royal Pack | Custom Printed Packaging That Promotes Your Brand',
+      description:
+        metadata.description ||
+        'Paper cups, juice cups, ice-cream cups, burger boxes, complete food packaging and more—professionally printed packaging designed to make your brand stand out.',
     },
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://xerostopcups.com'}/${locale}`,
