@@ -19,16 +19,16 @@ export function HeroSection() {
   const mediaContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isInView, setIsInView] = useState(false);
-  const [canAutoplay, setCanAutoplay] = useState(false);
+  /** Show and attempt to play hero video (mobile + desktop). Off for a11y / data-saver only. */
+  const [allowHeroVideo, setAllowHeroVideo] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
     const connection = (navigator as Navigator & { connection?: NavigatorConnection }).connection;
     const saveData = connection?.saveData === true;
 
-    setCanAutoplay(!prefersReducedMotion && !saveData && isDesktop);
+    setAllowHeroVideo(!prefersReducedMotion && !saveData);
   }, []);
 
   useEffect(() => {
@@ -40,7 +40,9 @@ export function HeroSection() {
         setIsInView(entries[0]?.isIntersecting ?? false);
       },
       {
-        threshold: 0.5,
+        /* Lower than 0.5 so mobile viewports still count the hero as visible quickly */
+        threshold: 0.25,
+        rootMargin: '0px 0px -5% 0px',
       }
     );
 
@@ -50,16 +52,16 @@ export function HeroSection() {
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !canAutoplay) return;
+    if (!video || !allowHeroVideo) return;
 
     if (isInView) {
       void video.play().catch(() => {
-        setCanAutoplay(false);
+        /* Autoplay can still fail on strict mobile policies; poster stays visible. */
       });
     } else {
       video.pause();
     }
-  }, [isInView, canAutoplay]);
+  }, [isInView, allowHeroVideo]);
 
   return (
     <section className="relative min-h-[100dvh] flex items-center overflow-hidden bg-bg-secondary">
@@ -173,17 +175,17 @@ export function HeroSection() {
                     sizes="(max-width: 1024px) 80vw, 38vw"
                     className={cn(
                       'object-cover transition-opacity duration-500',
-                      canAutoplay && videoLoaded ? 'opacity-0' : 'opacity-100'
+                      allowHeroVideo && videoLoaded ? 'opacity-0' : 'opacity-100'
                     )}
                   />
 
-                  {canAutoplay && (
+                  {allowHeroVideo && (
                     <video
                       ref={videoRef}
                       muted
                       loop
                       playsInline
-                      preload="none"
+                      preload="metadata"
                       poster="/royalpack-hero-poster.webp"
                       onCanPlay={() => setVideoLoaded(true)}
                       className={cn(
