@@ -401,8 +401,8 @@ export function BusinessHours() {
     { day: isRTL ? 'الأربعاء' : 'Wednesday', hours: isRTL ? '8:00 ص - 6:00 م' : '8:00 AM - 6:00 PM', dayIndex: 3 },
     { day: isRTL ? 'الخميس' : 'Thursday', hours: isRTL ? '8:00 ص - 6:00 م' : '8:00 AM - 6:00 PM', dayIndex: 4 },
     { day: isRTL ? 'الجمعة' : 'Friday', hours: closedLabel, dayIndex: 5 },
-    { day: isRTL ? 'السبت' : 'Saturday', hours: isRTL ? '9:00 ص - 2:00 م' : '9:00 AM - 2:00 PM', dayIndex: 6 },
-    { day: isRTL ? 'الأحد' : 'Sunday', hours: closedLabel, dayIndex: 0 },
+    { day: isRTL ? 'السبت' : 'Saturday', hours: isRTL ? '8:00 ص - 6:00 م' : '8:00 AM - 6:00 PM', dayIndex: 6 },
+    { day: isRTL ? 'الأحد' : 'Sunday', hours: isRTL ? '8:00 ص - 6:00 م' : '8:00 AM - 6:00 PM', dayIndex: 0 },
   ];
 
   return (

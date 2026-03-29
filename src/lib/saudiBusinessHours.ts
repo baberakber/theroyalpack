@@ -33,12 +33,11 @@ export function getRiyadhDayHourMinute(date = new Date()) {
 }
 
 /**
- * Mon–Thu 8:00–18:00, Sat 9:00–14:00 AST. Fri & Sun closed.
+ * Mon–Sun 8:00–18:00 AST except Friday (closed).
  */
 export function isOpenNowInRiyadh(date = new Date()): boolean {
   const { dayIndex, hour } = getRiyadhDayHourMinute(date);
-  if (dayIndex === 0 || dayIndex === 5) return false;
-  if (dayIndex === 6) return hour >= 9 && hour < 14;
+  if (dayIndex === 5) return false;
   return hour >= 8 && hour < 18;
 }
 
