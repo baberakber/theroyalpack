@@ -15,6 +15,12 @@ import {
 } from '@/lib/schemas/contact';
 import { cn } from '@/lib/utils';
 import { useLocale } from 'next-intl';
+import { whatsappUrl } from '@/lib/contactConstants';
+import {
+  formatRiyadhDateTime,
+  getRiyadhDayHourMinute,
+  isOpenNowInRiyadh,
+} from '@/lib/saudiBusinessHours';
 
 export function ContactForm() {
   const locale = useLocale();
@@ -257,7 +263,7 @@ export function ContactInfo() {
               href="tel:+966556240690"
               className="text-text-primary hover:text-primary-600 transition-colors"
             >
-              +966556240690
+              +966 556 240 690
             </a>
           </div>
         </div>
@@ -272,12 +278,12 @@ export function ContactInfo() {
               WhatsApp
             </p>
             <a
-              href="https://wa.me/966556240690"
+              href={whatsappUrl()}
               className="text-text-primary hover:text-primary-600 transition-colors"
               target="_blank"
               rel="noopener noreferrer"
             >
-              +966556240690
+              +966 556 240 690
             </a>
           </div>
         </div>
@@ -372,32 +378,31 @@ export function BusinessHours() {
   const isRTL = locale === 'ar';
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
   const [currentDay, setCurrentDay] = useState<number>(-1);
+  const [riyadhTimeLabel, setRiyadhTimeLabel] = useState('');
 
   useEffect(() => {
-    const now = new Date();
-    const day = now.getDay();
-    const hour = now.getHours();
-
-    setCurrentDay(day);
-
-    // Business hours: Mon-Fri 8-18, Sat 9-14, Sun closed
-    if (day === 0) {
-      setIsOpen(false);
-    } else if (day === 6) {
-      setIsOpen(hour >= 9 && hour < 14);
-    } else {
-      setIsOpen(hour >= 8 && hour < 18);
+    function tick() {
+      const now = new Date();
+      const { dayIndex } = getRiyadhDayHourMinute(now);
+      setCurrentDay(dayIndex);
+      setIsOpen(isOpenNowInRiyadh(now));
+      setRiyadhTimeLabel(formatRiyadhDateTime(locale, now));
     }
-  }, []);
+    tick();
+    const id = window.setInterval(tick, 1000);
+    return () => window.clearInterval(id);
+  }, [locale]);
+
+  const closedLabel = isRTL ? 'مغلق' : 'Closed';
 
   const hours = [
     { day: isRTL ? 'الاثنين' : 'Monday', hours: isRTL ? '8:00 ص - 6:00 م' : '8:00 AM - 6:00 PM', dayIndex: 1 },
     { day: isRTL ? 'الثلاثاء' : 'Tuesday', hours: isRTL ? '8:00 ص - 6:00 م' : '8:00 AM - 6:00 PM', dayIndex: 2 },
     { day: isRTL ? 'الأربعاء' : 'Wednesday', hours: isRTL ? '8:00 ص - 6:00 م' : '8:00 AM - 6:00 PM', dayIndex: 3 },
     { day: isRTL ? 'الخميس' : 'Thursday', hours: isRTL ? '8:00 ص - 6:00 م' : '8:00 AM - 6:00 PM', dayIndex: 4 },
-    { day: isRTL ? 'الجمعة' : 'Friday', hours: isRTL ? '8:00 ص - 6:00 م' : '8:00 AM - 6:00 PM', dayIndex: 5 },
+    { day: isRTL ? 'الجمعة' : 'Friday', hours: closedLabel, dayIndex: 5 },
     { day: isRTL ? 'السبت' : 'Saturday', hours: isRTL ? '9:00 ص - 2:00 م' : '9:00 AM - 2:00 PM', dayIndex: 6 },
-    { day: isRTL ? 'الأحد' : 'Sunday', hours: isRTL ? 'مغلق' : 'Closed', dayIndex: 0 },
+    { day: isRTL ? 'الأحد' : 'Sunday', hours: closedLabel, dayIndex: 0 },
   ];
 
   return (
@@ -439,7 +444,7 @@ export function BusinessHours() {
                 <td
                   className={cn(
                     'py-3 px-4 text-end text-sm',
-                    (time === 'Closed' || time === 'مغلق') ? 'text-text-muted' : 'text-text-primary'
+                    time === closedLabel ? 'text-text-muted' : 'text-text-primary'
                   )}
                 >
                   {time}
@@ -449,8 +454,18 @@ export function BusinessHours() {
           </tbody>
         </table>
 
-        <p className="mt-4 text-sm text-text-muted text-center">
-          {isRTL ? 'جميع الأوقات بتوقيت الخليج القياسي (GST / UTC+4)' : 'All times are in Gulf Standard Time (GST / UTC+4)'}
+        {riyadhTimeLabel ? (
+          <p className="mt-4 text-sm text-text-secondary text-center font-medium">
+            {isRTL ? 'الوقت الحالي في السعودية:' : 'Current time in Saudi Arabia:'}{' '}
+            <span dir="ltr" className="inline-block">
+              {riyadhTimeLabel}
+            </span>
+          </p>
+        ) : null}
+        <p className="mt-3 text-sm text-text-muted text-center">
+          {isRTL
+            ? 'ساعات العمل بتوقيت المملكة العربية السعودية الرسمي (توقيت العربية القياسي AST — ‎UTC+3). يوم الجمعة عطلة أسبوعية.'
+            : 'Hours follow Saudi Arabia official time (Arabia Standard Time, AST — UTC+3). Friday is closed.'}
         </p>
       </div>
     </section>

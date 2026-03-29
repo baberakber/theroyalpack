@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/Textarea';
 import { Checkbox } from '@/components/ui/Checkbox';
 import { Button } from '@/components/ui/Button';
 import { FileUpload } from './FileUpload';
+import { WHATSAPP_NUMBER_DIGITS, whatsappUrl } from '@/lib/contactConstants';
 import {
   quoteFormSchema,
   type QuoteFormData,
@@ -525,20 +526,20 @@ export function QuoteSidebar() {
         <div className="space-y-2 text-sm">
           <p className="text-text-muted">
             <span className="font-medium text-text-primary">Phone:</span>{' '}
-            <a href="tel:+971000000000" className="text-primary-600 hover:underline">
-              +971 XX XXX XXXX
+            <a href={`tel:+${WHATSAPP_NUMBER_DIGITS}`} className="text-primary-600 hover:underline">
+              +966 556 240 690
             </a>
           </p>
           <p className="text-text-muted">
             <span className="font-medium text-text-primary">WhatsApp:</span>{' '}
-            <a href="https://wa.me/971000000000" className="text-primary-600 hover:underline">
-              +971 XX XXX XXXX
+            <a href={whatsappUrl()} className="text-primary-600 hover:underline">
+              +966 556 240 690
             </a>
           </p>
           <p className="text-text-muted">
             <span className="font-medium text-text-primary">Email:</span>{' '}
-            <a href="mailto:sales@xerostopcups.com" className="text-primary-600 hover:underline">
-              sales@xerostopcups.com
+            <a href="mailto:sales@theroyalpack.com" className="text-primary-600 hover:underline">
+              sales@theroyalpack.com
             </a>
           </p>
         </div>

@@ -161,7 +161,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               openingHoursSpecification: [
                 {
                   '@type': 'OpeningHoursSpecification',
-                  dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                  dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
                   opens: '08:00',
                   closes: '18:00',
                 },

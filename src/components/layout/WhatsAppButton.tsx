@@ -3,6 +3,7 @@
 import { MessageCircle } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
 import { cn } from '@/lib/utils';
+import { WHATSAPP_NUMBER_DIGITS } from '@/lib/contactConstants';
 
 interface WhatsAppButtonProps {
   phoneNumber?: string;
@@ -11,7 +12,7 @@ interface WhatsAppButtonProps {
 }
 
 export function WhatsAppButton({
-  phoneNumber = '971501234567',
+  phoneNumber = WHATSAPP_NUMBER_DIGITS,
   message = 'Hello! I am interested in custom paper cups.',
   className,
 }: WhatsAppButtonProps) {

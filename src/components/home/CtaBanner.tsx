@@ -7,6 +7,7 @@ import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation';
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 import { SiteContainer } from '@/components/layout/SiteContainer';
+import { whatsappUrl } from '@/lib/contactConstants';
 
 export function CtaBanner() {
   const { ref, isVisible } = useScrollAnimation();
@@ -75,7 +76,9 @@ export function CtaBanner() {
                 asChild
               >
                 <a
-                  href="https://wa.me/971501234567?text=Hello!%20I%20am%20interested%20in%20custom%20paper%20cups."
+                  href={whatsappUrl(
+                    'Hello! I am interested in custom printed packaging and paper cups.'
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

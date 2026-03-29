@@ -6,6 +6,7 @@ import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import { Button } from '@/components/ui/Button';
 import { FaqAccordion } from '@/components/faq/FaqAccordion';
 import faqData from '@/data/faq.json';
+import { whatsappUrl } from '@/lib/contactConstants';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -71,7 +72,7 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
                 <Link href="/contact">{t('contact.button')}</Link>
               </Button>
               <Button variant="secondary" asChild>
-                <a href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '971000000000'}`} target="_blank" rel="noopener noreferrer">
+                <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
                   {t('contact.whatsapp')}
                 </a>
               </Button>
