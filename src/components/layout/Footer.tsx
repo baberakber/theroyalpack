@@ -5,6 +5,7 @@ import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { Link } from '@/i18n/navigation';
+import { SiteContainer } from '@/components/layout/SiteContainer';
 
 const socialLinks = [
   { key: 'facebook', href: 'https://facebook.com', icon: Facebook },
@@ -32,7 +33,7 @@ export function Footer() {
       links: [
         { label: t('footer.aboutUs'), href: '/about' },
         { label: t('footer.sustainability'), href: '/sustainability' },
-        { label: t('nav.industries'), href: '/industries' },
+        { label: t('nav.industries.label'), href: '/industries' },
         { label: t('nav.designSupport'), href: '/design-support' },
       ],
     },
@@ -48,26 +49,25 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-text-primary text-white">
+    <footer className="bg-zinc-950 text-white">
       {/* Main Footer */}
-      <div className="container mx-auto px-4 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Brand Column */}
-          <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-4">
+      <SiteContainer className="py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+          {/* Brand Column - wider */}
+          <div className="lg:col-span-4">
+            <Link href="/" className="inline-block mb-5">
               <Image
-                src="/logo-white.svg"
+                src="/images/Logo-RoyalPack.webp"
                 alt={t('common.siteName')}
-                width={140}
-                height={40}
-                className="h-10 w-auto"
+                width={200}
+                height={200}
+                className="h-14 w-auto"
               />
             </Link>
-            <p className="text-gray-400 text-sm mb-6 max-w-xs">
+            <p className="text-zinc-400 text-sm leading-relaxed mb-8 max-w-xs">
               {t('footer.description')}
             </p>
-            {/* Social Links */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               {socialLinks.map((social) => (
                 <a
                   key={social.key}
@@ -75,27 +75,30 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    'p-2 rounded-lg bg-gray-800 hover:bg-gray-700',
-                    'transition-colors duration-200',
+                    'p-2.5 rounded-xl bg-zinc-800/50 border border-zinc-800',
+                    'hover:bg-zinc-800 hover:border-zinc-700',
+                    'transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]',
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500'
                   )}
                   aria-label={t(`footer.social.${social.key}`)}
                 >
-                  <social.icon className="h-5 w-5" />
+                  <social.icon className="h-4 w-4 text-zinc-400" strokeWidth={1.5} />
                 </a>
               ))}
             </div>
           </div>
 
           {/* Products Column */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4">{footerLinks.products.title}</h3>
+          <div className="lg:col-span-2 lg:col-start-6">
+            <h3 className="font-semibold text-sm uppercase tracking-wider text-zinc-300 mb-5">
+              {footerLinks.products.title}
+            </h3>
             <ul className="space-y-3">
               {footerLinks.products.links.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                    className="text-zinc-500 hover:text-white transition-colors duration-300 text-sm"
                   >
                     {link.label}
                   </Link>
@@ -105,14 +108,16 @@ export function Footer() {
           </div>
 
           {/* Company Column */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4">{footerLinks.company.title}</h3>
+          <div className="lg:col-span-2">
+            <h3 className="font-semibold text-sm uppercase tracking-wider text-zinc-300 mb-5">
+              {footerLinks.company.title}
+            </h3>
             <ul className="space-y-3">
               {footerLinks.company.links.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                    className="text-zinc-500 hover:text-white transition-colors duration-300 text-sm"
                   >
                     {link.label}
                   </Link>
@@ -122,14 +127,16 @@ export function Footer() {
           </div>
 
           {/* Get Started Column */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4">{footerLinks.getStarted.title}</h3>
+          <div className="lg:col-span-2">
+            <h3 className="font-semibold text-sm uppercase tracking-wider text-zinc-300 mb-5">
+              {footerLinks.getStarted.title}
+            </h3>
             <ul className="space-y-3">
               {footerLinks.getStarted.links.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                    className="text-zinc-500 hover:text-white transition-colors duration-300 text-sm"
                   >
                     {link.label}
                   </Link>
@@ -138,31 +145,31 @@ export function Footer() {
             </ul>
           </div>
         </div>
-      </div>
+      </SiteContainer>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-800">
-        <div className="container mx-auto px-4 py-6">
+      <div className="border-t border-zinc-800/80">
+        <SiteContainer className="py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-gray-400 text-sm">
+            <p className="text-zinc-500 text-sm">
               &copy; {currentYear} {t('footer.copyright')}
             </p>
             <div className="flex items-center gap-6">
               <Link
                 href="/contact"
-                className="text-gray-400 hover:text-white transition-colors text-sm"
+                className="text-zinc-500 hover:text-white transition-colors duration-300 text-sm"
               >
                 {t('footer.contactUs')}
               </Link>
               <Link
                 href="/faq"
-                className="text-gray-400 hover:text-white transition-colors text-sm"
+                className="text-zinc-500 hover:text-white transition-colors duration-300 text-sm"
               >
                 {t('footer.faq')}
               </Link>
             </div>
           </div>
-        </div>
+        </SiteContainer>
       </div>
     </footer>
   );

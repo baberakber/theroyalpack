@@ -3,6 +3,8 @@
 import { Check, X } from 'lucide-react';
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation';
 import { cn } from '@/lib/utils';
+import { SiteContainer } from '@/components/layout/SiteContainer';
+import { useLocale } from 'next-intl';
 
 interface SpecRow {
   spec: string;
@@ -11,7 +13,7 @@ interface SpecRow {
   rippleWall: string | boolean;
 }
 
-const specs: SpecRow[] = [
+const specsEn: SpecRow[] = [
   { spec: 'Wall Layers', singleWall: '1', doubleWall: '2', rippleWall: '1 + ripple wrap' },
   { spec: 'Paper Weight (gsm)', singleWall: '190-260', doubleWall: '2 x 190', rippleWall: '250 + 120 (ripple)' },
   { spec: 'Insulation', singleWall: 'Low', doubleWall: 'High', rippleWall: 'Highest' },
@@ -43,10 +45,26 @@ function CellValue({ value }: { value: string | boolean }) {
 
 export function SpecsTable() {
   const { ref, isVisible } = useScrollAnimation();
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
+  const specs = isRTL
+    ? [
+      { spec: 'طبقات الجدار', singleWall: '1', doubleWall: '2', rippleWall: '1 + غلاف متموج' },
+      { spec: 'وزن الورق (GSM)', singleWall: '190-260', doubleWall: '2 x 190', rippleWall: '250 + 120 (متموج)' },
+      { spec: 'العزل الحراري', singleWall: 'منخفض', doubleWall: 'مرتفع', rippleWall: 'الأعلى' },
+      { spec: 'هل يحتاج غلافا؟', singleWall: 'نعم (للساخن)', doubleWall: 'لا', rippleWall: 'لا' },
+      { spec: 'طلاء PE', singleWall: 'داخلي', doubleWall: 'داخلي', rippleWall: 'داخلي' },
+      { spec: 'آمن غذائيا', singleWall: true, doubleWall: true, rippleWall: true },
+      { spec: 'آمن للميكروويف', singleWall: false, doubleWall: false, rippleWall: false },
+      { spec: 'قابل لإعادة التدوير', singleWall: 'بحسب المرافق المحلية', doubleWall: 'بحسب المرافق المحلية', rippleWall: 'بحسب المرافق المحلية' },
+      { spec: 'الحد الأدنى للطلب', singleWall: '1000 قطعة', doubleWall: '1000 قطعة', rippleWall: '1000 قطعة' },
+      { spec: 'مدة التنفيذ', singleWall: '7-14 يوم', doubleWall: '10-18 يوم', rippleWall: '10-18 يوم' },
+    ]
+    : specsEn;
 
   return (
     <section ref={ref} className="py-16 bg-bg-secondary">
-      <div className="container mx-auto px-4">
+      <SiteContainer>
         <h2
           className={cn(
             'text-2xl lg:text-3xl font-bold text-text-primary mb-8 text-center',
@@ -54,7 +72,7 @@ export function SpecsTable() {
             isVisible && 'is-visible'
           )}
         >
-          Technical Specifications
+          {isRTL ? 'المواصفات الفنية' : 'Technical Specifications'}
         </h2>
 
         <div
@@ -68,20 +86,20 @@ export function SpecsTable() {
           )}
           style={{ animationDelay: '100ms' }}
         >
-          <table className="w-full min-w-[500px] border-collapse bg-white rounded-xl overflow-hidden shadow-md">
+          <table className="mx-auto w-full max-w-5xl min-w-[500px] border-collapse bg-white rounded-xl overflow-hidden shadow-md">
             <thead>
               <tr className="bg-primary-500 text-white">
                 <th scope="col" className="p-4 text-left text-sm font-semibold">
-                  Specification
+                  {isRTL ? 'المواصفة' : 'Specification'}
                 </th>
                 <th scope="col" className="p-4 text-center text-sm font-semibold">
-                  Single-Wall
+                  {isRTL ? 'جدار واحد' : 'Single-Wall'}
                 </th>
                 <th scope="col" className="p-4 text-center text-sm font-semibold">
-                  Double-Wall
+                  {isRTL ? 'جدار مزدوج' : 'Double-Wall'}
                 </th>
                 <th scope="col" className="p-4 text-center text-sm font-semibold">
-                  Ripple-Wall
+                  {isRTL ? 'جدار متموج' : 'Ripple-Wall'}
                 </th>
               </tr>
             </thead>
@@ -111,7 +129,7 @@ export function SpecsTable() {
             </tbody>
           </table>
         </div>
-      </div>
+      </SiteContainer>
     </section>
   );
 }

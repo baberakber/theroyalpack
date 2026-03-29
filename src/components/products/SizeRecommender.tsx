@@ -16,6 +16,8 @@ import {
 import { Button } from '@/components/ui/Button';
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation';
 import { cn } from '@/lib/utils';
+import { SiteContainer } from '@/components/layout/SiteContainer';
+import { useLocale } from 'next-intl';
 
 type Step = 1 | 2 | 3 | 'result';
 
@@ -33,7 +35,7 @@ interface Recommendation {
   reasoning: string;
 }
 
-const beverageOptions = [
+const beverageOptionsEn = [
   { id: 'hot-coffee', label: 'Hot Coffee', icon: Coffee },
   { id: 'iced-coffee', label: 'Iced Coffee', icon: IceCream },
   { id: 'tea', label: 'Tea', icon: Leaf },
@@ -42,19 +44,19 @@ const beverageOptions = [
   { id: 'other', label: 'Other', icon: CircleHelp },
 ];
 
-const servingSizeOptions = [
+const servingSizeOptionsEn = [
   { id: 'small', label: 'Small', description: '6-8oz' },
   { id: 'medium', label: 'Medium', description: '10-12oz' },
   { id: 'large', label: 'Large', description: '14-16oz' },
   { id: 'extra-large', label: 'Extra Large', description: '18-22oz' },
 ];
 
-const insulationOptions = [
+const insulationOptionsEn = [
   { id: 'yes', label: 'Yes', description: 'Hot drinks held by hand', value: true },
   { id: 'no', label: 'No', description: 'Cold drinks / sleeve provided', value: false },
 ];
 
-function getRecommendation(state: SizeRecommenderState): Recommendation {
+function getRecommendation(state: SizeRecommenderState, isRTL: boolean): Recommendation {
   const { beverage, servingSize, needsInsulation } = state;
 
   // Size mapping
@@ -77,31 +79,35 @@ function getRecommendation(state: SizeRecommenderState): Recommendation {
   if (needsInsulation && isHotDrink) {
     if (servingSize === 'large' || servingSize === 'extra-large') {
       cupType = 'ripple-wall';
-      cupTypeLabel = 'Ripple-Wall';
-      reasoning =
-        'For larger hot drinks held by hand, ripple-wall cups provide maximum insulation and a premium grip texture.';
+      cupTypeLabel = isRTL ? 'جدار متموج' : 'Ripple-Wall';
+      reasoning = isRTL
+        ? 'للمشروبات الساخنة الكبيرة التي تُحمل باليد، يوفر الجدار المتموج أعلى عزل وإحساسا فاخرا.'
+        : 'For larger hot drinks held by hand, ripple-wall cups provide maximum insulation and a premium grip texture.';
     } else {
       cupType = 'double-wall';
-      cupTypeLabel = 'Double-Wall';
-      reasoning =
-        'Double-wall cups offer excellent insulation for hot drinks, keeping your hands comfortable without a sleeve.';
+      cupTypeLabel = isRTL ? 'جدار مزدوج' : 'Double-Wall';
+      reasoning = isRTL
+        ? 'أكواب الجدار المزدوج تمنح عزلا ممتازا للمشروبات الساخنة وتحافظ على راحة اليد دون غلاف.'
+        : 'Double-wall cups offer excellent insulation for hot drinks, keeping your hands comfortable without a sleeve.';
     }
   } else if (isPremiumCold) {
     cupType = 'single-wall';
-    cupTypeLabel = 'Single-Wall';
-    reasoning =
-      'For cold smoothies and juices, single-wall cups are ideal — economical and perfect for showcasing colorful drinks.';
+    cupTypeLabel = isRTL ? 'جدار واحد' : 'Single-Wall';
+    reasoning = isRTL
+      ? 'للعصائر والسموذي البارد، أكواب الجدار الواحد خيار عملي واقتصادي.'
+      : 'For cold smoothies and juices, single-wall cups are ideal - economical and perfect for showcasing colorful drinks.';
   } else if (beverage === 'water' || beverage === 'iced-coffee') {
     cupType = 'single-wall';
-    cupTypeLabel = 'Single-Wall';
-    reasoning =
-      'Single-wall cups are perfect for cold beverages — cost-effective and provide excellent print clarity.';
+    cupTypeLabel = isRTL ? 'جدار واحد' : 'Single-Wall';
+    reasoning = isRTL
+      ? 'أكواب الجدار الواحد مناسبة للمشروبات الباردة، اقتصادية وتوفر وضوحا جيدا للطباعة.'
+      : 'Single-wall cups are perfect for cold beverages - cost-effective and provide excellent print clarity.';
   } else {
     cupType = needsInsulation ? 'double-wall' : 'single-wall';
-    cupTypeLabel = needsInsulation ? 'Double-Wall' : 'Single-Wall';
+    cupTypeLabel = needsInsulation ? (isRTL ? 'جدار مزدوج' : 'Double-Wall') : (isRTL ? 'جدار واحد' : 'Single-Wall');
     reasoning = needsInsulation
-      ? 'Based on your insulation needs, we recommend double-wall cups for comfortable handling.'
-      : 'Single-wall cups are a great economical choice when insulation is not required.';
+      ? (isRTL ? 'بناء على احتياج العزل، نوصي بأكواب الجدار المزدوج لسهولة الاستخدام.' : 'Based on your insulation needs, we recommend double-wall cups for comfortable handling.')
+      : (isRTL ? 'أكواب الجدار الواحد خيار اقتصادي ممتاز عندما لا يكون العزل مطلوبا.' : 'Single-wall cups are a great economical choice when insulation is not required.');
   }
 
   return { cupType, cupTypeLabel, sizeOz, reasoning };
@@ -109,6 +115,32 @@ function getRecommendation(state: SizeRecommenderState): Recommendation {
 
 export function SizeRecommender() {
   const { ref, isVisible } = useScrollAnimation();
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
+  const beverageOptions = isRTL
+    ? [
+      { id: 'hot-coffee', label: 'قهوة ساخنة', icon: Coffee },
+      { id: 'iced-coffee', label: 'قهوة مثلجة', icon: IceCream },
+      { id: 'tea', label: 'شاي', icon: Leaf },
+      { id: 'smoothie', label: 'سموذي/عصير', icon: IceCream },
+      { id: 'water', label: 'ماء', icon: Droplets },
+      { id: 'other', label: 'أخرى', icon: CircleHelp },
+    ]
+    : beverageOptionsEn;
+  const servingSizeOptions = isRTL
+    ? [
+      { id: 'small', label: 'صغير', description: '6-8 أونصة' },
+      { id: 'medium', label: 'متوسط', description: '10-12 أونصة' },
+      { id: 'large', label: 'كبير', description: '14-16 أونصة' },
+      { id: 'extra-large', label: 'كبير جدا', description: '18-22 أونصة' },
+    ]
+    : servingSizeOptionsEn;
+  const insulationOptions = isRTL
+    ? [
+      { id: 'yes', label: 'نعم', description: 'مشروبات ساخنة تُحمل باليد', value: true },
+      { id: 'no', label: 'لا', description: 'مشروبات باردة / يوجد غلاف', value: false },
+    ]
+    : insulationOptionsEn;
   const [state, setState] = useState<SizeRecommenderState>({
     step: 1,
     beverage: null,
@@ -146,12 +178,12 @@ export function SizeRecommender() {
     });
   };
 
-  const recommendation = state.step === 'result' ? getRecommendation(state) : null;
+  const recommendation = state.step === 'result' ? getRecommendation(state, isRTL) : null;
   const progress = state.step === 'result' ? 100 : ((state.step - 1) / 3) * 100;
 
   return (
     <section ref={ref} className="py-16 bg-primary-50">
-      <div className="container mx-auto px-4">
+      <SiteContainer>
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
             <h2
@@ -161,7 +193,7 @@ export function SizeRecommender() {
                 isVisible && 'is-visible'
               )}
             >
-              Not Sure Which Size? Let Us Help
+              {isRTL ? 'غير متأكد من المقاس؟ دعنا نساعدك' : 'Not Sure Which Size? Let Us Help'}
             </h2>
             <p
               className={cn(
@@ -171,7 +203,7 @@ export function SizeRecommender() {
               )}
               style={{ animationDelay: '100ms' }}
             >
-              Answer a few quick questions to get a personalized recommendation.
+              {isRTL ? 'أجب عن بعض الأسئلة السريعة للحصول على توصية مناسبة لك.' : 'Answer a few quick questions to get a personalized recommendation.'}
             </p>
           </div>
 
@@ -204,7 +236,7 @@ export function SizeRecommender() {
               {state.step === 1 && (
                 <div className="animate-slide-in">
                   <h3 className="text-lg font-semibold text-text-primary mb-4">
-                    Step 1: What will you serve?
+                    {isRTL ? 'الخطوة 1: ماذا ستقدم؟' : 'Step 1: What will you serve?'}
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {beverageOptions.map((option) => {
@@ -238,7 +270,7 @@ export function SizeRecommender() {
               {state.step === 2 && (
                 <div className="animate-slide-in">
                   <h3 className="text-lg font-semibold text-text-primary mb-4">
-                    Step 2: What serving size?
+                    {isRTL ? 'الخطوة 2: ما حجم التقديم؟' : 'Step 2: What serving size?'}
                   </h3>
                   <div className="grid grid-cols-2 gap-3">
                     {servingSizeOptions.map((option) => (
@@ -266,7 +298,7 @@ export function SizeRecommender() {
                     onClick={handleBack}
                     className="mt-4 flex items-center gap-1 text-sm text-text-muted hover:text-text-primary transition-colors"
                   >
-                    <ArrowLeft className="w-4 h-4" /> Back
+                    <ArrowLeft className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} /> {isRTL ? 'رجوع' : 'Back'}
                   </button>
                 </div>
               )}
@@ -275,12 +307,12 @@ export function SizeRecommender() {
               {state.step === 3 && (
                 <div className="animate-slide-in">
                   <h3 className="text-lg font-semibold text-text-primary mb-4">
-                    Step 3: Do you need insulation?
+                    {isRTL ? 'الخطوة 3: هل تحتاج عزلا حراريا؟' : 'Step 3: Do you need insulation?'}
                   </h3>
                   <div className="flex items-center gap-2 mb-4 p-3 bg-accent-50 rounded-lg">
                     <ThermometerSun className="w-5 h-5 text-accent-600" />
                     <span className="text-sm text-accent-700">
-                      Insulated cups let customers hold hot drinks comfortably without sleeves.
+                      {isRTL ? 'الأكواب المعزولة تسمح بحمل المشروبات الساخنة براحة دون غلاف.' : 'Insulated cups let customers hold hot drinks comfortably without sleeves.'}
                     </span>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
@@ -309,7 +341,7 @@ export function SizeRecommender() {
                     onClick={handleBack}
                     className="mt-4 flex items-center gap-1 text-sm text-text-muted hover:text-text-primary transition-colors"
                   >
-                    <ArrowLeft className="w-4 h-4" /> Back
+                    <ArrowLeft className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} /> {isRTL ? 'رجوع' : 'Back'}
                   </button>
                 </div>
               )}
@@ -322,17 +354,17 @@ export function SizeRecommender() {
                       <Check className="w-6 h-6 text-success" />
                     </div>
                     <h3 className="text-lg font-semibold text-text-primary">
-                      Your Recommendation
+                      {isRTL ? 'توصيتنا لك' : 'Your Recommendation'}
                     </h3>
                   </div>
 
                   <div className="bg-primary-50 rounded-lg p-6 mb-6">
                     <div className="text-center mb-4">
                       <span className="text-3xl font-bold text-primary-600">
-                        {recommendation.sizeOz}oz
+                        {recommendation.sizeOz}{isRTL ? ' أونصة' : 'oz'}
                       </span>
                       <span className="block text-xl font-semibold text-text-primary mt-1">
-                        {recommendation.cupTypeLabel} Cup
+                        {isRTL ? `كوب ${recommendation.cupTypeLabel}` : `${recommendation.cupTypeLabel} Cup`}
                       </span>
                     </div>
                     <p className="text-text-secondary text-center">
@@ -351,11 +383,11 @@ export function SizeRecommender() {
                       <Link
                         href={`/get-a-quote?cup_type=${recommendation.cupType}&size=${recommendation.sizeOz}oz`}
                       >
-                        Get a Quote for This Cup
+                        {isRTL ? 'احصل على عرض سعر لهذا الكوب' : 'Get a Quote for This Cup'}
                       </Link>
                     </Button>
                     <Button variant="secondary" size="lg" onClick={handleReset}>
-                      Start Over
+                      {isRTL ? 'ابدأ من جديد' : 'Start Over'}
                     </Button>
                   </div>
                 </div>
@@ -363,7 +395,7 @@ export function SizeRecommender() {
             </div>
           </div>
         </div>
-      </div>
+      </SiteContainer>
     </section>
   );
 }

@@ -1,9 +1,43 @@
+import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import Image from 'next/image';
 import { RootLayout } from '@/components/layout/RootLayout';
 import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import { Button } from '@/components/ui/Button';
 import { Link } from '@/i18n/navigation';
 import { ArrowRight } from 'lucide-react';
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://xerostopcups.com';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'industries' });
+  const title = t('corporate.title');
+  const description = t('corporate.description');
+
+  return {
+    title: `${title} | Royal Pack`,
+    description,
+    openGraph: {
+      title: `${title} | Royal Pack`,
+      description,
+      type: 'website',
+      locale: locale === 'ar' ? 'ar_SA' : 'en_US',
+      images: [{ url: `${baseUrl}/og/corporate`, width: 1200, height: 630, alt: title }],
+    },
+    alternates: {
+      canonical: `${baseUrl}/${locale}/industries/corporate`,
+      languages: {
+        en: `${baseUrl}/en/industries/corporate`,
+        ar: `${baseUrl}/ar/industries/corporate`,
+      },
+    },
+  };
+}
 
 export default async function CorporateIndustryPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -12,8 +46,8 @@ export default async function CorporateIndustryPage({ params }: { params: Promis
 
   return (
     <RootLayout>
-      <main id="main-content">
-        <section className="bg-bg-secondary py-12 lg:py-16">
+      <div>
+        <section className="pt-24 pb-12 bg-gradient-to-b from-primary-50 to-white">
           <div className="container mx-auto px-4">
             <Breadcrumb
               items={[
@@ -46,27 +80,38 @@ export default async function CorporateIndustryPage({ params }: { params: Promis
                 <li>• {t('corporate.details.item4')}</li>
               </ul>
             </div>
-            <div className="rounded-xl bg-gradient-to-br from-primary-100 to-primary-50 p-8">
-              <h3 className="text-xl font-semibold text-text-primary mb-3">
-                {t('title')}
-              </h3>
-              <p className="text-text-secondary mb-6">
-                {t('description')}
-              </p>
-              <Button
-                variant="accent"
-                size="lg"
-                rightIcon={<ArrowRight className="w-5 h-5" />}
-                asChild
-              >
-                <Link href="/get-a-quote?industry=corporate">
-                  {t('corporate.cta.button')}
-                </Link>
-              </Button>
+            <div className="rounded-xl border border-border-light bg-white overflow-hidden">
+              <div className="relative aspect-[16/10]">
+                <Image
+                  src="/images/industries/Corporate%20Conferences.webp"
+                  alt={t('corporate.title')}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="text-xl font-semibold text-text-primary mb-3">
+                  {t('corporate.title')}
+                </h3>
+                <p className="text-text-secondary mb-6">
+                  {t('corporate.details.description')}
+                </p>
+                <Button
+                  variant="accent"
+                  size="lg"
+                  rightIcon={<ArrowRight className="w-5 h-5" />}
+                  asChild
+                >
+                  <Link href="/get-a-quote?industry=corporate">
+                    {t('corporate.cta.button')}
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </RootLayout>
   );
 }

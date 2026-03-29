@@ -3,6 +3,8 @@ import { RootLayout } from '@/components/layout/RootLayout';
 import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import { ProductCategoryCard } from '@/components/products/ProductCategoryCard';
 import { CrossSellBanner } from '@/components/products/CrossSellBanner';
+import { listPublicImages } from '@/lib/publicImages';
+import { SiteContainer } from '@/components/layout/SiteContainer';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -22,7 +24,10 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
 
   const productCategories = [
     {
-      image: '/images/products/paper-cups-lineup.webp',
+      image: listPublicImages('images/products/Double Wall Cups')[0]
+        ?? listPublicImages('images/products/Single Wall Cups')[0]
+        ?? listPublicImages('images/products/Ripple Wall Cups')[0]
+        ?? '/images/products/double-wall-paper-cups.webp',
       imageAlt: t('paperCups.subtitle'),
       title: t('paperCups.title'),
       description: t('paperCups.description'),
@@ -34,7 +39,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
       imageAlt: t('cupPrinting.subtitle'),
       title: t('cupPrinting.title'),
       description: t('cupPrinting.description'),
-      href: '/products/cup-printing',
+      href: '/products/custom-printing',
       ctaText: t('cta.button'),
     },
     {
@@ -51,7 +56,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
     <RootLayout>
       {/* Page Header */}
       <section className="pt-24 pb-12 bg-gradient-to-b from-primary-50 to-white">
-        <div className="container mx-auto px-4">
+        <SiteContainer>
           <Breadcrumb
             items={[{ label: t('title') }]}
           />
@@ -63,12 +68,12 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
               {t('subtitle')}
             </p>
           </div>
-        </div>
+        </SiteContainer>
       </section>
 
       {/* Product Category Cards */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+        <SiteContainer>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {productCategories.map((category, index) => (
               <ProductCategoryCard
@@ -79,7 +84,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
               />
             ))}
           </div>
-        </div>
+        </SiteContainer>
       </section>
 
       {/* Cross-Sell Banner */}
@@ -97,7 +102,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'CollectionPage',
-            name: 'Xerostop Cups Products',
+            name: 'Royal Pack Products',
             description:
               'Paper cups, custom printing, and accessories for branded takeaway experiences.',
             hasPart: [
@@ -109,7 +114,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
               {
                 '@type': 'Product',
                 name: 'Custom Cup Printing',
-                url: '/products/cup-printing',
+                url: '/products/custom-printing',
               },
               {
                 '@type': 'Product',
@@ -123,3 +128,4 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
     </RootLayout>
   );
 }
+

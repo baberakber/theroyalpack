@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: t('sample.title'),
       description: t('sample.description'),
-      images: [{ url: '/og/sample.jpg', width: 1200, height: 630 }],
+      images: [{ url: '/og/sample', width: 1200, height: 630 }],
     },
   };
 }
@@ -60,54 +60,56 @@ export default async function RequestSamplePage({ params }: { params: Promise<{ 
 
       {/* FAQ Section */}
       <section className="py-12 bg-bg-secondary">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-xl font-semibold text-text-primary mb-6 text-center">
-            Sample Kit FAQs
-          </h2>
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-xl font-semibold text-text-primary mb-6 text-center">
+              Sample Kit FAQs
+            </h2>
 
-          <div className="space-y-4">
-            <div className="bg-white rounded-lg p-5">
-              <h3 className="font-medium text-text-primary mb-2">
-                What is included in the sample kit?
-              </h3>
-              <p className="text-sm text-text-secondary">
-                Our standard sample kit includes a selection of single-wall, double-wall,
-                and ripple-wall cups in your preferred sizes. We also include a product
-                specification sheet and examples of printed cups when available.
-              </p>
-            </div>
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-5">
+                <h3 className="font-medium text-text-primary mb-2">
+                  What is included in the sample kit?
+                </h3>
+                <p className="text-sm text-text-secondary">
+                  Our standard sample kit includes a selection of single-wall, double-wall,
+                  and ripple-wall cups in your preferred sizes. We also include a product
+                  specification sheet and examples of printed cups when available.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-5">
-              <h3 className="font-medium text-text-primary mb-2">
-                Is there any cost for the sample kit?
-              </h3>
-              <p className="text-sm text-text-secondary">
-                Standard sample kits are free of charge, including shipping within the
-                UAE and GCC. For custom printed samples, there is a nominal fee that
-                can be credited toward your first order.
-              </p>
-            </div>
+              <div className="bg-white rounded-lg p-5">
+                <h3 className="font-medium text-text-primary mb-2">
+                  Is there any cost for the sample kit?
+                </h3>
+                <p className="text-sm text-text-secondary">
+                  Standard sample kits are free of charge, including shipping within the
+                  UAE and GCC. For custom printed samples, there is a nominal fee that
+                  can be credited toward your first order.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-5">
-              <h3 className="font-medium text-text-primary mb-2">
-                How long does delivery take?
-              </h3>
-              <p className="text-sm text-text-secondary">
-                Sample kits are typically shipped within 3-5 business days. UAE
-                deliveries usually arrive within 1-2 business days after shipping.
-                GCC deliveries may take 3-5 business days.
-              </p>
-            </div>
+              <div className="bg-white rounded-lg p-5">
+                <h3 className="font-medium text-text-primary mb-2">
+                  How long does delivery take?
+                </h3>
+                <p className="text-sm text-text-secondary">
+                  Sample kits are typically shipped within 3-5 business days. UAE
+                  deliveries usually arrive within 1-2 business days after shipping.
+                  GCC deliveries may take 3-5 business days.
+                </p>
+              </div>
 
-            <div className="bg-white rounded-lg p-5">
-              <h3 className="font-medium text-text-primary mb-2">
-                Can I request specific cup types or sizes?
-              </h3>
-              <p className="text-sm text-text-secondary">
-                Yes! Use the preferences section in the form to tell us exactly what
-                you are looking for. We will do our best to include the specific cups
-                you want to evaluate.
-              </p>
+              <div className="bg-white rounded-lg p-5">
+                <h3 className="font-medium text-text-primary mb-2">
+                  Can I request specific cup types or sizes?
+                </h3>
+                <p className="text-sm text-text-secondary">
+                  Yes! Use the preferences section in the form to tell us exactly what
+                  you are looking for. We will do our best to include the specific cups
+                  you want to evaluate.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -122,7 +124,7 @@ export default async function RequestSamplePage({ params }: { params: Promise<{ 
             '@type': 'WebPage',
             name: 'Request Free Paper Cup Samples',
             description:
-              'Request a free sample kit of paper cups from Xerostop Cups.',
+              'Request a free sample kit of paper cups from Royal Pack.',
             mainEntity: {
               '@type': 'Offer',
               name: 'Free Paper Cup Sample Kit',
@@ -131,7 +133,7 @@ export default async function RequestSamplePage({ params }: { params: Promise<{ 
               availability: 'https://schema.org/InStock',
               seller: {
                 '@type': 'Organization',
-                name: 'Xerostop Cups',
+                name: 'Royal Pack',
               },
             },
           }),
@@ -140,3 +142,4 @@ export default async function RequestSamplePage({ params }: { params: Promise<{ 
     </RootLayout>
   );
 }
+

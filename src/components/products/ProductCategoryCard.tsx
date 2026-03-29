@@ -5,10 +5,12 @@ import { Link } from '@/i18n/navigation';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
+import { useLocale } from 'next-intl';
 
 interface ProductCategoryCardProps {
   image: string;
   imageAlt: string;
+  imageFit?: 'cover' | 'contain';
   title: string;
   description: string;
   href: string;
@@ -20,6 +22,7 @@ interface ProductCategoryCardProps {
 export function ProductCategoryCard({
   image,
   imageAlt,
+  imageFit = 'cover',
   title,
   description,
   href,
@@ -27,13 +30,16 @@ export function ProductCategoryCard({
   className,
   style,
 }: ProductCategoryCardProps) {
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
+
   return (
     <article
       style={style}
       className={cn(
         'group rounded-xl border border-border-light shadow-md overflow-hidden',
         'bg-white transition-all duration-300',
-        'hover:shadow-lg hover:-translate-y-1',
+        'hover:shadow-lg hover:-translate-y-1 hover:bg-primary-50 hover:border-primary-300',
         className
       )}
     >
@@ -44,7 +50,11 @@ export function ProductCategoryCard({
           alt={imageAlt}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          className={cn(
+            imageFit === 'contain' ? 'object-contain p-2' : 'object-cover',
+            'transition-transform duration-300',
+            imageFit === 'cover' && 'group-hover:scale-105'
+          )}
         />
       </div>
 
@@ -60,7 +70,7 @@ export function ProductCategoryCard({
           variant="primary"
           size="md"
           className="w-full"
-          rightIcon={<ArrowRight className="w-4 h-4" />}
+          rightIcon={<ArrowRight className={cn('w-4 h-4', isRTL && 'rotate-180')} />}
           asChild
         >
           <Link href={href}>{ctaText}</Link>

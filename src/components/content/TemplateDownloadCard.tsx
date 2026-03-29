@@ -21,8 +21,8 @@ export function TemplateDownloadCard({
   return (
     <div
       className={cn(
-        'bg-bg-secondary rounded-lg p-4',
-        'hover:shadow-sm transition-shadow duration-200',
+        'bg-bg-secondary rounded-lg p-4 border border-border-light',
+        'hover:shadow-sm hover:bg-primary-50 hover:border-primary-300 transition-all duration-200',
         className
       )}
     >

@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: t('faq.title'),
       description: t('faq.description'),
-      images: [{ url: '/og/faq.jpg', width: 1200, height: 630 }],
+      images: [{ url: '/og/faq', width: 1200, height: 630 }],
     },
   };
 }
@@ -95,7 +95,7 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
               <p className="text-sm text-text-muted mt-1">{t('resources.paperCupsDesc')}</p>
             </Link>
             <Link
-              href="/products/cup-printing"
+              href="/products/custom-printing"
               className="p-4 bg-bg-secondary rounded-lg text-center hover:bg-primary-50 transition-colors"
             >
               <span className="font-medium text-text-primary">{t('resources.printing')}</span>

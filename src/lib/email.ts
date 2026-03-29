@@ -176,7 +176,7 @@ export async function sendQuoteEmail(
           </div>
         </div>
         <div class="footer">
-          <p>This quote request was submitted via the Xerostop Cups website.</p>
+          <p>This quote request was submitted via the Royal Pack website.</p>
         </div>
       </div>
     </body>
@@ -185,7 +185,7 @@ export async function sendQuoteEmail(
 
   // Send to business
   await transporter.sendMail({
-    from: `"Xerostop Cups Website" <${process.env.SMTP_FROM}>`,
+    from: `"Royal Pack Website" <${process.env.SMTP_FROM}>`,
     to: process.env.QUOTE_RECIPIENT_EMAIL || process.env.SMTP_FROM,
     subject: `New Quote Request from ${data.name.replace(/[<>]/g, '')} - ${data.cupType} ${data.cupSize} (${reference})`,
     html: htmlContent,
@@ -218,10 +218,10 @@ export async function sendQuoteEmail(
 
           <p>If you have any urgent questions, feel free to contact us directly.</p>
 
-          <p>Best regards,<br>The Xerostop Cups Team</p>
+          <p>Best regards,<br>The Royal Pack Team</p>
         </div>
         <div class="footer">
-          <p>&copy; ${new Date().getFullYear()} Xerostop Cups. All rights reserved.</p>
+          <p>&copy; ${new Date().getFullYear()} Royal Pack. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -229,9 +229,9 @@ export async function sendQuoteEmail(
   `;
 
   await transporter.sendMail({
-    from: `"Xerostop Cups" <${process.env.SMTP_FROM}>`,
+    from: `"Royal Pack" <${process.env.SMTP_FROM}>`,
     to: data.email,
-    subject: `Quote Request Received - ${reference} | Xerostop Cups`,
+    subject: `Quote Request Received - ${reference} | Royal Pack`,
     html: customerHtml,
   });
 }
@@ -329,7 +329,7 @@ export async function sendSampleEmail(
           </div>
         </div>
         <div class="footer">
-          <p>This sample request was submitted via the Xerostop Cups website.</p>
+          <p>This sample request was submitted via the Royal Pack website.</p>
         </div>
       </div>
     </body>
@@ -338,7 +338,7 @@ export async function sendSampleEmail(
 
   // Send to business
   await transporter.sendMail({
-    from: `"Xerostop Cups Website" <${process.env.SMTP_FROM}>`,
+    from: `"Royal Pack Website" <${process.env.SMTP_FROM}>`,
     to: process.env.SAMPLE_RECIPIENT_EMAIL || process.env.QUOTE_RECIPIENT_EMAIL || process.env.SMTP_FROM,
     subject: `New Sample Request from ${data.name.replace(/[<>]/g, '')} - ${data.city}, ${data.country} (${reference})`,
     html: htmlContent,
@@ -373,10 +373,10 @@ export async function sendSampleEmail(
 
           <p>If you have any questions about your order, feel free to contact us.</p>
 
-          <p>Best regards,<br>The Xerostop Cups Team</p>
+          <p>Best regards,<br>The Royal Pack Team</p>
         </div>
         <div class="footer">
-          <p>&copy; ${new Date().getFullYear()} Xerostop Cups. All rights reserved.</p>
+          <p>&copy; ${new Date().getFullYear()} Royal Pack. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -384,9 +384,9 @@ export async function sendSampleEmail(
   `;
 
   await transporter.sendMail({
-    from: `"Xerostop Cups" <${process.env.SMTP_FROM}>`,
+    from: `"Royal Pack" <${process.env.SMTP_FROM}>`,
     to: data.email,
-    subject: `Sample Request Confirmed - ${reference} | Xerostop Cups`,
+    subject: `Sample Request Confirmed - ${reference} | Royal Pack`,
     html: customerHtml,
   });
 }
@@ -442,7 +442,7 @@ export async function sendContactEmail(
           </div>
         </div>
         <div class="footer">
-          <p>This message was submitted via the Xerostop Cups website contact form.</p>
+          <p>This message was submitted via the Royal Pack website contact form.</p>
         </div>
       </div>
     </body>
@@ -451,7 +451,7 @@ export async function sendContactEmail(
 
   // Send to business
   await transporter.sendMail({
-    from: `"Xerostop Cups Website" <${process.env.SMTP_FROM}>`,
+    from: `"Royal Pack Website" <${process.env.SMTP_FROM}>`,
     to: process.env.CONTACT_RECIPIENT_EMAIL || process.env.QUOTE_RECIPIENT_EMAIL || process.env.SMTP_FROM,
     replyTo: data.email,
     subject: `[${data.subject}] Contact from ${data.name.replace(/[<>]/g, '')} (${reference})`,
@@ -470,7 +470,7 @@ export async function sendContactEmail(
         </div>
         <div class="content">
           <p>Dear ${escapeHtml(data.name)},</p>
-          <p>Thank you for contacting Xerostop Cups! We have received your message and will respond within 24 hours.</p>
+          <p>Thank you for contacting Royal Pack! We have received your message and will respond within 24 hours.</p>
 
           <div class="reference">
             Your Reference Number: ${reference}
@@ -484,10 +484,10 @@ export async function sendContactEmail(
 
           <p style="margin-top: 20px;">If your matter is urgent, please don't hesitate to call us directly.</p>
 
-          <p>Best regards,<br>The Xerostop Cups Team</p>
+          <p>Best regards,<br>The Royal Pack Team</p>
         </div>
         <div class="footer">
-          <p>&copy; ${new Date().getFullYear()} Xerostop Cups. All rights reserved.</p>
+          <p>&copy; ${new Date().getFullYear()} Royal Pack. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -495,9 +495,10 @@ export async function sendContactEmail(
   `;
 
   await transporter.sendMail({
-    from: `"Xerostop Cups" <${process.env.SMTP_FROM}>`,
+    from: `"Royal Pack" <${process.env.SMTP_FROM}>`,
     to: data.email,
-    subject: `We Received Your Message - ${reference} | Xerostop Cups`,
+    subject: `We Received Your Message - ${reference} | Royal Pack`,
     html: customerHtml,
   });
 }
+

@@ -3,6 +3,7 @@
 import { useEffect, useCallback, useRef, useState } from 'react';
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useLocale } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { Spinner } from '@/components/ui/Spinner';
 import type { GalleryItem } from '@/lib/data/gallery-types';
@@ -15,6 +16,7 @@ interface LightboxProps {
 }
 
 export function Lightbox({ images, initialIndex, isOpen, onClose }: LightboxProps) {
+  const isRTL = useLocale() === 'ar';
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -29,19 +31,16 @@ export function Lightbox({ images, initialIndex, isOpen, onClose }: LightboxProp
   const hasPrev = currentIndex > 0;
   const hasNext = currentIndex < images.length - 1;
 
-  // Reset loading state when image changes
   useEffect(() => {
     setIsImageLoading(true);
   }, [currentIndex]);
 
-  // Reset index when opening
   useEffect(() => {
     if (isOpen) {
       setCurrentIndex(initialIndex);
     }
   }, [isOpen, initialIndex]);
 
-  // Lock body scroll when open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -54,7 +53,6 @@ export function Lightbox({ images, initialIndex, isOpen, onClose }: LightboxProp
     };
   }, [isOpen]);
 
-  // Focus management
   useEffect(() => {
     if (isOpen && closeButtonRef.current) {
       closeButtonRef.current.focus();
@@ -73,7 +71,6 @@ export function Lightbox({ images, initialIndex, isOpen, onClose }: LightboxProp
     }
   }, [hasNext]);
 
-  // Keyboard navigation
   useEffect(() => {
     if (!isOpen) return;
 
@@ -83,13 +80,20 @@ export function Lightbox({ images, initialIndex, isOpen, onClose }: LightboxProp
           onClose();
           break;
         case 'ArrowLeft':
-          goToPrev();
+          if (isRTL) {
+            goToNext();
+          } else {
+            goToPrev();
+          }
           break;
         case 'ArrowRight':
-          goToNext();
+          if (isRTL) {
+            goToPrev();
+          } else {
+            goToNext();
+          }
           break;
-        case 'Tab':
-          // Focus trap
+        case 'Tab': {
           e.preventDefault();
           const focusableElements = [closeButtonRef, prevButtonRef, nextButtonRef]
             .map((ref) => ref.current)
@@ -111,14 +115,14 @@ export function Lightbox({ images, initialIndex, isOpen, onClose }: LightboxProp
             focusableElements[nextIndex]?.focus();
           }
           break;
+        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose, goToPrev, goToNext]);
+  }, [isOpen, onClose, goToPrev, goToNext, isRTL]);
 
-  // Touch swipe handling
   const minSwipeDistance = 50;
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -137,15 +141,22 @@ export function Lightbox({ images, initialIndex, isOpen, onClose }: LightboxProp
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
 
-    if (isLeftSwipe && hasNext) {
-      goToNext();
+    if (isLeftSwipe) {
+      if (isRTL && hasPrev) {
+        goToPrev();
+      } else if (!isRTL && hasNext) {
+        goToNext();
+      }
     }
-    if (isRightSwipe && hasPrev) {
-      goToPrev();
+    if (isRightSwipe) {
+      if (isRTL && hasNext) {
+        goToNext();
+      } else if (!isRTL && hasPrev) {
+        goToPrev();
+      }
     }
   };
 
-  // Click overlay to close
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === overlayRef.current) {
       onClose();
@@ -159,7 +170,7 @@ export function Lightbox({ images, initialIndex, isOpen, onClose }: LightboxProp
       ref={overlayRef}
       className={cn(
         'fixed inset-0 z-50 flex items-center justify-center',
-        'bg-text-primary/95 animate-fade-in'
+        'bg-zinc-950/95 backdrop-blur-sm'
       )}
       onClick={handleOverlayClick}
       role="dialog"
@@ -171,14 +182,14 @@ export function Lightbox({ images, initialIndex, isOpen, onClose }: LightboxProp
         ref={closeButtonRef}
         onClick={onClose}
         className={cn(
-          'absolute top-4 right-4 z-10 p-2 rounded-full',
-          'text-white/80 hover:text-white hover:bg-white/10',
-          'transition-colors duration-200',
-          'focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent'
+          'absolute top-5 end-5 z-10 p-2.5 rounded-full',
+          'text-white/60 hover:text-white hover:bg-white/10',
+          'transition-all duration-300',
+          'focus:outline-none focus-visible:ring-2 focus-visible:ring-white'
         )}
         aria-label="Close lightbox"
       >
-        <X className="w-6 h-6" />
+        <X className="w-5 h-5" strokeWidth={1.5} />
       </button>
 
       {/* Previous button */}
@@ -187,15 +198,15 @@ export function Lightbox({ images, initialIndex, isOpen, onClose }: LightboxProp
         onClick={goToPrev}
         disabled={!hasPrev}
         className={cn(
-          'absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full',
-          'text-white/80 hover:text-white hover:bg-white/10',
-          'transition-colors duration-200',
-          'focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent',
-          'disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent'
+          'absolute start-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full',
+          'text-white/60 hover:text-white hover:bg-white/10',
+          'transition-all duration-300',
+          'focus:outline-none focus-visible:ring-2 focus-visible:ring-white',
+          'disabled:opacity-20 disabled:cursor-not-allowed disabled:hover:bg-transparent'
         )}
         aria-label="Previous image"
       >
-        <ChevronLeft className="w-8 h-8" />
+        <ChevronLeft className="w-7 h-7" strokeWidth={1.5} />
       </button>
 
       {/* Next button */}
@@ -204,15 +215,15 @@ export function Lightbox({ images, initialIndex, isOpen, onClose }: LightboxProp
         onClick={goToNext}
         disabled={!hasNext}
         className={cn(
-          'absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full',
-          'text-white/80 hover:text-white hover:bg-white/10',
-          'transition-colors duration-200',
-          'focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent',
-          'disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent'
+          'absolute end-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full',
+          'text-white/60 hover:text-white hover:bg-white/10',
+          'transition-all duration-300',
+          'focus:outline-none focus-visible:ring-2 focus-visible:ring-white',
+          'disabled:opacity-20 disabled:cursor-not-allowed disabled:hover:bg-transparent'
         )}
         aria-label="Next image"
       >
-        <ChevronRight className="w-8 h-8" />
+        <ChevronRight className="w-7 h-7" strokeWidth={1.5} />
       </button>
 
       {/* Image container */}
@@ -222,17 +233,15 @@ export function Lightbox({ images, initialIndex, isOpen, onClose }: LightboxProp
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {/* Loading spinner */}
         {isImageLoading && (
           <div className="absolute inset-0 flex items-center justify-center">
             <Spinner size="lg" className="text-white" />
           </div>
         )}
 
-        {/* Image */}
         <div
           className={cn(
-            'relative transition-opacity duration-200',
+            'relative transition-opacity duration-300',
             isImageLoading ? 'opacity-0' : 'opacity-100'
           )}
           style={{
@@ -246,26 +255,26 @@ export function Lightbox({ images, initialIndex, isOpen, onClose }: LightboxProp
             alt={currentImage.alt}
             width={currentImage.width}
             height={currentImage.height}
-            className="object-contain max-h-[70vh] w-auto mx-auto"
+            className="object-contain max-h-[70vh] w-auto mx-auto rounded-lg"
             onLoad={() => setIsImageLoading(false)}
             priority
           />
         </div>
 
         {/* Caption */}
-        <div className="mt-4 text-center text-white max-w-2xl px-4">
-          <h3 className="text-lg font-medium">{currentImage.title}</h3>
+        <div className="mt-6 text-center text-white max-w-2xl px-4">
+          <h3 className="text-lg font-semibold tracking-tight">{currentImage.title}</h3>
           {currentImage.description && (
-            <p className="mt-1 text-white/70 text-sm">{currentImage.description}</p>
+            <p className="mt-1.5 text-white/50 text-sm">{currentImage.description}</p>
           )}
         </div>
 
         {/* Counter */}
         <div
-          className="mt-3 text-white/60 text-sm"
+          className="mt-4 text-white/30 text-xs font-medium tracking-wider uppercase"
           aria-live="polite"
         >
-          {currentIndex + 1} / {images.length}
+          {currentIndex + 1} of {images.length}
         </div>
       </div>
     </div>

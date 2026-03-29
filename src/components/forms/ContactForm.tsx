@@ -14,8 +14,11 @@ import {
   subjectOptions,
 } from '@/lib/schemas/contact';
 import { cn } from '@/lib/utils';
+import { useLocale } from 'next-intl';
 
 export function ContactForm() {
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -37,6 +40,51 @@ export function ContactForm() {
 
   const messageValue = watch('message') || '';
 
+  const tr = {
+    successTitle: isRTL ? 'تم إرسال الرسالة بنجاح!' : 'Message Sent Successfully!',
+    successBody: isRTL
+      ? 'شكرا لتواصلك معنا. سنقوم بالرد خلال 24 ساعة.'
+      : 'Thank you for reaching out. We\'ll respond within 24 hours.',
+    reference: isRTL ? 'المرجع' : 'Reference',
+    sendAnother: isRTL ? 'إرسال رسالة أخرى' : 'Send Another Message',
+    sendFailed: isRTL ? 'تعذر إرسال الرسالة. يرجى المحاولة مرة أخرى.' : 'Failed to send message. Please try again.',
+    fullName: isRTL ? 'الاسم الكامل' : 'Full Name',
+    yourName: isRTL ? 'اكتب اسمك' : 'Your name',
+    email: isRTL ? 'البريد الإلكتروني' : 'Email',
+    phone: isRTL ? 'رقم الهاتف' : 'Phone',
+    subject: isRTL ? 'الموضوع' : 'Subject',
+    selectTopic: isRTL ? 'اختر موضوعا' : 'Select a topic',
+    message: isRTL ? 'الرسالة' : 'Message',
+    messagePlaceholder: isRTL ? 'كيف يمكننا مساعدتك؟' : 'How can we help?',
+    sending: isRTL ? 'جار الإرسال...' : 'Sending...',
+    sendMessage: isRTL ? 'إرسال الرسالة' : 'Send Message',
+  };
+
+  const subjectLabelMap: Record<(typeof subjectOptions)[number]['value'], string> = {
+    general: isRTL ? 'استفسار عام' : 'General Inquiry',
+    product: isRTL ? 'استفسار عن منتج' : 'Product Question',
+    printing: isRTL ? 'استفسار عن الطباعة' : 'Printing Question',
+    quote: isRTL ? 'طلب عرض سعر' : 'Request a Quote',
+    partnership: isRTL ? 'استفسار شراكة' : 'Partnership Inquiry',
+    feedback: isRTL ? 'ملاحظات' : 'Feedback',
+    other: isRTL ? 'أخرى' : 'Other',
+  };
+
+  const localizeError = (msg?: string) => {
+    if (!msg || !isRTL) return msg;
+    const map: Record<string, string> = {
+      'Name must be at least 2 characters': 'يجب أن يكون الاسم حرفين على الأقل',
+      'Name must be less than 100 characters': 'يجب ألا يتجاوز الاسم 100 حرف',
+      'Please enter a valid email address': 'يرجى إدخال بريد إلكتروني صحيح',
+      'Phone number is too long': 'رقم الهاتف طويل جدا',
+      'Please enter a valid phone number': 'يرجى إدخال رقم هاتف صحيح',
+      'Please select a subject': 'يرجى اختيار موضوع',
+      'Message must be at least 10 characters': 'يجب أن تحتوي الرسالة على 10 أحرف على الأقل',
+      'Message must be less than 2000 characters': 'يجب ألا تتجاوز الرسالة 2000 حرف',
+    };
+    return map[msg] ?? msg;
+  };
+
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     setSubmitError(null);
@@ -51,14 +99,14 @@ export function ContactForm() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || 'Failed to send message');
+        throw new Error(result.error || tr.sendFailed);
       }
 
       setReference(result.reference);
       setSubmitSuccess(true);
     } catch (error) {
       setSubmitError(
-        error instanceof Error ? error.message : 'Failed to send message. Please try again.'
+        error instanceof Error ? error.message : tr.sendFailed
       );
     } finally {
       setIsSubmitting(false);
@@ -79,18 +127,18 @@ export function ContactForm() {
           <CheckCircle className="h-8 w-8 text-green-600" aria-hidden="true" />
         </div>
         <h3 className="text-xl font-bold text-text-primary mb-3">
-          Message Sent Successfully!
+          {tr.successTitle}
         </h3>
         <p className="text-text-muted mb-4">
-          Thank you for reaching out. We&apos;ll respond within 24 hours.
+          {tr.successBody}
         </p>
         {reference && (
           <p className="text-sm text-text-muted mb-6 font-mono bg-bg-secondary inline-block px-4 py-2 rounded">
-            Reference: {reference}
+            {tr.reference}: {reference}
           </p>
         )}
         <Button variant="primary" onClick={handleReset}>
-          Send Another Message
+          {tr.sendAnother}
         </Button>
       </div>
     );
@@ -111,19 +159,19 @@ export function ContactForm() {
       <div className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Input
-            label="Full Name"
-            placeholder="Your name"
+            label={tr.fullName}
+            placeholder={tr.yourName}
             {...register('name')}
-            error={errors.name?.message}
+            error={localizeError(errors.name?.message)}
             required
             aria-required="true"
           />
           <Input
-            label="Email"
+            label={tr.email}
             type="email"
             placeholder="you@company.com"
             {...register('email')}
-            error={errors.email?.message}
+            error={localizeError(errors.email?.message)}
             required
             aria-required="true"
           />
@@ -131,22 +179,22 @@ export function ContactForm() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Input
-            label="Phone"
+            label={tr.phone}
             type="tel"
-            placeholder="+971 50 000 0000"
+            placeholder="+966 55 624 0690"
             {...register('phone')}
-            error={errors.phone?.message}
+            error={localizeError(errors.phone?.message)}
           />
           <Controller
             name="subject"
             control={control}
             render={({ field }) => (
               <Select
-                label="Subject"
-                placeholder="Select a topic"
-                options={subjectOptions.map(opt => ({ value: opt.value, label: opt.label }))}
+                label={tr.subject}
+                placeholder={tr.selectTopic}
+                options={subjectOptions.map((opt) => ({ value: opt.value, label: subjectLabelMap[opt.value] }))}
                 {...field}
-                error={errors.subject?.message}
+                error={localizeError(errors.subject?.message)}
                 required
                 aria-required="true"
               />
@@ -156,16 +204,16 @@ export function ContactForm() {
 
         <div>
           <Textarea
-            label="Message"
-            placeholder="How can we help?"
+            label={tr.message}
+            placeholder={tr.messagePlaceholder}
             {...register('message')}
-            error={errors.message?.message}
+            error={localizeError(errors.message?.message)}
             required
             aria-required="true"
             maxLength={2000}
             className="min-h-[150px]"
           />
-          <p className="mt-1 text-xs text-text-muted text-right">
+          <p className="mt-1 text-xs text-text-muted text-end">
             {messageValue.length} / 2000
           </p>
         </div>
@@ -177,7 +225,7 @@ export function ContactForm() {
           isLoading={isSubmitting}
           className="w-full md:w-auto"
         >
-          {isSubmitting ? 'Sending...' : 'Send Message'}
+          {isSubmitting ? tr.sending : tr.sendMessage}
         </Button>
       </div>
     </form>
@@ -186,9 +234,14 @@ export function ContactForm() {
 
 // Contact Info component
 export function ContactInfo() {
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
+
   return (
     <div>
-      <h2 className="text-xl font-semibold text-text-primary mb-6">Get in Touch</h2>
+      <h2 className="text-xl font-semibold text-text-primary mb-6">
+        {isRTL ? 'تواصل معنا' : 'Get in Touch'}
+      </h2>
 
       <div className="space-y-6">
         {/* Phone */}
@@ -198,13 +251,13 @@ export function ContactInfo() {
           </div>
           <div>
             <p className="text-xs font-medium text-text-muted uppercase tracking-wide mb-1">
-              Phone
+              {isRTL ? 'الهاتف' : 'Phone'}
             </p>
             <a
-              href="tel:+971000000000"
+              href="tel:+966556240690"
               className="text-text-primary hover:text-primary-600 transition-colors"
             >
-              +971 XX XXX XXXX
+              +966556240690
             </a>
           </div>
         </div>
@@ -219,12 +272,12 @@ export function ContactInfo() {
               WhatsApp
             </p>
             <a
-              href="https://wa.me/971000000000"
+              href="https://wa.me/966556240690"
               className="text-text-primary hover:text-primary-600 transition-colors"
               target="_blank"
               rel="noopener noreferrer"
             >
-              +971 XX XXX XXXX
+              +966556240690
             </a>
           </div>
         </div>
@@ -236,13 +289,13 @@ export function ContactInfo() {
           </div>
           <div>
             <p className="text-xs font-medium text-text-muted uppercase tracking-wide mb-1">
-              Email
+              {isRTL ? 'البريد الإلكتروني' : 'Email'}
             </p>
             <a
-              href="mailto:info@xerostopcups.com"
+              href="mailto:sales@theroyalpack.com"
               className="text-text-primary hover:text-primary-600 transition-colors"
             >
-              info@xerostopcups.com
+              sales@theroyalpack.com
             </a>
           </div>
         </div>
@@ -254,16 +307,16 @@ export function ContactInfo() {
           </div>
           <div>
             <p className="text-xs font-medium text-text-muted uppercase tracking-wide mb-1">
-              Visit Us
+              {isRTL ? 'زورونا' : 'Visit Us'}
             </p>
             <a
-              href="https://maps.google.com"
+              href="https://maps.google.com/?q=Exit+18+As+Sulay+Riyadh+14321"
               className="text-text-primary hover:text-primary-600 transition-colors"
               target="_blank"
               rel="noopener noreferrer"
             >
-              123 Industrial Area<br />
-              Dubai, United Arab Emirates
+              Exit 18, As Sulay<br />
+              {isRTL ? 'الرياض 14321، المملكة العربية السعودية' : 'Riyadh 14321, Saudi Arabia'}
             </a>
           </div>
         </div>
@@ -271,7 +324,7 @@ export function ContactInfo() {
 
       {/* Social Media */}
       <div className="mt-8 pt-6 border-t border-border-default">
-        <p className="text-sm font-medium text-text-muted mb-3">Follow Us</p>
+        <p className="text-sm font-medium text-text-muted mb-3">{isRTL ? 'تابعنا' : 'Follow Us'}</p>
         <div className="flex gap-3">
           {/* Placeholder social icons */}
           {['facebook', 'instagram', 'linkedin', 'twitter'].map((social) => (
@@ -294,18 +347,20 @@ export function ContactInfo() {
 
 // Google Maps Embed component
 export function MapEmbed() {
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
+
   return (
     <div className="w-full rounded-lg overflow-hidden border border-border-light">
       <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d462560.3011806427!2d54.89784349404474!3d25.07628039538461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2s!4v1699999999999!5m2!1sen!2s"
+        src="https://www.google.com/maps?q=Exit+18+As+Sulay+Riyadh+14321&output=embed"
         width="100%"
         height="400"
-        style={{ border: 0 }}
         allowFullScreen
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
-        title="Xerostop Cups location"
-        className="w-full h-[300px] md:h-[400px]"
+        title={isRTL ? 'موقع رويال باك في الرياض' : 'Royal Pack Riyadh location'}
+        className="w-full h-[300px] md:h-[400px] border-0"
       />
     </div>
   );
@@ -313,6 +368,8 @@ export function MapEmbed() {
 
 // Business Hours component
 export function BusinessHours() {
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
   const [currentDay, setCurrentDay] = useState<number>(-1);
 
@@ -334,13 +391,13 @@ export function BusinessHours() {
   }, []);
 
   const hours = [
-    { day: 'Monday', hours: '8:00 AM - 6:00 PM', dayIndex: 1 },
-    { day: 'Tuesday', hours: '8:00 AM - 6:00 PM', dayIndex: 2 },
-    { day: 'Wednesday', hours: '8:00 AM - 6:00 PM', dayIndex: 3 },
-    { day: 'Thursday', hours: '8:00 AM - 6:00 PM', dayIndex: 4 },
-    { day: 'Friday', hours: '8:00 AM - 6:00 PM', dayIndex: 5 },
-    { day: 'Saturday', hours: '9:00 AM - 2:00 PM', dayIndex: 6 },
-    { day: 'Sunday', hours: 'Closed', dayIndex: 0 },
+    { day: isRTL ? 'الاثنين' : 'Monday', hours: isRTL ? '8:00 ص - 6:00 م' : '8:00 AM - 6:00 PM', dayIndex: 1 },
+    { day: isRTL ? 'الثلاثاء' : 'Tuesday', hours: isRTL ? '8:00 ص - 6:00 م' : '8:00 AM - 6:00 PM', dayIndex: 2 },
+    { day: isRTL ? 'الأربعاء' : 'Wednesday', hours: isRTL ? '8:00 ص - 6:00 م' : '8:00 AM - 6:00 PM', dayIndex: 3 },
+    { day: isRTL ? 'الخميس' : 'Thursday', hours: isRTL ? '8:00 ص - 6:00 م' : '8:00 AM - 6:00 PM', dayIndex: 4 },
+    { day: isRTL ? 'الجمعة' : 'Friday', hours: isRTL ? '8:00 ص - 6:00 م' : '8:00 AM - 6:00 PM', dayIndex: 5 },
+    { day: isRTL ? 'السبت' : 'Saturday', hours: isRTL ? '9:00 ص - 2:00 م' : '9:00 AM - 2:00 PM', dayIndex: 6 },
+    { day: isRTL ? 'الأحد' : 'Sunday', hours: isRTL ? 'مغلق' : 'Closed', dayIndex: 0 },
   ];
 
   return (
@@ -348,7 +405,7 @@ export function BusinessHours() {
       <div className="container mx-auto px-4 max-w-xl">
         <div className="flex items-center justify-center gap-3 mb-6">
           <Clock className="h-6 w-6 text-primary-600" aria-hidden="true" />
-          <h2 className="text-xl font-semibold text-text-primary">Business Hours</h2>
+          <h2 className="text-xl font-semibold text-text-primary">{isRTL ? 'ساعات العمل' : 'Business Hours'}</h2>
           {isOpen !== null && (
             <span
               className={cn(
@@ -358,7 +415,7 @@ export function BusinessHours() {
                   : 'bg-text-muted text-white'
               )}
             >
-              {isOpen ? 'Open Now' : 'Closed'}
+              {isOpen ? (isRTL ? 'مفتوح الآن' : 'Open Now') : (isRTL ? 'مغلق' : 'Closed')}
             </span>
           )}
         </div>
@@ -375,14 +432,14 @@ export function BusinessHours() {
               >
                 <th
                   scope="row"
-                  className="py-3 px-4 text-left text-sm font-medium text-text-primary"
+                  className="py-3 px-4 text-start text-sm font-medium text-text-primary"
                 >
                   {day}
                 </th>
                 <td
                   className={cn(
-                    'py-3 px-4 text-right text-sm',
-                    time === 'Closed' ? 'text-text-muted' : 'text-text-primary'
+                    'py-3 px-4 text-end text-sm',
+                    (time === 'Closed' || time === 'مغلق') ? 'text-text-muted' : 'text-text-primary'
                   )}
                 >
                   {time}
@@ -393,9 +450,10 @@ export function BusinessHours() {
         </table>
 
         <p className="mt-4 text-sm text-text-muted text-center">
-          All times are in Gulf Standard Time (GST / UTC+4)
+          {isRTL ? 'جميع الأوقات بتوقيت الخليج القياسي (GST / UTC+4)' : 'All times are in Gulf Standard Time (GST / UTC+4)'}
         </p>
       </div>
     </section>
   );
 }
+

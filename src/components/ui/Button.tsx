@@ -16,15 +16,15 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses = {
   primary:
-    'bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 focus-visible:ring-primary-500',
+    'bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 active:scale-[0.98] focus-visible:ring-primary-500 shadow-sm hover:shadow-md',
   secondary:
-    'bg-white text-text-primary border border-border-default hover:bg-bg-secondary active:bg-bg-tertiary focus-visible:ring-primary-500',
+    'bg-white text-text-primary border border-border-default hover:bg-bg-secondary hover:border-border-dark active:bg-bg-tertiary active:scale-[0.98] focus-visible:ring-primary-500',
   accent:
-    'bg-accent-500 text-white hover:bg-accent-600 active:bg-accent-700 focus-visible:ring-accent-500',
+    'bg-accent-500 text-white hover:bg-accent-600 active:bg-accent-700 active:scale-[0.98] focus-visible:ring-accent-500 shadow-sm hover:shadow-md',
   ghost:
-    'bg-transparent text-text-primary hover:bg-bg-secondary active:bg-bg-tertiary focus-visible:ring-primary-500',
+    'bg-transparent text-text-primary hover:bg-bg-secondary active:bg-bg-tertiary active:scale-[0.98] focus-visible:ring-primary-500',
   danger:
-    'bg-error text-white hover:bg-red-600 active:bg-red-700 focus-visible:ring-error',
+    'bg-error text-white hover:bg-red-600 active:bg-red-700 active:scale-[0.98] focus-visible:ring-error shadow-sm hover:shadow-md',
 };
 
 const sizeClasses = {
@@ -53,7 +53,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const buttonClasses = cn(
       'inline-flex items-center justify-center font-medium rounded-lg',
-      'transition-colors duration-200',
+      'transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
       'disabled:opacity-50 disabled:cursor-not-allowed',
       variantClasses[variant],

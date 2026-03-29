@@ -1,25 +1,30 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'Xerostop Cups';
+export const alt = 'Royal Pack';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
 const titles: Record<string, string> = {
   'home': 'Premium Custom Branded Paper Cups',
-  'products': 'Products — Paper Cups, Printing & Accessories',
-  'paper-cups': 'Paper Cups — Single, Double & Ripple Wall',
-  'cup-printing': 'Custom Cup Printing — Offset & Flexo',
-  'accessories': 'Cup Accessories — Lids, Sleeves & Carriers',
+  'products': 'Products - Paper Cups, Printing & Accessories',
+  'paper-cups': 'Paper Cups - Single, Double & Ripple Wall',
+  'cup-printing': 'Custom Cup Printing - Offset & Flexo',
+  'accessories': 'Cup Accessories - Lids, Sleeves & Carriers',
   'industries': 'Industries We Serve',
-  'gallery': 'Gallery — Custom Printed Cup Designs',
+  'gallery': 'Gallery - Custom Printed Cup Designs',
   'about': 'About Us',
   'sustainability': 'Sustainability',
-  'faq': 'FAQ — Frequently Asked Questions',
-  'design-support': 'Design Support — Templates & Design Services',
+  'faq': 'FAQ - Frequently Asked Questions',
+  'design-support': 'Design Support - Templates & Design Services',
   'contact': 'Contact Us',
-  'quote': 'Get a Quote — Custom Paper Cups',
-  'sample': 'Request Free Sample — Paper Cup Samples',
+  'quote': 'Get a Quote - Custom Paper Cups',
+  'sample': 'Request Free Sample - Paper Cup Samples',
+  'cafes': 'Paper Cups for Cafes',
+  'restaurants': 'Paper Cups for Restaurants',
+  'hotels': 'Paper Cups for Hotels',
+  'events': 'Paper Cups for Events',
+  'corporate': 'Paper Cups for Corporate Events',
 };
 
 export async function GET(
@@ -28,7 +33,7 @@ export async function GET(
 ) {
   const { slug } = await params;
   const key = slug.replace(/\.(jpg|jpeg|png|webp)$/i, '');
-  const title = titles[key] || 'Xerostop Cups | Premium Custom Branded Paper Cups';
+  const title = titles[key] || 'Royal Pack | Premium Custom Branded Paper Cups';
 
   return new ImageResponse(
     (
@@ -64,10 +69,11 @@ export async function GET(
             marginTop: 16,
           }}
         >
-          Xerostop Cups
+          Royal Pack
         </div>
       </div>
     ),
     { ...size }
   );
 }
+

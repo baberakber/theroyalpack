@@ -1,6 +1,6 @@
 {
   "common": {
-    "siteName": "Xerostop Cups",
+    "siteName": "Royal Pack",
     "siteDescription": "Premium custom branded paper cups for businesses",
     "getQuote": "Get a Quote",
     "learnMore": "Learn More",
@@ -28,6 +28,11 @@
       "label": "Products",
       "paperCups": "Paper Cups",
       "paperCupsDesc": "Custom branded paper cups",
+      "paperCupsSingleWall": "Single Wall Cups",
+      "paperCupsDoubleWall": "Double Wall Cups",
+      "paperCupsRippleWall": "Ripple Wall Cups",
+      "cupPrinting": "Custom Printing",
+      "cupPrintingDesc": "Custom cup printing services",
       "cupSleeves": "Cup Sleeves",
       "cupSleevesDesc": "Insulated cup sleeves",
       "lids": "Lids",
@@ -63,7 +68,7 @@
     "contactUs": "Contact Us",
     "faq": "FAQ",
     "gallery": "Gallery",
-    "copyright": "Xerostop Cups. All rights reserved.",
+    "copyright": "Royal Pack. All rights reserved.",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service",
     "social": {
@@ -93,6 +98,8 @@
     "whatWeDo": {
       "title": "What We Do",
       "subtitle": "Comprehensive solutions for your paper cup needs",
+      "cta": "Explore products",
+      "learnMore": "Learn more",
       "paperCups": {
         "title": "Paper Cups",
         "description": "Custom designed paper cups in various sizes with your branding"
@@ -107,7 +114,7 @@
       }
     },
     "whyXerostop": {
-      "title": "Why Choose Xerostop?",
+      "title": "Why Choose Royal Pack?",
       "subtitle": "Four pillars that set us apart",
       "quality": {
         "title": "Premium Quality",
@@ -221,6 +228,35 @@
         "heading": "Bundle with Lids & More",
         "text": "Order sleeves together with lids, carriers, and stirrers for a complete solution.",
         "cta": "View All Accessories"
+      },
+      "customSection": {
+        "heading": "Custom Paper Cup Sleeves",
+        "description": "Custom paper cup sleeves are a practical and stylish way to promote your brand while providing insulation for hot beverages. Perfect for cafes, restaurants, and events, these sleeves enhance your branding and offer a comfortable grip for customers.",
+        "keyFeaturesHeading": "Key Features",
+        "imageAlt1": "Custom printed cup sleeve close-up",
+        "imageAlt2": "Custom paper cup sleeves for hot beverages",
+        "features": {
+          "item1": {
+            "title": "Customizable Designs",
+            "description": "Print your logo, brand message, or artwork for a unique and eye-catching appearance."
+          },
+          "item2": {
+            "title": "Eco-Friendly Options",
+            "description": "Made from recyclable and biodegradable materials."
+          },
+          "item3": {
+            "title": "Perfect Fit",
+            "description": "Designed to fit standard paper cups securely."
+          },
+          "item4": {
+            "title": "High-Quality Printing",
+            "description": "Full-color, high-resolution printing ensures your design stands out."
+          },
+          "item5": {
+            "title": "Durable Material",
+            "description": "Crafted to withstand heat and maintain structure."
+          }
+        }
       }
     },
     "lids": {
@@ -272,6 +308,76 @@
       "title": "Need Help Choosing?",
       "description": "Our team is here to help you find the perfect solution",
       "button": "Contact Us"
+    },
+    "commonLabels": {
+      "sizes": "Sizes",
+      "material": "Material",
+      "bestFor": "Best for",
+      "getQuote": "Get a Quote",
+      "learnMore": "Learn More"
+    },
+    "paperCupsPage": {
+      "headerDescription": "We manufacture three types of paper cups to suit every need - from budget-friendly single-wall cups to premium ripple-wall insulated cups. All food-safe, all customizable.",
+      "chooseTypeTitle": "Choose Your Cup Type",
+      "crossSellTitle": "Complete Your Order",
+      "printingCardTitle": "Add Custom Printing",
+      "printingCardDescription": "Put your logo and brand colors on every cup with our full-color printing services.",
+      "accessoriesCardTitle": "Add Lids & Accessories",
+      "accessoriesCardDescription": "Complete your setup with matching lids, sleeves, stirrers, and carriers.",
+      "ctaTitle": "Ready to Order Paper Cups?",
+      "ctaDescription": "Get a free quote tailored to your needs, or request samples to see the quality firsthand.",
+      "sampleButton": "Request a Free Sample",
+      "cupTypes": {
+        "singleWall": {
+          "imageAlt": "Single-wall paper cup",
+          "title": "Single-Wall Cups",
+          "tagline": "Light & economical",
+          "bestFor1": "Cold drinks",
+          "bestFor2": "Water coolers",
+          "bestFor3": "Short-serve hot drinks"
+        },
+        "doubleWall": {
+          "imageAlt": "Double-wall paper cup",
+          "title": "Double-Wall Cups",
+          "tagline": "Insulated for comfort",
+          "bestFor1": "Hot drinks",
+          "bestFor2": "No sleeve needed",
+          "bestFor3": "Premium feel"
+        },
+        "rippleWall": {
+          "imageAlt": "Ripple-wall paper cup",
+          "title": "Ripple-Wall Cups",
+          "tagline": "Maximum insulation & grip",
+          "bestFor1": "Hot drinks",
+          "bestFor2": "Food trucks",
+          "bestFor3": "Premium cafes"
+        }
+      }
+    },
+    "cupSleevesPage": {
+      "types": {
+        "kraft": {
+          "name": "Standard Kraft",
+          "description": "Natural brown cardboard sleeves. Eco-friendly, cost-effective, and a classic look that suits any brand.",
+          "feature1": "FSC-certified paper",
+          "feature2": "Recyclable",
+          "feature3": "Fits 8oz-22oz cups"
+        },
+        "white": {
+          "name": "White Sleeves",
+          "description": "Clean white canvas for vibrant full-color printing. Make your logo and designs stand out.",
+          "feature1": "Bright white stock",
+          "feature2": "Full-color print",
+          "feature3": "Premium finish"
+        },
+        "custom": {
+          "name": "Custom Printed",
+          "description": "Your logo, messaging, or seasonal designs. We handle the printing so your brand stays consistent.",
+          "feature1": "Your artwork",
+          "feature2": "Spot or full color",
+          "feature3": "Low minimums"
+        }
+      }
     }
   },
   "industries": {
@@ -472,19 +578,22 @@
     }
   },
   "about": {
-    "title": "About Xerostop Cups",
+    "title": "About Royal Pack",
     "subtitle": "Your trusted partner in custom paper cups",
     "story": {
       "title": "Our Story",
-      "content": "Founded with a passion for quality and sustainability, Xerostop Cups has grown to become a leading provider of custom branded paper cups in the region."
+      "content": "Founded with a passion for quality and sustainability, Royal Pack has grown to become a leading provider of custom branded paper cups in the region.",
+      "imageAlt": "Royal Pack branded cups and packaging collage representing our story"
     },
     "mission": {
       "title": "Our Mission",
-      "content": "To provide businesses with premium quality, eco-friendly paper cup solutions that enhance their brand while minimizing environmental impact."
+      "content": "To provide businesses with premium quality, eco-friendly paper cup solutions that enhance their brand while minimizing environmental impact.",
+      "imageAlt": "Premium double-wall paper cups illustrating quality and sustainable solutions"
     },
     "vision": {
       "title": "Our Vision",
-      "content": "To be the most trusted and innovative paper cup manufacturer, leading the industry in sustainability and customer satisfaction."
+      "content": "To be the most trusted and innovative paper cup manufacturer, leading the industry in sustainability and customer satisfaction.",
+      "imageAlt": "Luxury branded cup design symbolizing innovation and leadership"
     },
     "values": {
       "title": "Our Values",
@@ -501,7 +610,7 @@
     },
     "team": {
       "title": "Our Team",
-      "subtitle": "Meet the people behind Xerostop Cups"
+      "subtitle": "Meet the people behind Royal Pack"
     },
     "cta": {
       "title": "Partner With Us",
@@ -743,68 +852,69 @@
   },
   "metadata": {
     "home": {
-      "title": "Xerostop Cups | Premium Custom Branded Paper Cups",
+      "title": "Royal Pack | Premium Custom Branded Paper Cups",
       "description": "High-quality custom branded paper cups for businesses. Eco-friendly, customizable designs for cafes, restaurants, and corporate events."
     },
     "products": {
-      "title": "Products | Xerostop Cups",
+      "title": "Products | Royal Pack",
       "description": "Explore our range of premium paper cups, printing services, and accessories."
     },
     "paperCups": {
-      "title": "Paper Cups | Xerostop Cups",
+      "title": "Paper Cups | Royal Pack",
       "description": "Custom branded paper cups in all sizes. Single wall, double wall, and ripple wall options available."
     },
     "cupPrinting": {
-      "title": "Cup Printing Services | Xerostop Cups",
+      "title": "Cup Printing Services | Royal Pack",
       "description": "Professional cup printing services. Full color, spot color, and custom designs."
     },
     "cupSleeves": {
-      "title": "Cup Sleeves | Xerostop Cups",
+      "title": "Cup Sleeves | Royal Pack",
       "description": "Insulated cup sleeves. Kraft, white, or custom printed to protect hands and promote your brand."
     },
     "lids": {
-      "title": "Cup Lids | Xerostop Cups",
+      "title": "Cup Lids | Royal Pack",
       "description": "Flat, dome, sip, and paper lids compatible with your custom cups."
     },
     "accessories": {
-      "title": "Cup Accessories | Xerostop Cups",
+      "title": "Cup Accessories | Royal Pack",
       "description": "Lids, sleeves, straws, and more to complete your cup offering."
     },
     "industries": {
-      "title": "Industries We Serve | Xerostop Cups",
+      "title": "Industries We Serve | Royal Pack",
       "description": "Custom paper cup solutions for cafes, restaurants, hotels, events, and more."
     },
     "gallery": {
-      "title": "Gallery | Xerostop Cups",
+      "title": "Gallery | Royal Pack",
       "description": "Browse our collection of custom designed paper cups."
     },
     "about": {
-      "title": "About Us | Xerostop Cups",
-      "description": "Learn about Xerostop Cups, our mission, and commitment to quality."
+      "title": "About Us | Royal Pack",
+      "description": "Learn about Royal Pack, our mission, and commitment to quality."
     },
     "sustainability": {
-      "title": "Sustainability | Xerostop Cups",
+      "title": "Sustainability | Royal Pack",
       "description": "Our commitment to eco-friendly practices and sustainable paper cups."
     },
     "faq": {
-      "title": "FAQ | Xerostop Cups",
+      "title": "FAQ | Royal Pack",
       "description": "Find answers to frequently asked questions about our products and services."
     },
     "designSupport": {
-      "title": "Design Support | Xerostop Cups",
+      "title": "Design Support | Royal Pack",
       "description": "Get help with your cup design. Templates, guidelines, and expert assistance."
     },
     "contact": {
-      "title": "Contact Us | Xerostop Cups",
+      "title": "Contact Us | Royal Pack",
       "description": "Get in touch with our team for inquiries and support."
     },
     "quote": {
-      "title": "Get a Quote | Xerostop Cups",
+      "title": "Get a Quote | Royal Pack",
       "description": "Request a custom quote for your paper cup needs."
     },
     "sample": {
-      "title": "Request a Sample | Xerostop Cups",
+      "title": "Request a Sample | Royal Pack",
       "description": "Request free samples to experience our quality firsthand."
     }
   }
 }
+

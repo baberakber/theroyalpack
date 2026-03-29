@@ -9,6 +9,7 @@ interface DropdownItem {
   label: string;
   href: string;
   description?: string;
+  isSubItem?: boolean;
 }
 
 interface DropdownMenuProps {
@@ -57,7 +58,6 @@ export function DropdownMenu({ trigger, items, className }: DropdownMenuProps) {
           'hover:bg-bg-secondary transition-colors duration-200',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500'
         )}
-        aria-expanded={isOpen}
         aria-haspopup="true"
       >
         {trigger}
@@ -72,15 +72,14 @@ export function DropdownMenu({ trigger, items, className }: DropdownMenuProps) {
 
       <div
         className={cn(
-          'absolute top-full left-0 mt-1 min-w-[220px]',
+          'absolute top-full start-0 mt-1 min-w-[220px]',
           'bg-white rounded-xl shadow-lg border border-border-light',
-          'py-2 z-dropdown',
-          'transition-all duration-200 origin-top-left',
+          'py-2 z-[90]',
+          'transition-all duration-200 origin-top-left rtl:origin-top-right',
           isOpen
             ? 'opacity-100 scale-100 visible'
             : 'opacity-0 scale-95 invisible'
         )}
-        role="menu"
       >
         {items.map((item) => (
           <Link
@@ -90,9 +89,9 @@ export function DropdownMenu({ trigger, items, className }: DropdownMenuProps) {
               'block px-4 py-2.5 text-sm',
               'text-text-primary hover:bg-bg-secondary',
               'transition-colors duration-150',
-              'focus-visible:outline-none focus-visible:bg-bg-secondary'
+              'focus-visible:outline-none focus-visible:bg-bg-secondary',
+              item.isSubItem && 'ps-8 text-[13px]'
             )}
-            role="menuitem"
           >
             <span className="font-medium">{item.label}</span>
             {item.description && (

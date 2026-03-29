@@ -16,7 +16,7 @@ export function SkipLink({ href = '#main-content', className }: SkipLinkProps) {
       href={href}
       className={cn(
         'skip-link',
-        'fixed left-4 -top-12 z-[100]',
+        'fixed start-4 -top-12 z-[100]',
         'bg-primary-500 text-white px-4 py-2 rounded-md',
         'font-medium text-sm',
         'focus:top-4 transition-[top] duration-200',

@@ -8,7 +8,10 @@ const publicPaths = [
   '',
   '/products',
   '/products/paper-cups',
-  '/products/cup-printing',
+  '/products/paper-cups/single-wall',
+  '/products/paper-cups/double-wall',
+  '/products/paper-cups/ripple-wall',
+  '/products/custom-printing',
   '/products/cup-sleeves',
   '/products/lids',
   '/products/accessories',
@@ -38,7 +41,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url: `${baseUrl}/${locale}${pathname === '/' ? '' : pathname}`,
         lastModified: new Date(),
         changeFrequency: path === '' ? 'weekly' : (path.startsWith('/products') || path.startsWith('/gallery') ? 'weekly' : 'monthly'),
-        priority: path === '' ? 1 : (path === '/products' || path === '/contact' ? 0.9 : 0.8),
+        priority:
+          path === ''
+            ? 1
+            : path === '/products' || path === '/contact'
+              ? 0.9
+              : path.startsWith('/products/paper-cups/')
+                ? 0.8
+                : path.startsWith('/industries/')
+                  ? 0.7
+                  : 0.8,
       });
     }
   }

@@ -62,7 +62,7 @@ export function MobileMenu({ isOpen, onClose, navItems }: MobileMenuProps) {
               {/* Header */}
               <div className="flex items-center justify-between px-4 h-16 border-b border-border-light">
                 <Dialog.Title className="text-lg font-semibold text-text-primary">
-                  {t('openMenu').replace('Open ', '')}
+                  {t('openMenu')}
                 </Dialog.Title>
                 <button
                   onClick={onClose}
@@ -144,7 +144,7 @@ function MobileNavGroup({ item, onClose, isRTL }: MobileNavGroupProps) {
           )}
         />
       </summary>
-      <ul className={cn("mt-1 space-y-1", isRTL ? "mr-4" : "ml-4")}>
+      <ul className="mt-1 space-y-1 ms-4">
         {item.children?.map((child) => (
           <li key={child.href}>
             <Link

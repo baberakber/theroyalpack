@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface CupTypeCardProps {
   image: string;
@@ -30,13 +31,17 @@ export function CupTypeCard({
   className,
   style,
 }: CupTypeCardProps) {
+  const t = useTranslations('products.commonLabels');
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
+
   return (
     <article
       style={style}
       className={cn(
         'group rounded-xl overflow-hidden bg-white',
         'border shadow-md transition-all duration-300',
-        'hover:shadow-lg hover:-translate-y-1',
+        'hover:shadow-lg hover:-translate-y-1 hover:bg-primary-50 hover:border-primary-300',
         isSelected
           ? 'border-2 border-primary-500 shadow-lg'
           : 'border-border-light',
@@ -69,7 +74,7 @@ export function CupTypeCard({
 
         {/* Best For List */}
         <div className="mb-4">
-          <span className="text-sm font-medium text-text-secondary">Best for:</span>
+          <span className="text-sm font-medium text-text-secondary">{t('bestFor')}:</span>
           <ul className="mt-1 space-y-1">
             {bestFor.map((item, index) => (
               <li key={index} className="flex items-start gap-2 text-sm text-text-secondary">
@@ -87,7 +92,9 @@ export function CupTypeCard({
           asChild
         >
           <Link href={`/get-a-quote?cup_type=${cupType}`}>
-            Get a Quote
+            <span className={cn('inline-flex items-center gap-1', isRTL && 'flex-row-reverse')}>
+              {t('getQuote')}
+            </span>
           </Link>
         </Button>
       </div>

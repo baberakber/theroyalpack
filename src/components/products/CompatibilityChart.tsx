@@ -3,6 +3,7 @@
 import { Check, X } from 'lucide-react';
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation';
 import { cn } from '@/lib/utils';
+import { useLocale } from 'next-intl';
 
 interface CompatibilityRow {
   cupSize: string;
@@ -15,7 +16,7 @@ interface CompatibilityRow {
   carrier4: boolean;
 }
 
-const compatibilityData: CompatibilityRow[] = [
+const compatibilityDataEn: CompatibilityRow[] = [
   {
     cupSize: '2.5oz',
     flatLid: false,
@@ -98,40 +99,32 @@ const compatibilityData: CompatibilityRow[] = [
   },
 ];
 
-const columns = [
-  { key: 'flatLid', label: 'Flat Lid' },
-  { key: 'domeLid', label: 'Dome Lid' },
-  { key: 'sipLid', label: 'Sip Lid' },
-  { key: 'paperLid', label: 'Paper Lid' },
-  { key: 'sleeve', label: 'Sleeve' },
-  { key: 'carrier2', label: '2-Cup Carrier' },
-  { key: 'carrier4', label: '4-Cup Carrier' },
-] as const;
-
 function CompatibilityCell({
   compatible,
   accessory,
   cupSize,
+  isRTL,
 }: {
   compatible: boolean;
   accessory: string;
   cupSize: string;
+  isRTL: boolean;
 }) {
   const label = compatible
-    ? `${accessory} compatible with ${cupSize} cup`
-    : `${accessory} not compatible with ${cupSize} cup`;
+    ? (isRTL ? `${accessory} متوافق مع كوب ${cupSize}` : `${accessory} compatible with ${cupSize} cup`)
+    : (isRTL ? `${accessory} غير متوافق مع كوب ${cupSize}` : `${accessory} not compatible with ${cupSize} cup`);
 
   return (
     <td className="p-3 text-center border-b border-border-light">
       {compatible ? (
         <span className="inline-flex items-center justify-center text-success" aria-label={label}>
           <Check className="w-5 h-5" aria-hidden="true" />
-          <span className="sr-only">Compatible</span>
+          <span className="sr-only">{isRTL ? 'متوافق' : 'Compatible'}</span>
         </span>
       ) : (
         <span className="inline-flex items-center justify-center text-text-muted" aria-label={label}>
           <X className="w-5 h-5" aria-hidden="true" />
-          <span className="sr-only">Not compatible</span>
+          <span className="sr-only">{isRTL ? 'غير متوافق' : 'Not compatible'}</span>
         </span>
       )}
     </td>
@@ -140,6 +133,39 @@ function CompatibilityCell({
 
 export function CompatibilityChart() {
   const { ref, isVisible } = useScrollAnimation();
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
+  const compatibilityData = (isRTL
+    ? [
+      { ...compatibilityDataEn[0], cupSize: '2.5 أونصة' },
+      { ...compatibilityDataEn[1], cupSize: '4 أونصة' },
+      { ...compatibilityDataEn[2], cupSize: '6-7 أونصة' },
+      { ...compatibilityDataEn[3], cupSize: '8 أونصة' },
+      { ...compatibilityDataEn[4], cupSize: '9-10 أونصة' },
+      { ...compatibilityDataEn[5], cupSize: '12 أونصة' },
+      { ...compatibilityDataEn[6], cupSize: '14-16 أونصة' },
+      { ...compatibilityDataEn[7], cupSize: '18-22 أونصة' },
+    ]
+    : compatibilityDataEn);
+  const columns = isRTL
+    ? [
+      { key: 'flatLid', label: 'غطاء مسطح' },
+      { key: 'domeLid', label: 'غطاء قُبّبي' },
+      { key: 'sipLid', label: 'غطاء رشف' },
+      { key: 'paperLid', label: 'غطاء ورقي' },
+      { key: 'sleeve', label: 'غلاف' },
+      { key: 'carrier2', label: 'حامل كوبين' },
+      { key: 'carrier4', label: 'حامل 4 أكواب' },
+    ]
+    : [
+      { key: 'flatLid', label: 'Flat Lid' },
+      { key: 'domeLid', label: 'Dome Lid' },
+      { key: 'sipLid', label: 'Sip Lid' },
+      { key: 'paperLid', label: 'Paper Lid' },
+      { key: 'sleeve', label: 'Sleeve' },
+      { key: 'carrier2', label: '2-Cup Carrier' },
+      { key: 'carrier4', label: '4-Cup Carrier' },
+    ] as { key: 'flatLid' | 'domeLid' | 'sipLid' | 'paperLid' | 'sleeve' | 'carrier2' | 'carrier4'; label: string }[];
 
   return (
     <section ref={ref} className="py-16 bg-white">
@@ -152,7 +178,7 @@ export function CompatibilityChart() {
               isVisible && 'is-visible'
             )}
           >
-            What Fits What — Compatibility Guide
+            {isRTL ? 'دليل التوافق بين الأكواب والإكسسوارات' : 'What Fits What - Compatibility Guide'}
           </h2>
           <p
             className={cn(
@@ -162,13 +188,13 @@ export function CompatibilityChart() {
             )}
             style={{ animationDelay: '100ms' }}
           >
-            Quick reference to find the right accessories for your cup size.
+            {isRTL ? 'مرجع سريع لاختيار الإكسسوارات المناسبة لمقاس كوبك.' : 'Quick reference to find the right accessories for your cup size.'}
           </p>
         </div>
 
         <div
           role="region"
-          aria-label="Accessories compatibility chart"
+          aria-label={isRTL ? 'جدول توافق الإكسسوارات' : 'Accessories compatibility chart'}
           tabIndex={0}
           className={cn(
             'overflow-x-auto',
@@ -184,7 +210,7 @@ export function CompatibilityChart() {
                   scope="col"
                   className="p-3 text-left text-sm font-semibold sticky left-0 bg-primary-500 z-10"
                 >
-                  Cup Size
+                  {isRTL ? 'مقاس الكوب' : 'Cup Size'}
                 </th>
                 {columns.map((col) => (
                   <th
@@ -223,6 +249,7 @@ export function CompatibilityChart() {
                       compatible={row[col.key]}
                       accessory={col.label}
                       cupSize={row.cupSize}
+                      isRTL={isRTL}
                     />
                   ))}
                 </tr>

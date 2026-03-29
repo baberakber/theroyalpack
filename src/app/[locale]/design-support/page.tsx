@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: t('designSupport.title'),
       description: t('designSupport.description'),
-      images: [{ url: '/og/design-support.jpg', width: 1200, height: 630 }],
+      images: [{ url: '/og/design-support', width: 1200, height: 630 }],
     },
   };
 }
@@ -286,52 +286,54 @@ export default async function DesignSupportPage({ params }: { params: Promise<{ 
 
       {/* Artwork Requirements */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-2xl lg:text-3xl font-bold text-text-primary mb-8 text-center">
-            {t('guidelines.title')}
-          </h2>
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl lg:text-3xl font-bold text-text-primary mb-8 text-center">
+              {t('guidelines.title')}
+            </h2>
 
-          <div className="bg-bg-secondary rounded-xl p-8">
-            <h3 className="font-semibold text-text-primary mb-4">
-              {t('guidelines.bleed')}
-            </h3>
-            <ul className="space-y-3 text-text-secondary">
-              <li className="flex items-start gap-3">
-                <span className="w-2 h-2 rounded-full bg-primary-500 mt-2 flex-shrink-0" />
-                <span>
-                  <strong>Format:</strong> Vector files preferred (AI, EPS, PDF). High-res
-                  raster files (PSD, TIFF) accepted at 300 DPI minimum.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="w-2 h-2 rounded-full bg-primary-500 mt-2 flex-shrink-0" />
-                <span>
-                  <strong>Color Mode:</strong> CMYK for offset printing. Pantone
-                  references for flexographic printing.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="w-2 h-2 rounded-full bg-primary-500 mt-2 flex-shrink-0" />
-                <span>
-                  <strong>Bleed:</strong> Include 3mm bleed on all edges that extend to
-                  the cup rim or base.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="w-2 h-2 rounded-full bg-primary-500 mt-2 flex-shrink-0" />
-                <span>
-                  <strong>Fonts:</strong> Convert all text to outlines/curves to avoid
-                  font substitution issues.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="w-2 h-2 rounded-full bg-primary-500 mt-2 flex-shrink-0" />
-                <span>
-                  <strong>Maximum File Size:</strong> 50MB per file. Contact us for
-                  larger files.
-                </span>
-              </li>
-            </ul>
+            <div className="bg-bg-secondary rounded-xl p-8">
+              <h3 className="font-semibold text-text-primary mb-4">
+                {t('guidelines.bleed')}
+              </h3>
+              <ul className="space-y-3 text-text-secondary">
+                <li className="flex items-start gap-3">
+                  <span className="w-2 h-2 rounded-full bg-primary-500 mt-2 flex-shrink-0" />
+                  <span>
+                    <strong>Format:</strong> Vector files preferred (AI, EPS, PDF). High-res
+                    raster files (PSD, TIFF) accepted at 300 DPI minimum.
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="w-2 h-2 rounded-full bg-primary-500 mt-2 flex-shrink-0" />
+                  <span>
+                    <strong>Color Mode:</strong> CMYK for offset printing. Pantone
+                    references for flexographic printing.
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="w-2 h-2 rounded-full bg-primary-500 mt-2 flex-shrink-0" />
+                  <span>
+                    <strong>Bleed:</strong> Include 3mm bleed on all edges that extend to
+                    the cup rim or base.
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="w-2 h-2 rounded-full bg-primary-500 mt-2 flex-shrink-0" />
+                  <span>
+                    <strong>Fonts:</strong> Convert all text to outlines/curves to avoid
+                    font substitution issues.
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="w-2 h-2 rounded-full bg-primary-500 mt-2 flex-shrink-0" />
+                  <span>
+                    <strong>Maximum File Size:</strong> 50MB per file. Contact us for
+                    larger files.
+                  </span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -377,7 +379,7 @@ export default async function DesignSupportPage({ params }: { params: Promise<{ 
             name: 'Cup Design Support',
             provider: {
               '@type': 'Organization',
-              name: 'Xerostop Cups',
+              name: 'Royal Pack',
             },
             description:
               'Free design templates and professional design services for custom paper cups.',
@@ -388,3 +390,4 @@ export default async function DesignSupportPage({ params }: { params: Promise<{ 
     </RootLayout>
   );
 }
+

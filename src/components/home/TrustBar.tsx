@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
+import { SiteContainer } from '@/components/layout/SiteContainer';
 
 const clients = [
   { name: 'Coffee House', id: 1 },
@@ -16,32 +17,32 @@ export function TrustBar() {
   const t = useTranslations('home.trustBar');
 
   return (
-    <section className="py-12 bg-bg-secondary border-y border-border-light overflow-hidden">
-      <div className="container mx-auto px-4">
-        <p className="text-center text-sm text-text-muted mb-8 uppercase tracking-wider font-medium">
+    <section className="py-10 bg-white border-y border-border-light/60 overflow-hidden">
+      <SiteContainer>
+        <p className="text-center text-xs text-text-muted mb-8 uppercase tracking-[0.2em] font-medium">
           {t('title')}
         </p>
-      </div>
+      </SiteContainer>
 
-      {/* Desktop: Static grid */}
-      <div className="hidden md:block container mx-auto px-4">
-        <div className="flex items-center justify-center gap-12 lg:gap-16">
+      {/* Desktop: spaced row with dividers */}
+      <SiteContainer className="hidden md:block">
+        <div className="flex items-center justify-center divide-x divide-border-light">
           {clients.map((client) => (
             <ClientLogo key={client.id} name={client.name} />
           ))}
         </div>
-      </div>
+      </SiteContainer>
 
-      {/* Mobile: Marquee */}
+      {/* Mobile: smooth marquee */}
       <div className="md:hidden relative">
+        <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent z-10" />
         <div className="flex animate-marquee">
-          {/* First set */}
           {clients.map((client) => (
-            <ClientLogo key={`first-${client.id}`} name={client.name} className="mx-6" />
+            <ClientLogo key={`first-${client.id}`} name={client.name} className="mx-5" />
           ))}
-          {/* Duplicate for seamless loop */}
           {clients.map((client) => (
-            <ClientLogo key={`second-${client.id}`} name={client.name} className="mx-6" />
+            <ClientLogo key={`second-${client.id}`} name={client.name} className="mx-5" />
           ))}
         </div>
       </div>
@@ -58,14 +59,13 @@ function ClientLogo({ name, className }: ClientLogoProps) {
   return (
     <div
       className={cn(
-        'flex-shrink-0 px-6 py-3 rounded-lg',
-        'bg-white border border-border-light',
-        'grayscale hover:grayscale-0 transition-all duration-300',
-        'hover:shadow-sm',
+        'flex-shrink-0 px-8 py-2',
+        'opacity-40 hover:opacity-100',
+        'transition-opacity duration-300',
         className
       )}
     >
-      <span className="text-lg font-semibold text-text-secondary whitespace-nowrap">
+      <span className="text-lg font-semibold text-text-primary whitespace-nowrap tracking-tight">
         {name}
       </span>
     </div>

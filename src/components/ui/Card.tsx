@@ -31,7 +31,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
           'rounded-xl',
           variantClasses[variant],
           paddingClasses[padding],
-          hover && 'transition-shadow duration-200 hover:shadow-xl',
+          hover && 'transition-all duration-200 hover:shadow-xl hover:bg-primary-50 hover:border-primary-300',
           className
         )}
         {...props}

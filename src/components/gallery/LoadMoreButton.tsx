@@ -24,7 +24,7 @@ export function LoadMoreButton({
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 py-8">
+    <div className="flex flex-col items-center gap-4 pt-12 pb-4">
       <Button
         variant="secondary"
         size="md"
@@ -34,8 +34,8 @@ export function LoadMoreButton({
       >
         {t('loadMore')}
       </Button>
-      <p className="text-sm text-text-secondary">
-        {visibleCount} / {totalCount}
+      <p className="text-xs text-text-muted tracking-wider uppercase font-medium">
+        {visibleCount} of {totalCount}
       </p>
     </div>
   );

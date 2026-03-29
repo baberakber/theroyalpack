@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Design Tokens for Xerostop Cups */
+/* Design Tokens for Royal Pack */
 @theme {
   /* Primary - Teal */
   --color-primary-50: #E6F7F7;
@@ -46,13 +46,13 @@
 
   /* Background Colors */
   --color-bg-primary: #FFFFFF;
-  --color-bg-secondary: #F9FAFB;
-  --color-bg-tertiary: #F3F4F6;
+  --color-bg-secondary: #F2FAFA;
+  --color-bg-tertiary: #E9F5F5;
   --color-bg-dark: #1F2937;
 
   /* Border Colors */
-  --color-border-light: #E5E7EB;
-  --color-border-default: #D1D5DB;
+  --color-border-light: #D6E9E8;
+  --color-border-default: #BED8D6;
   --color-border-dark: #9CA3AF;
 
   /* Semantic Colors */
@@ -114,31 +114,49 @@
   --spacing-header-mobile: 64px;
 
   /* Fonts */
-  --font-sans: var(--font-inter), var(--font-noto-sans-arabic), system-ui, sans-serif;
+  --font-sans: var(--font-outfit), var(--font-noto-sans-arabic), system-ui, sans-serif;
 }
 
 :root {
   --background: var(--color-bg-primary);
   --foreground: var(--color-text-primary);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --shadow-elevated: 0 20px 40px -15px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover: 0 8px 30px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  overflow-x: clip;
 }
 
-/* Focus visible styles */
+html {
+  width: 100%;
+  overflow-x: clip;
+}
+
+/* Global content width - keep all pages visually consistent */
+.container {
+  width: min(90vw, 1280px) !important;
+  max-width: 1280px !important;
+}
+
 *:focus-visible {
   outline: 2px solid var(--color-primary-500);
   outline-offset: 2px;
 }
 
-/* Skip link styles */
 .skip-link {
   position: absolute;
   top: -40px;
-  left: 0;
+  inset-inline-start: 0;
   background: var(--color-primary-500);
   color: white;
   padding: 8px 16px;
@@ -150,7 +168,6 @@ body {
   top: 0;
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -162,11 +179,11 @@ body {
   }
 }
 
-/* Scroll animations */
+/* Premium scroll-triggered fade with expo easing */
 .animate-fade-in-up {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
 }
 
 .animate-fade-in-up.is-visible {
@@ -174,21 +191,57 @@ body {
   transform: translateY(0);
 }
 
-/* Float animation for hero */
+.animate-fade-in-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+}
+
+.animate-fade-in-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-fade-in-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+}
+
+.animate-fade-in-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-scale-in {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+}
+
+.animate-scale-in.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Float animation with smooth spring-like physics */
 @keyframes float {
   0%, 100% {
-    transform: translateY(0);
+    transform: translateY(0) rotate(0deg);
   }
-  50% {
-    transform: translateY(-8px);
+  25% {
+    transform: translateY(-6px) rotate(0.5deg);
+  }
+  75% {
+    transform: translateY(4px) rotate(-0.5deg);
   }
 }
 
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  animation: float 5s var(--ease-out-quart) infinite;
 }
 
-/* Marquee animation for trust bar */
+/* Kinetic marquee with smooth loop */
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -199,33 +252,89 @@ body {
 }
 
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 35s linear infinite;
 }
+
+/* Subtle shimmer for premium elements */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Breathing pulse for status indicators */
+@keyframes breathe {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.animate-breathe {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+/* Stagger cascade utility */
+.stagger-children > * {
+  --stagger-delay: 80ms;
+}
+.stagger-children > *:nth-child(1) { transition-delay: calc(var(--stagger-delay) * 0); }
+.stagger-children > *:nth-child(2) { transition-delay: calc(var(--stagger-delay) * 1); }
+.stagger-children > *:nth-child(3) { transition-delay: calc(var(--stagger-delay) * 2); }
+.stagger-children > *:nth-child(4) { transition-delay: calc(var(--stagger-delay) * 3); }
+.stagger-children > *:nth-child(5) { transition-delay: calc(var(--stagger-delay) * 4); }
+.stagger-children > *:nth-child(6) { transition-delay: calc(var(--stagger-delay) * 5); }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-float,
-  .animate-marquee {
+  .animate-marquee,
+  .animate-shimmer,
+  .animate-breathe {
     animation: none;
   }
 }
 
 /* RTL Support */
 [dir="rtl"] {
-  /* Reverse marquee direction for RTL */
   .animate-marquee {
     animation-name: marquee-rtl;
   }
 
-  /* Skip link on right side for RTL */
-  .skip-link {
+  .timeline-line-rtl {
     left: auto;
     right: 0;
   }
 
-  /* Fix timeline line position in RTL */
-  .timeline-line-rtl {
-    left: auto;
-    right: 0;
+  .animate-fade-in-left {
+    transform: translateX(32px);
+  }
+  .animate-fade-in-left.is-visible {
+    transform: translateX(0);
+  }
+
+  .animate-fade-in-right {
+    transform: translateX(-32px);
+  }
+  .animate-fade-in-right.is-visible {
+    transform: translateX(0);
   }
 }
 
@@ -238,12 +347,10 @@ body {
   }
 }
 
-/* RTL-aware flex gaps and icon spacing */
 [dir="rtl"] .rtl\:space-x-reverse > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 1;
 }
 
-/* Ensure Arabic text renders with proper line-height */
 [dir="rtl"] body {
   line-height: 1.8;
 }
@@ -256,3 +363,4 @@ body {
 [dir="rtl"] h6 {
   line-height: 1.4;
 }
+

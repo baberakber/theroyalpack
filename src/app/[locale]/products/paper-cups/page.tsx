@@ -9,6 +9,8 @@ import { SpecsTable } from '@/components/products/SpecsTable';
 import { ComparisonTable } from '@/components/products/ComparisonTable';
 import { SizeRecommender } from '@/components/products/SizeRecommender';
 import { Button } from '@/components/ui/Button';
+import { listPublicImages } from '@/lib/publicImages';
+import { SiteContainer } from '@/components/layout/SiteContainer';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -19,73 +21,85 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: t('paperCups.title'),
       description: t('paperCups.description'),
-      images: [{ url: '/og/paper-cups.jpg', width: 1200, height: 630 }],
+      images: [{ url: '/og/paper-cups', width: 1200, height: 630 }],
     },
   };
 }
 
-const cupTypes = [
-  {
-    image: '/images/products/single-wall-cup.webp',
-    imageAlt: 'Single-wall paper cup',
-    title: 'Single-Wall Cups',
-    tagline: 'Light & economical',
-    bestFor: ['Cold drinks', 'Water coolers', 'Short-serve hot drinks'],
-    priceIndicator: '$' as const,
-    cupType: 'single-wall',
-  },
-  {
-    image: '/images/products/double-wall-cup.webp',
-    imageAlt: 'Double-wall paper cup',
-    title: 'Double-Wall Cups',
-    tagline: 'Insulated for comfort',
-    bestFor: ['Hot drinks', 'No sleeve needed', 'Premium feel'],
-    priceIndicator: '$$' as const,
-    cupType: 'double-wall',
-  },
-  {
-    image: '/images/products/ripple-wall-cup.webp',
-    imageAlt: 'Ripple-wall paper cup',
-    title: 'Ripple-Wall Cups',
-    tagline: 'Maximum insulation & grip',
-    bestFor: ['Hot drinks', 'Food trucks', 'Premium cafes'],
-    priceIndicator: '$$$' as const,
-    cupType: 'ripple-wall',
-  },
-];
-
 export default async function PaperCupsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'products' });
+  const tNav = await getTranslations({ locale, namespace: 'nav.products' });
+  const isRTL = locale === 'ar';
+  const cupTypes = [
+    {
+      image: '/images/products/Single%20Wall%20Cups/25.webp',
+      imageAlt: t('paperCupsPage.cupTypes.singleWall.imageAlt'),
+      title: t('paperCupsPage.cupTypes.singleWall.title'),
+      tagline: t('paperCupsPage.cupTypes.singleWall.tagline'),
+      bestFor: [
+        t('paperCupsPage.cupTypes.singleWall.bestFor1'),
+        t('paperCupsPage.cupTypes.singleWall.bestFor2'),
+        t('paperCupsPage.cupTypes.singleWall.bestFor3'),
+      ],
+      priceIndicator: '$' as const,
+      cupType: 'single-wall',
+    },
+    {
+      image: listPublicImages('images/products/Double Wall Cups')[0] ?? '/images/products/double-wall-paper-cups.webp',
+      imageAlt: t('paperCupsPage.cupTypes.doubleWall.imageAlt'),
+      title: t('paperCupsPage.cupTypes.doubleWall.title'),
+      tagline: t('paperCupsPage.cupTypes.doubleWall.tagline'),
+      bestFor: [
+        t('paperCupsPage.cupTypes.doubleWall.bestFor1'),
+        t('paperCupsPage.cupTypes.doubleWall.bestFor2'),
+        t('paperCupsPage.cupTypes.doubleWall.bestFor3'),
+      ],
+      priceIndicator: '$$' as const,
+      cupType: 'double-wall',
+    },
+    {
+      image: listPublicImages('images/products/Ripple Wall Cups')[0] ?? '/images/products/Ripple-Wall-Paper-Cups-Coffee-Cups.webp',
+      imageAlt: t('paperCupsPage.cupTypes.rippleWall.imageAlt'),
+      title: t('paperCupsPage.cupTypes.rippleWall.title'),
+      tagline: t('paperCupsPage.cupTypes.rippleWall.tagline'),
+      bestFor: [
+        t('paperCupsPage.cupTypes.rippleWall.bestFor1'),
+        t('paperCupsPage.cupTypes.rippleWall.bestFor2'),
+        t('paperCupsPage.cupTypes.rippleWall.bestFor3'),
+      ],
+      priceIndicator: '$$$' as const,
+      cupType: 'ripple-wall',
+    },
+  ];
   return (
     <RootLayout>
       {/* Page Header */}
       <section className="pt-24 pb-12 bg-gradient-to-b from-primary-50 to-white">
-        <div className="container mx-auto px-4">
+        <SiteContainer>
           <Breadcrumb
             items={[
-              { label: 'Products', href: '/products' },
-              { label: 'Paper Cups' },
+              { label: tNav('label'), href: '/products' },
+              { label: tNav('paperCups') },
             ]}
           />
           <div className="max-w-3xl">
             <h1 className="text-4xl lg:text-5xl font-bold text-text-primary mb-4">
-              Paper Cups
+              {t('paperCups.title')}
             </h1>
             <p className="text-lg text-text-secondary">
-              We manufacture three types of paper cups to suit every need — from
-              budget-friendly single-wall cups to premium ripple-wall insulated cups.
-              All food-safe, all customizable.
+              {t('paperCupsPage.headerDescription')}
             </p>
           </div>
-        </div>
+        </SiteContainer>
       </section>
 
       {/* Cup Types Overview */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+        <SiteContainer>
           <h2 className="text-2xl lg:text-3xl font-bold text-text-primary mb-8 text-center">
-            Choose Your Cup Type
+            {t('paperCupsPage.chooseTypeTitle')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {cupTypes.map((cup, index) => (
@@ -97,7 +111,7 @@ export default async function PaperCupsPage({ params }: { params: Promise<{ loca
               />
             ))}
           </div>
-        </div>
+        </SiteContainer>
       </section>
 
       {/* Size Guide */}
@@ -114,28 +128,27 @@ export default async function PaperCupsPage({ params }: { params: Promise<{ loca
 
       {/* Cross-Sell Section */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+        <SiteContainer>
           <h2 className="text-2xl lg:text-3xl font-bold text-text-primary mb-8 text-center">
-            Complete Your Order
+            {t('paperCupsPage.crossSellTitle')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Custom Printing Card */}
-            <div className="rounded-xl border border-border-light bg-white p-6 shadow-md hover:shadow-lg transition-shadow">
+            <div className="rounded-xl border border-border-light bg-white p-6 shadow-md hover:shadow-lg hover:bg-primary-50 hover:border-primary-300 transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-lg bg-primary-100 flex items-center justify-center flex-shrink-0">
                   <FileText className="w-6 h-6 text-primary-600" />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-text-primary mb-2">
-                    Add Custom Printing
+                    {t('paperCupsPage.printingCardTitle')}
                   </h3>
                   <p className="text-text-secondary text-sm mb-4">
-                    Put your logo and brand colors on every cup with our full-color
-                    printing services.
+                    {t('paperCupsPage.printingCardDescription')}
                   </p>
                   <Button variant="secondary" size="sm" asChild>
-                    <Link href="/products/cup-printing">
-                      Learn More <ArrowRight className="w-4 h-4 ml-1" />
+                    <Link href="/products/custom-printing">
+                      {t('commonLabels.learnMore')} <ArrowRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : 'ml-1'}`} />
                     </Link>
                   </Button>
                 </div>
@@ -143,7 +156,7 @@ export default async function PaperCupsPage({ params }: { params: Promise<{ loca
             </div>
 
             {/* Accessories Card */}
-            <div className="rounded-xl border border-border-light bg-white p-6 shadow-md hover:shadow-lg transition-shadow">
+            <div className="rounded-xl border border-border-light bg-white p-6 shadow-md hover:shadow-lg hover:bg-primary-50 hover:border-primary-300 transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-lg bg-accent-100 flex items-center justify-center flex-shrink-0">
                   <svg
@@ -159,43 +172,41 @@ export default async function PaperCupsPage({ params }: { params: Promise<{ loca
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-text-primary mb-2">
-                    Add Lids & Accessories
+                    {t('paperCupsPage.accessoriesCardTitle')}
                   </h3>
                   <p className="text-text-secondary text-sm mb-4">
-                    Complete your setup with matching lids, sleeves, stirrers, and
-                    carriers.
+                    {t('paperCupsPage.accessoriesCardDescription')}
                   </p>
                   <Button variant="secondary" size="sm" asChild>
                     <Link href="/products/accessories">
-                      Learn More <ArrowRight className="w-4 h-4 ml-1" />
+                      {t('commonLabels.learnMore')} <ArrowRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : 'ml-1'}`} />
                     </Link>
                   </Button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </SiteContainer>
       </section>
 
       {/* CTA Section */}
       <section className="py-16 lg:py-24 bg-gradient-to-r from-primary-600 via-primary-500 to-primary-600">
-        <div className="container mx-auto px-4">
+        <SiteContainer>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-              Ready to Order Paper Cups?
+              {t('paperCupsPage.ctaTitle')}
             </h2>
             <p className="text-lg text-primary-100 mb-8">
-              Get a free quote tailored to your needs, or request samples to see
-              the quality firsthand.
+              {t('paperCupsPage.ctaDescription')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button
                 variant="accent"
                 size="lg"
-                rightIcon={<ArrowRight className="w-5 h-5" />}
+                rightIcon={<ArrowRight className={`w-5 h-5 ${isRTL ? 'rotate-180' : ''}`} />}
                 asChild
               >
-                <Link href="/get-a-quote">Get a Quote</Link>
+                <Link href="/get-a-quote">{t('commonLabels.getQuote')}</Link>
               </Button>
               <Button
                 variant="ghost"
@@ -203,11 +214,11 @@ export default async function PaperCupsPage({ params }: { params: Promise<{ loca
                 className="text-white border-white/30 hover:bg-white/10"
                 asChild
               >
-                <Link href="/contact?type=sample">Request a Free Sample</Link>
+                <Link href="/contact?type=sample">{t('paperCupsPage.sampleButton')}</Link>
               </Button>
             </div>
           </div>
-        </div>
+        </SiteContainer>
       </section>
 
       {/* Structured Data */}
@@ -222,7 +233,7 @@ export default async function PaperCupsPage({ params }: { params: Promise<{ loca
               'Custom paper cups available in single-wall, double-wall, and ripple-wall configurations.',
             brand: {
               '@type': 'Brand',
-              name: 'Xerostop Cups',
+              name: 'Royal Pack',
             },
             offers: {
               '@type': 'AggregateOffer',
@@ -234,3 +245,4 @@ export default async function PaperCupsPage({ params }: { params: Promise<{ loca
     </RootLayout>
   );
 }
+

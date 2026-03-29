@@ -87,7 +87,7 @@ export default function AdminDashboardPage() {
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
           <p className="text-gray-600 mt-1">
-            Welcome to the Xerostop admin panel
+            Welcome to the Royal Pack admin panel
           </p>
         </div>
 

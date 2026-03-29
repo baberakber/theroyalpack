@@ -2,6 +2,8 @@
 
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation';
 import { cn } from '@/lib/utils';
+import { SiteContainer } from '@/components/layout/SiteContainer';
+import { useLocale } from 'next-intl';
 
 interface ComparisonRow {
   feature: string;
@@ -13,7 +15,7 @@ interface ComparisonRow {
   rippleBest?: string;
 }
 
-const comparisons: ComparisonRow[] = [
+const comparisonsEn: ComparisonRow[] = [
   { feature: 'Budget-friendly', singleWall: 3, doubleWall: 1, rippleWall: 1 },
   { feature: 'Hot drink insulation', singleWall: 1, doubleWall: 3, rippleWall: 3 },
   { feature: 'No sleeve required', singleWall: 0, doubleWall: 3, rippleWall: 3 },
@@ -22,7 +24,7 @@ const comparisons: ComparisonRow[] = [
   { feature: 'Eco-friendly options', singleWall: 1, doubleWall: 1, rippleWall: 1 },
 ];
 
-const bestFor = {
+const bestForEn = {
   singleWall: 'Water coolers, events',
   doubleWall: 'Cafes, offices',
   rippleWall: 'Premium cafes, hotels',
@@ -55,10 +57,25 @@ function RatingDots({ count }: { count: number }) {
 
 export function ComparisonTable() {
   const { ref, isVisible } = useScrollAnimation();
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
+  const comparisons = isRTL
+    ? [
+      { feature: 'مناسب للميزانية', singleWall: 3, doubleWall: 1, rippleWall: 1 },
+      { feature: 'عزل المشروبات الساخنة', singleWall: 1, doubleWall: 3, rippleWall: 3 },
+      { feature: 'لا يحتاج غلافا إضافيا', singleWall: 0, doubleWall: 3, rippleWall: 3 },
+      { feature: 'إحساس فاخر', singleWall: 1, doubleWall: 2, rippleWall: 3 },
+      { feature: 'جودة مساحة الطباعة', singleWall: 2, doubleWall: 2, rippleWall: 3 },
+      { feature: 'خيارات صديقة للبيئة', singleWall: 1, doubleWall: 1, rippleWall: 1 },
+    ]
+    : comparisonsEn;
+  const bestFor = isRTL
+    ? { singleWall: 'مبردات المياه، الفعاليات', doubleWall: 'المقاهي، المكاتب', rippleWall: 'المقاهي الراقية، الفنادق' }
+    : bestForEn;
 
   return (
     <section ref={ref} className="py-16 bg-white">
-      <div className="container mx-auto px-4">
+      <SiteContainer>
         <h2
           className={cn(
             'text-2xl lg:text-3xl font-bold text-text-primary mb-8 text-center',
@@ -66,7 +83,7 @@ export function ComparisonTable() {
             isVisible && 'is-visible'
           )}
         >
-          Which Cup Type Is Right for You?
+          {isRTL ? 'أي نوع كوب مناسب لك؟' : 'Which Cup Type Is Right for You?'}
         </h2>
 
         <div
@@ -80,20 +97,20 @@ export function ComparisonTable() {
           )}
           style={{ animationDelay: '100ms' }}
         >
-          <table className="w-full min-w-[500px] border-collapse bg-white rounded-xl overflow-hidden shadow-md border border-border-light">
+          <table className="mx-auto w-full max-w-5xl min-w-[500px] border-collapse bg-white rounded-xl overflow-hidden shadow-md border border-border-light">
             <thead>
-              <tr className="bg-bg-secondary">
-                <th scope="col" className="p-4 text-left text-sm font-semibold text-text-primary">
-                  Feature
+              <tr className="bg-primary-500 text-white">
+                <th scope="col" className="p-4 text-left text-sm font-semibold">
+                  {isRTL ? 'الميزة' : 'Feature'}
                 </th>
-                <th scope="col" className="p-4 text-center text-sm font-semibold text-text-primary">
-                  Single-Wall
+                <th scope="col" className="p-4 text-center text-sm font-semibold">
+                  {isRTL ? 'جدار واحد' : 'Single-Wall'}
                 </th>
-                <th scope="col" className="p-4 text-center text-sm font-semibold text-text-primary">
-                  Double-Wall
+                <th scope="col" className="p-4 text-center text-sm font-semibold">
+                  {isRTL ? 'جدار مزدوج' : 'Double-Wall'}
                 </th>
-                <th scope="col" className="p-4 text-center text-sm font-semibold text-text-primary">
-                  Ripple-Wall
+                <th scope="col" className="p-4 text-center text-sm font-semibold">
+                  {isRTL ? 'جدار متموج' : 'Ripple-Wall'}
                 </th>
               </tr>
             </thead>
@@ -123,7 +140,7 @@ export function ComparisonTable() {
               {/* Best For Row */}
               <tr className="bg-primary-50">
                 <th scope="row" className="p-4 text-left text-sm font-semibold text-text-primary">
-                  Best for
+                  {isRTL ? 'الأنسب لـ' : 'Best for'}
                 </th>
                 <td className="p-4 text-center text-sm text-text-secondary font-medium">
                   {bestFor.singleWall}
@@ -138,7 +155,7 @@ export function ComparisonTable() {
             </tbody>
           </table>
         </div>
-      </div>
+      </SiteContainer>
     </section>
   );
 }

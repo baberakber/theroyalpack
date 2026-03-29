@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { FilterChips, GalleryGrid, LoadMoreButton } from '@/components/gallery';
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation';
+import { SiteContainer } from '@/components/layout/SiteContainer';
 import type { GalleryItem } from '@/lib/data/gallery-types';
 
 const Lightbox = dynamic(() => import('@/components/gallery/Lightbox').then((m) => ({ default: m.Lightbox })), {
@@ -32,7 +33,6 @@ export function GalleryClient({ items }: GalleryClientProps) {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
   const { ref: ctaRef, isVisible: ctaVisible } = useScrollAnimation();
 
-  // Filter items based on active filters
   const filteredItems = useMemo(() => {
     if (activeFilters.length === 0) {
       return items;
@@ -40,28 +40,23 @@ export function GalleryClient({ items }: GalleryClientProps) {
     return items.filter((item) => activeFilters.includes(item.category));
   }, [items, activeFilters]);
 
-  // Get visible items based on pagination
   const visibleItems = useMemo(() => {
     return filteredItems.slice(0, visibleCount);
   }, [filteredItems, visibleCount]);
 
-  // Handle filter change - reset visible count
   const handleFilterChange = useCallback((filters: string[]) => {
     setActiveFilters(filters);
     setVisibleCount(ITEMS_PER_PAGE);
   }, []);
 
-  // Handle load more
   const handleLoadMore = useCallback(() => {
     setIsLoadingMore(true);
-    // Simulate loading delay for better UX
     setTimeout(() => {
       setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
       setIsLoadingMore(false);
     }, 300);
   }, []);
 
-  // Handle lightbox
   const handleItemClick = useCallback((index: number) => {
     setLightboxIndex(index);
   }, []);
@@ -75,55 +70,70 @@ export function GalleryClient({ items }: GalleryClientProps) {
       {/* Page Header */}
       <section
         ref={headerRef}
-        className="py-12 lg:py-16 bg-bg-secondary"
+        className="pt-24 pb-12 bg-gradient-to-b from-primary-50 to-white"
       >
-        <div className="container mx-auto px-4">
+        <SiteContainer>
           {/* Breadcrumb */}
           <nav
             aria-label="Breadcrumb"
             className={cn(
-              'mb-4 animate-fade-in-up',
+              'mb-6 animate-fade-in-up',
               headerVisible && 'is-visible'
             )}
           >
-            <ol className="flex items-center gap-2 text-sm text-text-secondary">
+            <ol className="flex items-center gap-2 text-sm text-text-muted">
               <li>
                 <Link
                   href="/"
-                  className="hover:text-primary-500 transition-colors"
+                  className="hover:text-primary-500 transition-colors duration-300"
                 >
                   {tBreadcrumb('home')}
                 </Link>
               </li>
-              <ChevronRight className="w-4 h-4" aria-hidden="true" />
+              <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
               <li className="text-text-primary font-medium">{t('title')}</li>
             </ol>
           </nav>
 
           {/* Heading */}
-          <h1
-            className={cn(
-              'text-4xl lg:text-5xl font-bold text-text-primary mb-4',
-              'animate-fade-in-up',
-              headerVisible && 'is-visible'
-            )}
-            style={{ animationDelay: '100ms' }}
-          >
-            {t('heading')}
-          </h1>
+          <div className="max-w-2xl">
+            <h1
+              className={cn(
+                'text-4xl lg:text-6xl font-bold text-text-primary tracking-tighter leading-none mb-5',
+                'animate-fade-in-up',
+                headerVisible && 'is-visible'
+              )}
+              style={{ animationDelay: '80ms' }}
+            >
+              {t('heading')}
+            </h1>
 
-          {/* Intro */}
-          <p
+            <p
+              className={cn(
+                'text-lg text-text-secondary leading-relaxed max-w-[55ch]',
+                'animate-fade-in-up',
+                headerVisible && 'is-visible'
+              )}
+              style={{ animationDelay: '160ms' }}
+            >
+              {t('description')}
+            </p>
+          </div>
+
+          {/* Item count */}
+          <div
             className={cn(
-              'text-lg text-text-secondary max-w-xl',
+              'mt-8 pt-8 border-t border-border-light',
               'animate-fade-in-up',
               headerVisible && 'is-visible'
             )}
-            style={{ animationDelay: '200ms' }}
+            style={{ animationDelay: '240ms' }}
           >
-            {t('description')}
-          </p>
-        </div>
+            <span className="text-sm text-text-muted">
+              {filteredItems.length} {filteredItems.length === 1 ? 'design' : 'designs'}
+            </span>
+          </div>
+        </SiteContainer>
       </section>
 
       {/* Filter Chips */}
@@ -133,8 +143,8 @@ export function GalleryClient({ items }: GalleryClientProps) {
       />
 
       {/* Gallery Grid */}
-      <section className="py-8 lg:py-12">
-        <div className="container mx-auto px-4">
+      <section className="py-10 lg:py-16">
+        <SiteContainer>
           <GalleryGrid items={visibleItems} onItemClick={handleItemClick} />
 
           {/* Load More */}
@@ -144,64 +154,69 @@ export function GalleryClient({ items }: GalleryClientProps) {
             isLoading={isLoadingMore}
             onLoadMore={handleLoadMore}
           />
-        </div>
+        </SiteContainer>
       </section>
 
       {/* CTA Banner */}
       <section
         ref={ctaRef}
-        className="py-16 lg:py-24 bg-gradient-to-r from-primary-600 via-primary-500 to-primary-600"
+        className="relative py-20 lg:py-28 overflow-hidden"
       >
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2
-              className={cn(
-                'text-3xl lg:text-4xl font-bold text-white mb-4',
-                'animate-fade-in-up',
-                ctaVisible && 'is-visible'
-              )}
-            >
-              {t('cta.title')}
-            </h2>
-            <p
-              className={cn(
-                'text-lg lg:text-xl text-primary-100 mb-8',
-                'animate-fade-in-up',
-                ctaVisible && 'is-visible'
-              )}
-              style={{ animationDelay: '100ms' }}
-            >
-              {t('cta.description')}
-            </p>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-700 via-primary-600 to-primary-500" />
+        <div className="absolute inset-0 border-y border-white/5" />
 
-            <div
-              className={cn(
-                'flex flex-col sm:flex-row items-center justify-center gap-4',
-                'animate-fade-in-up',
-                ctaVisible && 'is-visible'
-              )}
-              style={{ animationDelay: '200ms' }}
-            >
-              <Button
-                variant="accent"
-                size="lg"
-                rightIcon={<ArrowRight className="w-5 h-5" />}
-                asChild
+        <SiteContainer className="relative">
+          <div className="grid lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-7">
+              <h2
+                className={cn(
+                  'text-3xl lg:text-5xl font-bold text-white tracking-tighter leading-none mb-5',
+                  'animate-fade-in-up',
+                  ctaVisible && 'is-visible'
+                )}
               >
-                <Link href="/get-a-quote">{t('cta.quote')}</Link>
-              </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                leftIcon={<MessageCircle className="w-5 h-5" />}
-                className="text-white border-white/30 hover:bg-white/10"
-                asChild
+                {t('cta.title')}
+              </h2>
+              <p
+                className={cn(
+                  'text-lg lg:text-xl text-primary-100/80 leading-relaxed mb-8 max-w-[50ch]',
+                  'animate-fade-in-up',
+                  ctaVisible && 'is-visible'
+                )}
+                style={{ animationDelay: '80ms' }}
               >
-                <Link href="/request-sample">{t('cta.sample')}</Link>
-              </Button>
+                {t('cta.description')}
+              </p>
+
+              <div
+                className={cn(
+                  'flex flex-col sm:flex-row gap-4',
+                  'animate-fade-in-up',
+                  ctaVisible && 'is-visible'
+                )}
+                style={{ animationDelay: '160ms' }}
+              >
+                <Button
+                  variant="accent"
+                  size="lg"
+                  rightIcon={<ArrowRight className="w-5 h-5" />}
+                  asChild
+                >
+                  <Link href="/get-a-quote">{t('cta.quote')}</Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  leftIcon={<MessageCircle className="w-5 h-5" />}
+                  className="text-white border border-white/20 hover:bg-white/10"
+                  asChild
+                >
+                  <Link href="/request-sample">{t('cta.sample')}</Link>
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        </SiteContainer>
       </section>
 
       {/* Lightbox */}

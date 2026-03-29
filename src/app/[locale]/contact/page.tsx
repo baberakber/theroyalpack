@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: t('contact.title'),
       description: t('contact.description'),
-      images: [{ url: '/og/contact.jpg', width: 1200, height: 630 }],
+      images: [{ url: '/og/contact', width: 1200, height: 630 }],
     },
   };
 }
@@ -27,6 +27,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'contact' });
+  const isRTL = locale === 'ar';
 
   return (
     <RootLayout>
@@ -79,15 +80,17 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           </div>
           <div className="text-center mt-6">
             <p className="text-text-secondary text-sm">
-              123 Industrial Area, Dubai, United Arab Emirates
+              {isRTL
+                ? 'مخرج 18، السلي، الرياض 14321، المملكة العربية السعودية'
+                : 'Exit 18, As Sulay, Riyadh 14321, Saudi Arabia'}
             </p>
             <a
-              href="https://maps.google.com/maps?q=Dubai+Industrial+Area"
+              href="https://maps.google.com/maps?q=Exit+18+As+Sulay+Riyadh+14321"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary-600 hover:underline text-sm mt-2 inline-block"
             >
-              Get Directions
+              {isRTL ? 'الحصول على الاتجاهات' : 'Get Directions'}
             </a>
           </div>
         </div>
@@ -97,29 +100,39 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       <section className="py-12 bg-bg-secondary">
         <div className="container mx-auto px-4">
           <h2 className="text-xl font-semibold text-text-primary mb-6 text-center">
-            Quick Actions
+            {isRTL ? 'إجراءات سريعة' : 'Quick Actions'}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
             <Link
               href="/get-a-quote"
               className="bg-white p-6 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow"
             >
-              <div className="font-semibold text-text-primary mb-1">Get a Quote</div>
-              <p className="text-sm text-text-muted">Request pricing for your order</p>
+              <div className="font-semibold text-text-primary mb-1">
+                {isRTL ? 'احصل على عرض سعر' : 'Get a Quote'}
+              </div>
+              <p className="text-sm text-text-muted">
+                {isRTL ? 'اطلب تسعيرًا مخصصًا لطلبك' : 'Request pricing for your order'}
+              </p>
             </Link>
             <Link
               href="/request-sample"
               className="bg-white p-6 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow"
             >
-              <div className="font-semibold text-text-primary mb-1">Request Sample</div>
-              <p className="text-sm text-text-muted">Try before you buy</p>
+              <div className="font-semibold text-text-primary mb-1">
+                {isRTL ? 'اطلب عينة' : 'Request Sample'}
+              </div>
+              <p className="text-sm text-text-muted">
+                {isRTL ? 'جرّب المنتج قبل الشراء' : 'Try before you buy'}
+              </p>
             </Link>
             <Link
               href="/faq"
               className="bg-white p-6 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="font-semibold text-text-primary mb-1">FAQ</div>
-              <p className="text-sm text-text-muted">Find quick answers</p>
+              <p className="text-sm text-text-muted">
+                {isRTL ? 'اعثر على إجابات سريعة' : 'Find quick answers'}
+              </p>
             </Link>
           </div>
         </div>
@@ -134,15 +147,16 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             '@type': 'ContactPage',
             mainEntity: {
               '@type': 'LocalBusiness',
-              name: 'Xerostop Cups',
-              image: '/images/logo.png',
-              telephone: '+971-XX-XXX-XXXX',
-              email: 'info@xerostopcups.com',
+              name: 'Royal Pack',
+              image: '/images/Logo-RoyalPack.webp',
+              telephone: '+966556240690',
+              email: 'sales@theroyalpack.com',
               address: {
                 '@type': 'PostalAddress',
-                streetAddress: '123 Industrial Area',
-                addressLocality: 'Dubai',
-                addressCountry: 'AE',
+                streetAddress: 'Exit 18, As Sulay',
+                addressLocality: 'Riyadh',
+                postalCode: '14321',
+                addressCountry: 'SA',
               },
               openingHoursSpecification: [
                 {
@@ -165,3 +179,4 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
     </RootLayout>
   );
 }
+

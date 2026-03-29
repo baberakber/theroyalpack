@@ -33,6 +33,7 @@ interface IndustryDetailCardProps {
   description: string;
   keyNeeds: string[];
   backgroundImage: string;
+  backgroundAlt?: string;
   ctaText: string;
   ctaHref: string;
   size: 'full' | 'half';
@@ -45,6 +46,7 @@ export function IndustryDetailCard({
   description,
   keyNeeds,
   backgroundImage,
+  backgroundAlt,
   ctaText,
   ctaHref,
   size,
@@ -66,7 +68,7 @@ export function IndustryDetailCard({
       <div className="absolute inset-0">
         <Image
           src={backgroundImage}
-          alt=""
+          alt={backgroundAlt ?? title}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes={size === 'full' ? '100vw' : '50vw'}

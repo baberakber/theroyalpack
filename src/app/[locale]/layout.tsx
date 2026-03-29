@@ -2,7 +2,6 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-import { LocaleHtmlAttributes } from '@/components/LocaleHtmlAttributes';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -15,20 +14,20 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://xerostopcups.com';
   return {
-    title: metadata.title || 'Xerostop Cups | Premium Custom Branded Paper Cups',
+    title: metadata.title || 'Royal Pack | Premium Custom Branded Paper Cups',
     description: metadata.description || 'High-quality custom branded paper cups for businesses.',
     keywords: ['paper cups', 'custom cups', 'branded cups', 'eco-friendly cups', 'disposable cups'],
     openGraph: {
-      title: metadata.title || 'Xerostop Cups | Premium Custom Branded Paper Cups',
+      title: metadata.title || 'Royal Pack | Premium Custom Branded Paper Cups',
       description: metadata.description || 'High-quality custom branded paper cups for businesses.',
       type: 'website',
       locale: locale === 'ar' ? 'ar_SA' : 'en_US',
-      siteName: locale === 'ar' ? 'أكواب زيروستوب' : 'Xerostop Cups',
-      images: [{ url: `${baseUrl}/og/home.jpg`, width: 1200, height: 630, alt: 'Xerostop Cups' }],
+      siteName: locale === 'ar' ? 'رويال باك' : 'Royal Pack',
+      images: [{ url: `${baseUrl}/og/home`, width: 1200, height: 630, alt: 'Royal Pack' }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: metadata.title || 'Xerostop Cups | Premium Custom Branded Paper Cups',
+      title: metadata.title || 'Royal Pack | Premium Custom Branded Paper Cups',
       description: metadata.description || 'High-quality custom branded paper cups for businesses.',
     },
     alternates: {
@@ -62,19 +61,19 @@ export default async function LocaleLayout({
   const isRTL = locale === 'ar';
 
   return (
-    <LocaleHtmlAttributes locale={locale}>
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Organization',
-            name: isRTL ? 'أكواب زيروستوب' : 'Xerostop Cups',
+            name: isRTL ? 'رويال باك' : 'Royal Pack',
             description: isRTL
               ? 'مصنع أكواب ورقية مخصصة عالية الجودة'
               : 'Premium custom branded paper cups manufacturer',
             url: process.env.NEXT_PUBLIC_SITE_URL || 'https://xerostopcups.com',
-            logo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://xerostopcups.com'}/logo.svg`,
+            logo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://xerostopcups.com'}/images/Logo-RoyalPack.webp`,
             contactPoint: {
               '@type': 'ContactPoint',
               contactType: 'sales',
@@ -86,6 +85,7 @@ export default async function LocaleLayout({
       <NextIntlClientProvider messages={messages}>
         {children}
       </NextIntlClientProvider>
-    </LocaleHtmlAttributes>
+    </>
   );
 }
+

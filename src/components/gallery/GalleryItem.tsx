@@ -19,7 +19,6 @@ export function GalleryItem({ item, index, onClick, priority = false }: GalleryI
   const [isInView, setIsInView] = useState(priority);
   const itemRef = useRef<HTMLDivElement>(null);
 
-  // Lazy loading with Intersection Observer
   useEffect(() => {
     if (priority) return;
 
@@ -52,11 +51,11 @@ export function GalleryItem({ item, index, onClick, priority = false }: GalleryI
     <div
       ref={itemRef}
       className={cn(
-        'group relative overflow-hidden rounded-lg cursor-pointer break-inside-avoid mb-4',
+        'group relative overflow-hidden rounded-xl cursor-pointer break-inside-avoid mb-4',
         'animate-fade-in-up',
         isLoaded && 'is-visible'
       )}
-      style={{ animationDelay: `${index * 50}ms` }}
+      style={{ animationDelay: `${Math.min(index * 60, 600)}ms` }}
       onClick={onClick}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -68,14 +67,13 @@ export function GalleryItem({ item, index, onClick, priority = false }: GalleryI
       role="button"
       aria-label={`View ${item.title} - ${item.alt}`}
     >
-      {/* Image container with aspect ratio */}
       <div
-        className="relative w-full bg-bg-tertiary"
+        className="relative w-full bg-bg-tertiary rounded-xl overflow-hidden"
         style={{
           paddingBottom:
             item.width && item.height
               ? `${(item.height / item.width) * 100}%`
-              : '75%',
+              : '100%',
         }}
       >
         {isInView && (
@@ -85,7 +83,9 @@ export function GalleryItem({ item, index, onClick, priority = false }: GalleryI
             fill
             sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
             className={cn(
-              'object-cover transition-transform duration-300 group-hover:scale-105',
+              'object-cover',
+              'transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
+              'group-hover:scale-[1.04]',
               isLoaded ? 'opacity-100' : 'opacity-0'
             )}
             onLoad={() => setIsLoaded(true)}
@@ -93,38 +93,61 @@ export function GalleryItem({ item, index, onClick, priority = false }: GalleryI
           />
         )}
 
-        {/* Loading placeholder */}
+        {/* Skeleton shimmer placeholder */}
         {!isLoaded && (
-          <div className="absolute inset-0 bg-bg-tertiary animate-pulse" />
+          <div className="absolute inset-0 bg-bg-tertiary">
+            <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+          </div>
         )}
 
-        {/* Hover overlay */}
+        {/* Hover overlay with premium gradient */}
         <div
           className={cn(
-            'absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent',
-            'opacity-0 group-hover:opacity-100 transition-opacity duration-300',
-            'flex flex-col justify-end p-4'
+            'absolute inset-0',
+            'bg-gradient-to-t from-zinc-900/80 via-zinc-900/20 to-transparent',
+            'opacity-0 group-hover:opacity-100',
+            'transition-opacity duration-500',
+            'flex flex-col justify-end p-5'
           )}
         >
           {/* Expand icon */}
-          <div className="absolute top-3 right-3">
-            <Maximize2 className="w-5 h-5 text-white opacity-80" />
+          <div className="absolute top-4 right-4">
+            <div className={cn(
+              'p-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10',
+              'opacity-0 group-hover:opacity-100',
+              'transition-all duration-500',
+              'group-hover:scale-100 scale-90'
+            )}>
+              <Maximize2 className="w-4 h-4 text-white" strokeWidth={1.5} />
+            </div>
           </div>
 
           {/* Title and category */}
-          <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+          <div className="transform translate-y-3 group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
             <Badge
               variant="primary"
               size="sm"
-              className="mb-2 bg-primary-500/80 text-white"
+              className="mb-2.5 bg-primary-500/80 text-white border-0"
             >
               {categoryLabel}
             </Badge>
-            <h3 className="text-white font-medium text-sm line-clamp-2">
+            <h3 className="text-white font-semibold text-sm leading-snug line-clamp-1">
               {item.title}
             </h3>
+            {item.description && (
+              <p className="text-white/60 text-xs mt-1 line-clamp-1">
+                {item.description}
+              </p>
+            )}
           </div>
         </div>
+
+        {/* Inner border for depth */}
+        <div className={cn(
+          'absolute inset-0 rounded-xl',
+          'border border-white/0 group-hover:border-white/15',
+          'transition-all duration-500 pointer-events-none'
+        )} />
       </div>
     </div>
   );

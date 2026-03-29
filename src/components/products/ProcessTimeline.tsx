@@ -6,7 +6,6 @@ import {
   CheckCircle,
   Factory,
   Truck,
-  type LucideIcon,
 } from 'lucide-react';
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation';
 import { cn } from '@/lib/utils';
@@ -15,39 +14,47 @@ interface ProcessStep {
   number: string;
   title: string;
   description: string;
-  icon: LucideIcon;
+  iconKey: 'inquiry' | 'design' | 'approval' | 'production' | 'delivery';
 }
 
-const steps: ProcessStep[] = [
+const processStepIcons = {
+  inquiry: MessageCircle,
+  design: PenTool,
+  approval: CheckCircle,
+  production: Factory,
+  delivery: Truck,
+} as const;
+
+const defaultSteps: ProcessStep[] = [
   {
     number: '01',
     title: 'Inquiry',
     description: 'Tell us your cup type, size, quantity, and share your logo or artwork.',
-    icon: MessageCircle,
+    iconKey: 'inquiry',
   },
   {
     number: '02',
     title: 'Design',
     description: 'Our team creates a print-ready mockup. We offer free design support.',
-    icon: PenTool,
+    iconKey: 'design',
   },
   {
     number: '03',
     title: 'Approval',
     description: 'Review the digital proof. Request revisions until you\'re satisfied.',
-    icon: CheckCircle,
+    iconKey: 'approval',
   },
   {
     number: '04',
     title: 'Production',
     description: 'Cups are printed and quality-checked in our facility.',
-    icon: Factory,
+    iconKey: 'production',
   },
   {
     number: '05',
     title: 'Delivery',
     description: 'Packed and shipped to your location. Track your order online.',
-    icon: Truck,
+    iconKey: 'delivery',
   },
 ];
 
@@ -62,7 +69,7 @@ function ProcessStepItem({
   isLast: boolean;
   isVisible: boolean;
 }) {
-  const Icon = step.icon;
+  const Icon = processStepIcons[step.iconKey];
 
   return (
     <li
@@ -116,9 +123,38 @@ function ProcessStepItem({
 
 export function ProcessTimeline() {
   const { ref, isVisible } = useScrollAnimation();
-
   return (
-    <section ref={ref} className="py-16 bg-white">
+    <ProcessTimelineContent
+      refValue={ref}
+      isVisible={isVisible}
+      title="From Design to Delivery in 5 Steps"
+      ariaLabel="Printing process steps"
+      steps={defaultSteps}
+    />
+  );
+}
+
+type ProcessTimelineProps = {
+  title: string;
+  ariaLabel: string;
+  steps: ProcessStep[];
+};
+
+function ProcessTimelineContent({
+  refValue,
+  isVisible,
+  title,
+  ariaLabel,
+  steps,
+}: {
+  refValue: ReturnType<typeof useScrollAnimation>['ref'];
+  isVisible: boolean;
+  title: string;
+  ariaLabel: string;
+  steps: ProcessStep[];
+}) {
+  return (
+    <section ref={refValue} className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <h2
           className={cn(
@@ -127,10 +163,10 @@ export function ProcessTimeline() {
             isVisible && 'is-visible'
           )}
         >
-          From Design to Delivery in 5 Steps
+          {title}
         </h2>
 
-        <nav aria-label="Printing process steps">
+        <nav aria-label={ariaLabel}>
           <ol className="flex flex-col lg:flex-row items-center lg:items-start justify-center lg:justify-between gap-4 lg:gap-0">
             {steps.map((step, index) => (
               <ProcessStepItem
@@ -145,5 +181,19 @@ export function ProcessTimeline() {
         </nav>
       </div>
     </section>
+  );
+}
+
+export function LocalizedProcessTimeline({ title, ariaLabel, steps }: ProcessTimelineProps) {
+  const { ref, isVisible } = useScrollAnimation();
+
+  return (
+    <ProcessTimelineContent
+      refValue={ref}
+      isVisible={isVisible}
+      title={title}
+      ariaLabel={ariaLabel}
+      steps={steps}
+    />
   );
 }

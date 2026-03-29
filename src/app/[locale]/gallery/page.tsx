@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: t('gallery.title'),
       description: t('gallery.description'),
-      images: [{ url: '/og/gallery.jpg', width: 1200, height: 630 }],
+      images: [{ url: '/og/gallery', width: 1200, height: 630 }],
     },
   };
 }
@@ -31,7 +31,7 @@ export default async function GalleryPage({ params }: { params: Promise<{ locale
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'ImageGallery',
-            name: 'Xerostop Cups Design Gallery',
+            name: 'Royal Pack Design Gallery',
             description: 'Custom printed paper cup designs for various industries',
             numberOfItems: items.length,
           }),
@@ -42,3 +42,4 @@ export default async function GalleryPage({ params }: { params: Promise<{ locale
     </RootLayout>
   );
 }
+

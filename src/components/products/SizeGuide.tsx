@@ -2,6 +2,8 @@
 
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation';
 import { cn } from '@/lib/utils';
+import { SiteContainer } from '@/components/layout/SiteContainer';
+import { useLocale } from 'next-intl';
 
 interface SizeData {
   sizeOz: number;
@@ -12,7 +14,7 @@ interface SizeData {
   commonUse: string;
 }
 
-const sizes: SizeData[] = [
+const sizesEn: SizeData[] = [
   { sizeOz: 2.5, volumeMl: 75, topDiameter: 50, bottomDiameter: 35, height: 50, commonUse: 'Espresso' },
   { sizeOz: 4, volumeMl: 120, topDiameter: 62, bottomDiameter: 42, height: 64, commonUse: 'Espresso, tasting' },
   { sizeOz: 6, volumeMl: 180, topDiameter: 73, bottomDiameter: 50, height: 75, commonUse: 'Small coffee' },
@@ -29,14 +31,14 @@ const sizes: SizeData[] = [
 ];
 
 // Cup SVG component that scales based on size
-function CupSvg({ sizeOz, height: cupHeight }: { sizeOz: number; height: number }) {
+function CupSvg({ height: cupHeight }: { height: number }) {
   // Scale factor based on the largest cup (160mm for 22oz)
   const scale = cupHeight / 160;
   const svgHeight = 80 * scale;
   const svgWidth = 50 * scale;
 
   return (
-    <div className="flex flex-col items-center">
+    <div>
       <svg
         width={Math.max(svgWidth, 25)}
         height={Math.max(svgHeight, 40)}
@@ -52,17 +54,35 @@ function CupSvg({ sizeOz, height: cupHeight }: { sizeOz: number; height: number 
           strokeWidth="2"
         />
       </svg>
-      <span className="mt-2 text-xs font-medium text-text-primary">{sizeOz}oz</span>
     </div>
   );
 }
 
 export function SizeGuide() {
   const { ref, isVisible } = useScrollAnimation();
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
+  const sizes = isRTL
+    ? [
+      { sizeOz: 2.5, volumeMl: 75, topDiameter: 50, bottomDiameter: 35, height: 50, commonUse: 'إسبريسو' },
+      { sizeOz: 4, volumeMl: 120, topDiameter: 62, bottomDiameter: 42, height: 64, commonUse: 'إسبريسو، تذوق' },
+      { sizeOz: 6, volumeMl: 180, topDiameter: 73, bottomDiameter: 50, height: 75, commonUse: 'قهوة صغيرة' },
+      { sizeOz: 7, volumeMl: 210, topDiameter: 73, bottomDiameter: 50, height: 85, commonUse: 'قهوة صغيرة' },
+      { sizeOz: 8, volumeMl: 240, topDiameter: 80, bottomDiameter: 56, height: 92, commonUse: 'قهوة قياسية' },
+      { sizeOz: 9, volumeMl: 270, topDiameter: 80, bottomDiameter: 56, height: 98, commonUse: 'قهوة، شاي' },
+      { sizeOz: 10, volumeMl: 300, topDiameter: 85, bottomDiameter: 58, height: 105, commonUse: 'قهوة متوسطة' },
+      { sizeOz: 12, volumeMl: 360, topDiameter: 90, bottomDiameter: 60, height: 110, commonUse: 'متوسطة، مشروبات مثلجة' },
+      { sizeOz: 14, volumeMl: 420, topDiameter: 90, bottomDiameter: 62, height: 125, commonUse: 'قهوة كبيرة' },
+      { sizeOz: 16, volumeMl: 480, topDiameter: 90, bottomDiameter: 62, height: 135, commonUse: 'كبيرة، سموذي' },
+      { sizeOz: 18, volumeMl: 540, topDiameter: 95, bottomDiameter: 65, height: 140, commonUse: 'حجم كبير جدا' },
+      { sizeOz: 20, volumeMl: 600, topDiameter: 95, bottomDiameter: 65, height: 150, commonUse: 'كبير جدا، بارد' },
+      { sizeOz: 22, volumeMl: 650, topDiameter: 95, bottomDiameter: 65, height: 160, commonUse: 'مشروبات باردة جامبو' },
+    ]
+    : sizesEn;
 
   return (
     <section ref={ref} className="py-16 bg-white">
-      <div className="container mx-auto px-4">
+      <SiteContainer>
         <div className="text-center mb-8">
           <h2
             className={cn(
@@ -71,7 +91,7 @@ export function SizeGuide() {
               isVisible && 'is-visible'
             )}
           >
-            Available Sizes
+            {isRTL ? 'الأحجام المتوفرة' : 'Available Sizes'}
           </h2>
           <p
             className={cn(
@@ -81,8 +101,9 @@ export function SizeGuide() {
             )}
             style={{ animationDelay: '100ms' }}
           >
-            All cup types are available in the following sizes. Not sure which size?
-            Try our size recommender below.
+            {isRTL
+              ? 'جميع أنواع الأكواب متوفرة بالمقاسات التالية. غير متأكد من المقاس؟ جرّب أداة ترشيح المقاس بالأسفل.'
+              : 'All cup types are available in the following sizes. Not sure which size? Try our size recommender below.'}
           </p>
         </div>
 
@@ -96,7 +117,10 @@ export function SizeGuide() {
           style={{ animationDelay: '200ms' }}
         >
           {sizes.map((size) => (
-            <CupSvg key={size.sizeOz} sizeOz={size.sizeOz} height={size.height} />
+            <div key={size.sizeOz} className="flex flex-col items-center">
+              <CupSvg height={size.height} />
+              <span className="mt-2 text-xs font-medium text-text-primary">{size.sizeOz}{isRTL ? ' أونصة' : 'oz'}</span>
+            </div>
           ))}
         </div>
 
@@ -112,26 +136,26 @@ export function SizeGuide() {
           )}
           style={{ animationDelay: '300ms' }}
         >
-          <table className="w-full min-w-[600px] border-collapse">
+          <table className="mx-auto w-full max-w-5xl min-w-[600px] border-collapse bg-white rounded-xl overflow-hidden shadow-md border border-border-light">
             <thead>
-              <tr className="bg-bg-secondary">
-                <th scope="col" className="p-3 text-left text-sm font-semibold text-text-primary border-b border-border-light">
-                  Size (oz)
+              <tr className="bg-primary-500 text-white">
+                <th scope="col" className="p-3 text-left text-sm font-semibold">
+                  {isRTL ? 'الحجم (أونصة)' : 'Size (oz)'}
                 </th>
-                <th scope="col" className="p-3 text-left text-sm font-semibold text-text-primary border-b border-border-light">
-                  Volume (ml)
+                <th scope="col" className="p-3 text-left text-sm font-semibold">
+                  {isRTL ? 'السعة (مل)' : 'Volume (ml)'}
                 </th>
-                <th scope="col" className="p-3 text-left text-sm font-semibold text-text-primary border-b border-border-light">
-                  Top Diameter (mm)
+                <th scope="col" className="p-3 text-left text-sm font-semibold">
+                  {isRTL ? 'القطر العلوي (مم)' : 'Top Diameter (mm)'}
                 </th>
-                <th scope="col" className="p-3 text-left text-sm font-semibold text-text-primary border-b border-border-light">
-                  Bottom Diameter (mm)
+                <th scope="col" className="p-3 text-left text-sm font-semibold">
+                  {isRTL ? 'القطر السفلي (مم)' : 'Bottom Diameter (mm)'}
                 </th>
-                <th scope="col" className="p-3 text-left text-sm font-semibold text-text-primary border-b border-border-light">
-                  Height (mm)
+                <th scope="col" className="p-3 text-left text-sm font-semibold">
+                  {isRTL ? 'الارتفاع (مم)' : 'Height (mm)'}
                 </th>
-                <th scope="col" className="p-3 text-left text-sm font-semibold text-text-primary border-b border-border-light">
-                  Common Use
+                <th scope="col" className="p-3 text-left text-sm font-semibold">
+                  {isRTL ? 'الاستخدام الشائع' : 'Common Use'}
                 </th>
               </tr>
             </thead>
@@ -167,7 +191,7 @@ export function SizeGuide() {
             </tbody>
           </table>
         </div>
-      </div>
+      </SiteContainer>
     </section>
   );
 }

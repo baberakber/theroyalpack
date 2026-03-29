@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: t('industries.title'),
       description: t('industries.description'),
-      images: [{ url: '/og/industries.jpg', width: 1200, height: 630 }],
+      images: [{ url: '/og/industries', width: 1200, height: 630 }],
     },
   };
 }
@@ -36,7 +36,8 @@ export default async function IndustriesPage({ params }: { params: Promise<{ loc
         t('mainPage.cafes.keyNeeds.item3'),
         t('mainPage.cafes.keyNeeds.item4'),
       ],
-      backgroundImage: '/images/industries/cafe.webp',
+      backgroundImage: '/images/industries/Cafee%20Shops.webp',
+      backgroundAlt: 'Custom branded cups for cafes and coffee shops',
       ctaText: t('mainPage.cafes.ctaText'),
       ctaHref: '/get-a-quote?industry=cafes',
       size: 'full' as const,
@@ -50,24 +51,10 @@ export default async function IndustriesPage({ params }: { params: Promise<{ loc
         t('mainPage.restaurants.keyNeeds.item2'),
         t('mainPage.restaurants.keyNeeds.item3'),
       ],
-      backgroundImage: '/images/industries/restaurant.webp',
+      backgroundImage: '/images/industries/Restuarants.webp',
+      backgroundAlt: 'Restaurant takeaway and dine-in custom paper cups',
       ctaText: t('mainPage.restaurants.ctaText'),
       ctaHref: '/get-a-quote?industry=restaurants',
-      size: 'half' as const,
-    },
-    {
-      iconKey: 'truck' as const,
-      title: t('mainPage.foodTrucks.title'),
-      description: t('mainPage.foodTrucks.description'),
-      keyNeeds: [
-        t('mainPage.foodTrucks.keyNeeds.item1'),
-        t('mainPage.foodTrucks.keyNeeds.item2'),
-        t('mainPage.foodTrucks.keyNeeds.item3'),
-        t('mainPage.foodTrucks.keyNeeds.item4'),
-      ],
-      backgroundImage: '/images/industries/foodtruck.webp',
-      ctaText: t('mainPage.foodTrucks.ctaText'),
-      ctaHref: '/get-a-quote?industry=foodtrucks',
       size: 'half' as const,
     },
     {
@@ -79,37 +66,25 @@ export default async function IndustriesPage({ params }: { params: Promise<{ loc
         t('mainPage.hotels.keyNeeds.item2'),
         t('mainPage.hotels.keyNeeds.item3'),
       ],
-      backgroundImage: '/images/industries/hotel.webp',
+      backgroundImage: '/images/industries/Hotels.webp',
+      backgroundAlt: 'Hotel room service and hospitality paper cups',
       ctaText: t('mainPage.hotels.ctaText'),
       ctaHref: '/get-a-quote?industry=hotels',
-      size: 'full' as const,
-    },
-    {
-      iconKey: 'plane' as const,
-      title: t('mainPage.airlines.title'),
-      description: t('mainPage.airlines.description'),
-      keyNeeds: [
-        t('mainPage.airlines.keyNeeds.item1'),
-        t('mainPage.airlines.keyNeeds.item2'),
-        t('mainPage.airlines.keyNeeds.item3'),
-      ],
-      backgroundImage: '/images/industries/airline.webp',
-      ctaText: t('mainPage.airlines.ctaText'),
-      ctaHref: '/get-a-quote?industry=airlines',
       size: 'half' as const,
     },
     {
-      iconKey: 'heart' as const,
-      title: t('mainPage.hospitals.title'),
-      description: t('mainPage.hospitals.description'),
+      iconKey: 'plane' as const,
+      title: t('events.title'),
+      description: t('events.description'),
       keyNeeds: [
-        t('mainPage.hospitals.keyNeeds.item1'),
-        t('mainPage.hospitals.keyNeeds.item2'),
-        t('mainPage.hospitals.keyNeeds.item3'),
+        t('events.details.item1'),
+        t('events.details.item2'),
+        t('events.details.item3'),
       ],
-      backgroundImage: '/images/industries/hospital.webp',
-      ctaText: t('mainPage.hospitals.ctaText'),
-      ctaHref: '/get-a-quote?industry=healthcare',
+      backgroundImage: '/images/industries/Events.webp',
+      backgroundAlt: 'Custom event cups for exhibitions and catering',
+      ctaText: t('events.cta.button'),
+      ctaHref: '/get-a-quote?industry=events',
       size: 'half' as const,
     },
     {
@@ -121,7 +96,8 @@ export default async function IndustriesPage({ params }: { params: Promise<{ loc
         t('mainPage.corporate.keyNeeds.item2'),
         t('mainPage.corporate.keyNeeds.item3'),
       ],
-      backgroundImage: '/images/industries/corporate.webp',
+      backgroundImage: '/images/industries/Corporate%20Conferences.webp',
+      backgroundAlt: 'Corporate conference branded paper cups',
       ctaText: t('mainPage.corporate.ctaText'),
       ctaHref: '/get-a-quote?industry=corporate',
       size: 'full' as const,
@@ -132,7 +108,7 @@ export default async function IndustriesPage({ params }: { params: Promise<{ loc
     <RootLayout>
       <main id="main-content">
         {/* Page Header */}
-        <section className="bg-bg-secondary py-12 lg:py-16">
+        <section className="pt-24 pb-12 bg-gradient-to-b from-primary-50 to-white">
           <div className="container mx-auto px-4">
             <Breadcrumb items={[{ label: t('title') }]} />
 
@@ -152,23 +128,17 @@ export default async function IndustriesPage({ params }: { params: Promise<{ loc
               {/* Row 1: Cafes (full) */}
               <IndustryDetailCard {...industries[0]} />
 
-              {/* Row 2: Restaurants + Food Trucks (half each) */}
+              {/* Row 2: Restaurants + Hotels (half each) */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <IndustryDetailCard {...industries[1]} />
                 <IndustryDetailCard {...industries[2]} />
               </div>
 
-              {/* Row 3: Hotels (full) */}
-              <IndustryDetailCard {...industries[3]} />
-
-              {/* Row 4: Airlines + Hospitals (half each) */}
+              {/* Row 3: Events + Corporate */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <IndustryDetailCard {...industries[3]} />
                 <IndustryDetailCard {...industries[4]} />
-                <IndustryDetailCard {...industries[5]} />
               </div>
-
-              {/* Row 5: Corporate (full) */}
-              <IndustryDetailCard {...industries[6]} />
             </div>
           </div>
         </section>

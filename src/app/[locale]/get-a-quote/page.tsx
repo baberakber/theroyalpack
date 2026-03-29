@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: t('quote.title'),
       description: t('quote.description'),
-      images: [{ url: '/og/quote.jpg', width: 1200, height: 630 }],
+      images: [{ url: '/og/quote', width: 1200, height: 630 }],
     },
   };
 }
@@ -107,13 +107,13 @@ export default async function GetAQuotePage({ params, searchParams }: QuotePageP
             '@type': 'WebPage',
             name: 'Get a Quote for Custom Paper Cups',
             description:
-              'Request a free quote for custom printed paper cups from Xerostop Cups.',
+              'Request a free quote for custom printed paper cups from Royal Pack.',
             mainEntity: {
               '@type': 'Service',
               name: 'Custom Paper Cup Manufacturing',
               provider: {
                 '@type': 'Organization',
-                name: 'Xerostop Cups',
+                name: 'Royal Pack',
               },
             },
           }),
@@ -122,3 +122,4 @@ export default async function GetAQuotePage({ params, searchParams }: QuotePageP
     </RootLayout>
   );
 }
+

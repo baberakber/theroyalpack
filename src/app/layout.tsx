@@ -1,11 +1,11 @@
-import type { Metadata } from 'next';
-import { Inter, Noto_Sans_Arabic } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import { Outfit, Noto_Sans_Arabic } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({
-  variable: '--font-inter',
+const outfit = Outfit({
+  variable: '--font-outfit',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   display: 'swap',
 });
 
@@ -17,26 +17,43 @@ const notoSansArabic = Noto_Sans_Arabic({
 });
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || 'http://127.0.0.1:3001';
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://xerostopcups.com';
 
 export const metadata: Metadata = {
-  title: 'Xerostop Cups | Premium Custom Branded Paper Cups',
+  title: 'Royal Pack | Premium Custom Branded Paper Cups',
   description: 'High-quality custom branded paper cups for businesses.',
   metadataBase: new URL(siteUrl),
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-icon.png',
+  },
 };
 
-export default function RootLayout({
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
+
+export default async function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale?: string }>;
 }) {
+  const locale = (await params).locale === 'ar' ? 'ar' : 'en';
+  const dir = locale === 'ar' ? 'rtl' : 'ltr';
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} dir={dir} suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${notoSansArabic.variable} antialiased`}
+        className={`${outfit.variable} ${notoSansArabic.variable} antialiased`}
+        suppressHydrationWarning
       >
         {children}
       </body>
     </html>
   );
 }
+
