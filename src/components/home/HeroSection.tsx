@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
 import { cn } from '@/lib/utils';
 import { SiteContainer } from '@/components/layout/SiteContainer';
 
@@ -75,13 +74,6 @@ export function HeroSection() {
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           {/* Content - Left aligned, 7 columns */}
           <div className="lg:col-span-7 space-y-8">
-            <Badge
-              variant="primary"
-              className="animate-fade-in-up is-visible tracking-wider uppercase text-xs"
-            >
-              {tCommon('siteName')}
-            </Badge>
-
             <h1
               className={cn(
                 'text-4xl md:text-5xl lg:text-6xl xl:text-[4.25rem] font-bold',

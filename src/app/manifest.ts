@@ -11,12 +11,12 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: '#0f766e',
     icons: [
       {
-        src: '/images/Logo-RoyalPack.webp',
+        src: '/images/icon-192.webp',
         sizes: '192x192',
         type: 'image/webp',
       },
       {
-        src: '/images/Logo-RoyalPack.webp',
+        src: '/images/icon-512.webp',
         sizes: '512x512',
         type: 'image/webp',
       },

@@ -44,6 +44,7 @@ export function Header() {
       ],
     },
     { label: t('nav.gallery'), href: '/gallery' },
+    { label: t('nav.demo'), href: '/demo' },
     { label: t('nav.about'), href: '/about' },
     { label: t('nav.contact'), href: '/contact' },
   ];
@@ -77,10 +78,11 @@ export function Header() {
               className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-lg"
             >
               <Image
-                src="/images/Logo-RoyalPack.webp"
+                src="/images/Logo-RoyalPack.png"
                 alt={t('common.siteName')}
-                width={200}
-                height={200}
+                width={1024}
+                height={960}
+                unoptimized
                 className="h-16 lg:h-20 w-auto"
                 priority
               />

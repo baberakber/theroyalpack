@@ -49,6 +49,7 @@
       "corporate": "Corporate"
     },
     "gallery": "Gallery",
+    "demo": "Cup Designer",
     "about": "About",
     "contact": "Contact",
     "faq": "FAQ",
@@ -914,6 +915,52 @@
     "sample": {
       "title": "Request a Sample | Royal Pack",
       "description": "Request free samples to experience our quality firsthand."
+    },
+    "demo": {
+      "title": "Cup Designer | Royal Pack",
+      "description": "Preview your logo on paper and plastic cups in different sizes and colors before you order."
+    }
+  },
+  "demo": {
+    "title": "Design Your Cup",
+    "subtitle": "Preview your logo on any cup size before you order",
+    "cupType": "Cup Type",
+    "paper": "Paper Cup",
+    "plastic": "Plastic Cup",
+    "size": "Cup Size",
+    "color": "Cup Color",
+    "customColor": "Custom color",
+    "logoUpload": "Upload Your Logos",
+    "frontLogoUpload": "Front Logo (0°)",
+    "backLogoUpload": "Back Logo (180°)",
+    "dragDrop": "Drag & drop or click to upload",
+    "logoFormats": "PNG, JPG, SVG — max 5 MB",
+    "removeLogo": "Remove Logo",
+    "downloadPreview": "Download Preview",
+    "getQuote": "Get a Quote for This Cup",
+    "previewLabel": "Live Preview",
+    "plasticNote": "Plastic cups are clear — your logo wraps the outer surface",
+    "loveDesign": "Love this design?",
+    "loveDesignDesc": "Request a quote with your selected cup size and we'll bring your brand to life.",
+    "uploadError": "Please upload a PNG, JPG, or SVG file under 5 MB.",
+    "viewFlat": "2D View",
+    "view3d": "3D View",
+    "rotateCup": "Rotate cup",
+    "dragToRotate": "Slide or drag to flip — front logo at 0°, back logo at 180°",
+    "dragLogoPosition": "Click and drag the logo to move it anywhere on the cup",
+    "logoSize": "Logo size",
+    "logoSizeIncrease": "Increase logo size",
+    "logoSizeDecrease": "Decrease logo size",
+    "colors": {
+      "white": "White",
+      "kraft": "Kraft Brown",
+      "black": "Black",
+      "coral": "Coral Red",
+      "green": "Forest Green",
+      "navy": "Navy Blue",
+      "teal": "Royal Teal",
+      "amber": "Amber Gold",
+      "clear": "Clear"
     }
   }
 }

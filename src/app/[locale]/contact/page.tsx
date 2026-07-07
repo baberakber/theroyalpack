@@ -148,7 +148,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             mainEntity: {
               '@type': 'LocalBusiness',
               name: 'Royal Pack',
-              image: '/images/Logo-RoyalPack.webp',
+              image: '/images/Logo-RoyalPack.png',
               telephone: '+966556240690',
               email: 'sales@theroyalpack.com',
               address: {

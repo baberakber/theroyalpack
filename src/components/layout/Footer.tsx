@@ -41,6 +41,7 @@ export function Footer() {
       title: t('footer.getStarted'),
       links: [
         { label: t('footer.requestQuote'), href: '/get-a-quote' },
+        { label: t('nav.demo'), href: '/demo' },
         { label: t('footer.contactUs'), href: '/contact' },
         { label: t('footer.faq'), href: '/faq' },
         { label: t('footer.gallery'), href: '/gallery' },
@@ -57,10 +58,11 @@ export function Footer() {
           <div className="lg:col-span-4">
             <Link href="/" className="inline-block mb-5">
               <Image
-                src="/images/Logo-RoyalPack.webp"
+                src="/images/Logo-RoyalPack.png"
                 alt={t('common.siteName')}
-                width={200}
-                height={200}
+                width={1024}
+                height={960}
+                unoptimized
                 className="h-14 w-auto"
               />
             </Link>

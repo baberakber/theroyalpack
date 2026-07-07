@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 268" width="320" height="268">
+  <defs>
+    <clipPath id="body-clip"><path d="M 35 29 L 69 252 Q 160 262 251 252 L 285 29 Z"/></clipPath>
+    <linearGradient id="body-light" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="38%" stop-color="#F8F8F6" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#D8D8D4" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-10%" width="160%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <ellipse cx="160" cy="276" rx="112.5" ry="10" fill="#000" opacity="0.06"/>
+  <g filter="url(#shadow)">
+    <path id="cup-body" d="M 35 29 L 69 252 Q 160 262 251 252 L 285 29 Z" fill="url(#body-light)" stroke="#D4D4D0" stroke-width="1.2"/>
+    <ellipse cx="160" cy="254" rx="91" ry="7" fill="#ECECEA" stroke="#D4D4D0"/>
+    <ellipse cx="160" cy="29" rx="125" ry="11" fill="#FFFFFF" stroke="#E0E0DC" stroke-width="1.5"/>
+  </g>
+</svg>

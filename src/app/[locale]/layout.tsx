@@ -79,7 +79,7 @@ export default async function LocaleLayout({
               ? 'مصنع أكواب ورقية مخصصة عالية الجودة'
               : 'Premium custom branded paper cups manufacturer',
             url: process.env.NEXT_PUBLIC_SITE_URL || 'https://xerostopcups.com',
-            logo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://xerostopcups.com'}/images/Logo-RoyalPack.webp`,
+            logo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://xerostopcups.com'}/images/Logo-RoyalPack.png`,
             contactPoint: {
               '@type': 'ContactPoint',
               contactType: 'sales',
